@@ -1,0 +1,253 @@
+----------------------------------
+TP01 - Automatización y scripting 
+FAI - TUASSL
+----------------------------------
+
+1. ¿Dónde se encuentra bash ubicado en su sistema? ¿De qué tipo es el archivo? 
+   ¿Cuáles son sus permisos?
+
+3. ¿De qué tipo son todos los shells disponibles en su sistema?
+
+4. Obtenga la versión de bash que esta utilizando, opción --version. 
+
+5. Qué archivos de configuración son leídos cuando ingresamos al sistema.
+
+6. ¿Cuántos procesos se encuentran en ejecución en el sistema?. Recuerde
+descontar los encabezados si utiliza ps y wc.
+
+7. ¿Qué comando utiliza para mostrar el nombre del sistema y sólo el nombre 
+del sistema?  
+
+8. ¿Cómo obtiene ayuda acerca de las funcionalidades de bash?
+
+9. Indique la diferencia entre man y help.
+
+  
+Redirección y pipe
+------------------
+El uso de la redirección y los pipes es fundamental en la construcción de 
+scripts ya que, siguiendo la filosofía UNIX, nos permite combinar programas
+para construir nuevas funcionalidades. En tal sentido es importante RECORDAR que 
+existen tres descriptores de archivos frecuentemente utilizados y redireccionados
+dentro de un proceso (programa en ejecución): 
+
+0 Entrada estándar (lo leído por un proceso)  
+1 Salida estándar (lo escrito por un proceso durante un funcionamiento normal) 
+2 Error estándar (lo escrito por un proceso cuando sucedió algún acontecimiento anormal)
+
+1. Explique el funcionamiento de las siguientes redirecciones. Indique además cuál es 
+la entrada, la salida y los errores si los hubiera. 
+
+	ls > archivo.txt 
+	ls >> archivo.txt 
+	ls archivoinexistente.txt > archivo.txt 
+	ls archivoinexistente.txt > /dev/null
+	ls archivoinexistente.txt > archivo.txt 2>&1
+	ls archivoinexistente.txt &> archivo.txt 
+	ls archivoinexistente.txt &> /dev/null 
+	read palabra < archivocontexto.txt ; echo $palabra
+
+El pipe es un mecanismo que permite vincular la entrada y salida de los procesos. De este
+modo lo escrito por un proceso es leído por el siguiente en la cadena de pipes. 
+
+2. Explique el funcionamiento de los siguientes pipes. Indique cómo debiera reemplazar
+las sentencias si no existiera el pipe. 
+
+	du -sh * |sort -h 
+	ps -ef |grep root  
+	ls -hl |grep root |sort -h -k 5  	
+	df -h |grep /dev
+	dpkg -l paquetenoexiste |grep -v dpkg  
+
+
+	
+Ejecute estos comandos y explique utilizando el resultado y las páginas
+man qué es lo que realizan.
+
+1. Ejecute y explique : seq 5
+
+¿Puede generar una secuencia que comience en el número 22 y termine en el 60?
+
+
+2. Ejecute y explique : echo {01..100}
+
+¿Puede generar una secuencia que comience con 0022 y termine en el 0060?
+
+3. Ejecute y explique: echo soy_{isaac,asimov}_escritor
+
+
+4. Ejecute y explique : echo {z..a}
+
+¿Puede generar la secuencia de letras desde la B (mayúscula) hasta
+la Q?
+
+¿Qué programa hace la expansión de las llaves en los ejercicios 2, 3 y 4?
+
+5. Ejecute y explique : 
+
+echo "Esta es la salida de mi codigo a dos lugares distintos" | tee salida.txt
+
+¿Para qué podría ser de utilidad el comando tee dentro de un script?
+
+6. Ejecute y explique : 
+
+seq 10 | xargs -n 2 
+
+Encuentre al menos otros dos usos del programa xargs.  
+
+
+7.  Obtener un archivo desde un servidor web con el comando telnet :
+
+(echo 'GET /'; echo; sleep 1; ) | telnet www.google.com 80
+
+¿Puede explicar que sucedió en el comando anterior?
+
+
+10. Ejecute y explique :
+
+echo "linux" | tr a-n 'X '
+echo "linux" | tr a-z A-Z 
+
+
+11. Ejecute y explique :
+
+cat /etc/passwd | cut -f 3 -d :
+
+¿Puede listar el ID del usuario y su nombre completo y ordenar la lista
+de manera inversa?
+
+
+12. Listar los paquetes instalados :
+
+dpkg -l | grep ii | awk '{print $2}' 
+
+dpkg -l | grep ii | awk '{print $2}' | sort 
+
+¿Puede generar los dos listados pero que incluyan la versión del paquete?
+
+
+13. Ejecute y explique :
+
+cat /etc/passwd
+cat /etc/passwd | tac
+
+
+14. Ejecute y explique :
+
+cat /etc/profile 
+for i in $(cat /etc/profile) ; do echo $i ; done
+
+¿Qué valor toma la variable i en cada interacción del for?
+¿Puede modifcar este mismo for para que en cada interacción muestre,
+además de un valor de /etc/profile, un valor número en forma creciente?
+
+
+15. Ejecute y explique :
+
+Extraña manera de obtener la linea numero 20 de un archivo
+cat /etc/passwd | head -20 | tail -1
+
+
+16. Ejecute y explique estos casos :
+
+Caso a)
+
+[[ -d /var ]]
+echo $?
+
+test -d /var
+echo $?
+
+
+Caso b)
+
+[[ -d /directorio ]]
+echo $?
+
+test -d /directorio
+echo $?
+
+
+Caso c)
+
+if [[ -d /var ]] ; then
+	echo "El dir existe"
+else
+	echo "NO existe"
+fi
+
+
+Caso d)
+
+if test -d /var  ; then
+	echo "El dir existe"
+else
+	echo "NO existe"
+fi
+
+
+Caso e)
+
+if test -d /var && [[ -d /etc ]] ; then
+	echo "Los dos directorios existen "
+else
+	echo "Alguno NO existe"
+fi
+
+
+Caso f)
+
+if test -d /var && test -d /directorio ; then
+	echo "Los dos directorios existen "
+else
+	echo "Alguno NO existe"
+fi
+
+
+17. Ejecute y explique :
+
+echo "2 2 2 1 2 1 3 4 5 6 6" | tr " " "\n" | sort | uniq -u
+
+
+18. Asegúrese de que conoce todos estos comandos :
+
+pwd
+ls
+cd
+mkdir
+echo
+cat
+cp
+mv
+rm
+man
+head
+tail
+less
+more
+sort
+grep
+which
+chmod
+history
+clear
+
+
+19. Ejecute y explique :
+
+mkdir testdir 
+outputdir=testdir
+
+if ! cd $outputdir; then 
+	echo "No pude ingresar al directorio" 
+else
+	echo "PUDE ingresar al directorio"
+fi
+
+
+20. Ejecute y explique : 
+
+echo "a b c" > /tmp/uno
+echo "d e f" > /tmp/dos
+paste /tmp/uno /tmp/dos
+
