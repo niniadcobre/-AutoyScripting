@@ -3,28 +3,39 @@ TP01 - Automatización y scripting
 FAI - TUASSL
 ----------------------------------
 
-1. ¿Dónde se encuentra bash ubicado en su sistema? ¿De qué tipo es el archivo? 
+-----------------------------------------------------------------------------
+MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
+-----------------------------------------------------------------------------
+
+1. ¿Dónde se encuentra bash ubicado en su sistema? 
+   ¿De qué tipo es el archivo? 
    ¿Cuáles son sus permisos?
 
-3. ¿De qué tipo son todos los shells disponibles en su sistema?
+2. ¿De qué tipo de archivo, son todos los shells disponibles en su sistema?
+
+3. ¿Cómo saber cuál es el shell que estoy ejecutando al abrir una terminal o
+cuando me conecto a una consola?
+¿Dónde se define el shell predeterminado para un usuario? 
+¿Cómo puedo hacer para ejecutar un shell diferente?
 
 4. Obtenga la versión de bash que esta utilizando, opción --version. 
 
-5. Qué archivos de configuración son leídos cuando ingresamos al sistema.
+5. ¿Cuántos procesos se encuentran en ejecución en el sistema?. Recuerde
+descontar los encabezados si utiliza ps y wc, a menos que use la opción 
+apropiada para evitar dicho encabezado ¿Cuál es?. 
 
-6. ¿Cuántos procesos se encuentran en ejecución en el sistema?. Recuerde
-descontar los encabezados si utiliza ps y wc.
-
-7. ¿Qué comando utiliza para mostrar el nombre del sistema y sólo el nombre 
+6. ¿Qué comando utiliza para mostrar el nombre del sistema y sólo el nombre 
 del sistema?  
 
-8. ¿Cómo obtiene ayuda acerca de las funcionalidades de bash?
+7. ¿Cómo obtiene ayuda, en la terminal, acerca de las funcionalidades de bash?
 
-9. Indique la diferencia entre man y help.
-
+8. Indique la diferencia entre info, man y help.
   
+-----------------------------------------------------------------------------
 Redirección y pipe
-------------------
+LEA LAS PÁGINAS 21 A 23 DEL MANUAL DE REFERENCIA. 
+-----------------------------------------------------------------------------
+
 El uso de la redirección y los pipes es fundamental en la construcción de 
 scripts ya que, siguiendo la filosofía UNIX, nos permite combinar programas
 para construir nuevas funcionalidades. En tal sentido es importante RECORDAR que 
@@ -35,7 +46,7 @@ dentro de un proceso (programa en ejecución):
 1 Salida estándar (lo escrito por un proceso durante un funcionamiento normal) 
 2 Error estándar (lo escrito por un proceso cuando sucedió algún acontecimiento anormal)
 
-1. Explique el funcionamiento de las siguientes redirecciones. Indique además cuál es 
+9. Explique el funcionamiento de las siguientes redirecciones. Indique además cuál es 
 la entrada, la salida y los errores si los hubiera. 
 
 	ls > archivo.txt 
@@ -50,7 +61,7 @@ la entrada, la salida y los errores si los hubiera.
 El pipe es un mecanismo que permite vincular la entrada y salida de los procesos. De este
 modo lo escrito por un proceso es leído por el siguiente en la cadena de pipes. 
 
-2. Explique el funcionamiento de los siguientes pipes. Indique cómo debiera reemplazar
+10. Explique el funcionamiento de los siguientes pipes. Indique cómo debiera reemplazar
 las sentencias si no existiera el pipe. 
 
 	du -sh * |sort -h 
@@ -59,96 +70,114 @@ las sentencias si no existiera el pipe.
 	df -h |grep /dev
 	dpkg -l paquetenoexiste |grep -v dpkg  
 
+En los casos que aparece el programa sort, ¿cómo sabemos sobre qué campo de la
+salida se produce el ordenamiento? 
 
-	
-Ejecute estos comandos y explique utilizando el resultado y las páginas
-man qué es lo que realizan.
+-----------------------------------------------------------------------------
+OBSERVACIÓN: es común abusar del uso del pipe, y nos encontraremos con cierta
+frecuencia ejecutando cosas como:
 
-1. Ejecute y explique : seq 5
+	cat /etc/passwd |sort |uniq
+
+La sentencia anterior puede lograr el objetivo buscado, pero utiliza tres 
+programas diferentes para lograrlo. El MISMO resultado se obtiene haciendo:
+
+	sort -u /etc/passwd 
+
+Haga el ejercicio de pensar si todos los pipes utilizados son necesarios, cada 
+vez que construya o lea sentencias. Siempre pregúntese si el "cat" es necesario.  
+-----------------------------------------------------------------------------
+
+11. Ejecute y explique : seq 5
 
 ¿Puede generar una secuencia que comience en el número 22 y termine en el 60?
 
-
-2. Ejecute y explique : echo {01..100}
+12. Ejecute y explique : echo {01..100}
 
 ¿Puede generar una secuencia que comience con 0022 y termine en el 0060?
 
-3. Ejecute y explique: echo soy_{isaac,asimov}_escritor
+13. Ejecute y explique: echo soy_{isaac,asimov}_escritor
 
 
-4. Ejecute y explique : echo {z..a}
+14. Ejecute y explique : echo {z..a}
 
 ¿Puede generar la secuencia de letras desde la B (mayúscula) hasta
 la Q?
 
 ¿Qué programa hace la expansión de las llaves en los ejercicios 2, 3 y 4?
 
-5. Ejecute y explique : 
 
-echo "Esta es la salida de mi codigo a dos lugares distintos" | tee salida.txt
+-----------------------------------------------------------------------------
+OBSERVACIÓN: es muy importante prestar atención a cuál es el 
+programa que realiza la expansión de comodines. ¿Lo hace el shell o él 
+programa que recibe la entrada? En este sentido, hay programas que aceptan 
+el uso de comodines para armar expresiones regulares. Por ejemplo, 
+
+grep '^s.*e' /etc/passwd
+
+Los comodines que se encuentran entre las comillas simples son 
+interpretados por grep y no por bash.  
+-------------------------------------------------------------------
+
+15. Ejecute y explique : 
+
+echo "Esta es la salida de mi código a dos lugares distintos" | tee salida.txt
 
 ¿Para qué podría ser de utilidad el comando tee dentro de un script?
 
-6. Ejecute y explique : 
+16. Ejecute y explique : 
 
 seq 10 | xargs -n 2 
 
 Encuentre al menos otros dos usos del programa xargs.  
 
-
-7.  Obtener un archivo desde un servidor web con el comando telnet :
+17.  Obtener un archivo desde un servidor web con el comando telnet :
 
 (echo 'GET /'; echo; sleep 1; ) | telnet www.google.com 80
 
 ¿Puede explicar que sucedió en el comando anterior?
 
 
-10. Ejecute y explique :
+18. Ejecute y explique :
 
-echo "linux" | tr a-n 'X '
 echo "linux" | tr a-z A-Z 
 
+19. Ejecute y explique :
 
-11. Ejecute y explique :
-
-cat /etc/passwd | cut -f 3 -d :
+cut -f 3 -d:  /etc/passwd 
 
 ¿Puede listar el ID del usuario y su nombre completo y ordenar la lista
 de manera inversa?
 
+20. Listar los paquetes instalados :
 
-12. Listar los paquetes instalados :
-
-dpkg -l | grep ii | awk '{print $2}' 
+dpkg -l | awk '$1=="ii" {print $2}' 
 
 dpkg -l | grep ii | awk '{print $2}' | sort 
 
-¿Puede generar los dos listados pero que incluyan la versión del paquete?
+a) ¿Qué diferencias hay entre la primer y segunda sentencia? 
+   ¿Cuántos programas se invocan en cada uno?¿Cuál es más exacta?
+b) ¿Puede generar los dos listados pero que incluyan la versión del paquete?
+c) ¿Por qué se seleccionan aquellos con ii? 
 
 
-13. Ejecute y explique :
+21. Ejecute y explique :
 
-cat /etc/passwd
-cat /etc/passwd | tac
+tac /etc/passwd 
 
+¿Conoce algún programa que haga la operación inversa?
 
-14. Ejecute y explique :
+22. Ejecute y explique :
 
-cat /etc/profile 
-for i in $(cat /etc/profile) ; do echo $i ; done
+head -20 /etc/passwd | tail -1
 
-¿Qué valor toma la variable i en cada interacción del for?
-¿Puede modifcar este mismo for para que en cada interacción muestre,
-además de un valor de /etc/profile, un valor número en forma creciente?
+¿Cuál es el objetivo de la sentencia anterior? ¿Es eficiente? 
+¿Cuántos programas utiliza?¿Puede obtener una forma mejor de 
+hacer esto mismo? Generalice la solución para cualquier número 
+de línea. 
 
-
-15. Ejecute y explique :
-
-Extraña manera de obtener la linea numero 20 de un archivo
-cat /etc/passwd | head -20 | tail -1
-
-
-16. Ejecute y explique estos casos :
+23. Lea páginas 31 a 36 del manual de referencia, luego
+Ejecute y explique estos casos :
 
 Caso a)
 
@@ -204,50 +233,12 @@ else
 fi
 
 
-17. Ejecute y explique :
+24. Ejecute y explique :
 
 echo "2 2 2 1 2 1 3 4 5 6 6" | tr " " "\n" | sort | uniq -u
 
-
-18. Asegúrese de que conoce todos estos comandos :
-
-pwd
-ls
-cd
-mkdir
-echo
-cat
-cp
-mv
-rm
-man
-head
-tail
-less
-more
-sort
-grep
-which
-chmod
-history
-clear
-
-
-19. Ejecute y explique :
-
-mkdir testdir 
-outputdir=testdir
-
-if ! cd $outputdir; then 
-	echo "No pude ingresar al directorio" 
-else
-	echo "PUDE ingresar al directorio"
-fi
-
-
-20. Ejecute y explique : 
+25. Ejecute y explique : 
 
 echo "a b c" > /tmp/uno
 echo "d e f" > /tmp/dos
 paste /tmp/uno /tmp/dos
-
