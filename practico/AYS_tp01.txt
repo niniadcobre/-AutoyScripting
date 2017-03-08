@@ -74,18 +74,22 @@ En los casos que aparece el programa sort, ¿cómo sabemos sobre qué campo de l
 salida se produce el ordenamiento? 
 
 -----------------------------------------------------------------------------
-OBSERVACIÓN: es común abusar del uso del pipe, y nos encontraremos con cierta
-frecuencia ejecutando cosas como:
+OBSERVACIÓN: Filosofía UNIX vs. nuevas tendencias
+
+La sentencias como la siguiente son frecuentes: 
 
 	cat /etc/passwd |sort |uniq
 
-La sentencia anterior puede lograr el objetivo buscado, pero utiliza tres 
-programas diferentes para lograrlo. El MISMO resultado se obtiene haciendo:
+El MISMO resultado se obtiene haciendo:
 
 	sort -u /etc/passwd 
 
-Haga el ejercicio de pensar si todos los pipes utilizados son necesarios, cada 
-vez que construya o lea sentencias. Siempre pregúntese si el "cat" es necesario.  
+Ambas logran el mismo objetivo, y si bien la última utiliza un solo programa, 
+la primera es más representativa de la filosofía UNIX y más portable ya que 
+muchos UNIX pueden tener versiones de sort (más puristas) que no reciben 
+archivos como argumentos, y sólo trabajan sobre flujos de texto; o pueden no
+soportar la opción "-u". Evalúe según el ámbito y sus necesidades puntuales
+el uso de una u otra opción. Generalice esta idea al resto de los programas. 
 -----------------------------------------------------------------------------
 
 11. Ejecute y explique : seq 5
@@ -144,10 +148,11 @@ echo "linux" | tr a-z A-Z
 
 19. Ejecute y explique :
 
-cut -f 3 -d:  /etc/passwd 
+cat /etc/passwd |cut -f 3 -d:   
 
 ¿Puede listar el ID del usuario y su nombre completo y ordenar la lista
 de manera inversa?
+¿La versión de cut que utiliza soporta trabajar sobre archivos directamente? 
 
 20. Listar los paquetes instalados :
 
@@ -169,7 +174,7 @@ tac /etc/passwd
 
 22. Ejecute y explique :
 
-head -20 /etc/passwd | tail -1
+cat /etc/passwd |head -20 | tail -1
 
 ¿Cuál es el objetivo de la sentencia anterior? ¿Es eficiente? 
 ¿Cuántos programas utiliza?¿Puede obtener una forma mejor de 
