@@ -86,12 +86,3 @@ Bibliografía:
 "Beginning Linux Programming". Neil Mathew, Richard Stones. 
 Chapter 2: shell programming 
 
-Metodología: 
-Entrega de trabajos prácticos obligatorios semana por medio. 
-Parcial con coloquio para promoción. 
-
-Objetivo: Lograr que el alumno pueda leer y comprender la 
-funcionalidad de scripts. Lograr que el alumno pueda 
-incorporar pequeños cambios a scripts; reutilizar código. 
-Lograr que el alumno pueda desarrollar scripts de baja 
-complejidad. 
