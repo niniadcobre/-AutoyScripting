@@ -1,0 +1,196 @@
+----------------------------------
+TP02 - Automatización y scripting 
+FAI - TUASSL
+----------------------------------
+
+---------------------------------------------------
+MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
+---------------------------------------------------
+
+VIM TIPS: 
+--------------------------------------------------------
+En modo normal: 
+:set number  <- muestra los números de línea
+:syntax enable <- colorea el código siguiendo la sintaxis 
+:n1,n2w archivo <- escribe desde la línea n1 hasta n2 en un archivo 
+:r archivo <- copia el contenido de archivo en el documento 
+              actual, a partir de la posición del cursor
+:vsplit archivo <- visualiza dos archivos con división vertical
+	        Ctrl+w para cambiar de archivo
+!!comando <- copia la salida de comando dentro del archivo actual 
+--------------------------------------------------------
+
+Los ejercicios a continuación están relacionados a los temas 
+de variables, parámetros posicionales, variables de ambiente, 
+condiciones y listas. 
+
+BACKGROUND ACERCA DE CONDICIONES: 
+---------------------------------
+Las condiciones evaluadas con test o [[ caen en tres categorías 
+principales: 
+	1) comparaciones de cadenas
+	2) comparaciones aritméticas
+	3) condiciones sobre archivos
+
+Cuando en los ejercicios se pregunta de "qué tipo es la 
+condición", se refiere a en cuál de estas categorías 
+se incluye la misma. 
+
+Ver "EXPRESIONES CONDICIONALES" en man bash en español 
+("CONDITIONAL EXPRESSIONS" en man bash inglés) y páginas 
+31 a 33 del manual de referencia. 
+---------------------------------
+
+EJERCITACIÓN:
+---------------------------------
+1. ¿De dónde provienen las variables de ambiente que 
+están definidas al comenzar la ejecución de un script? 
+
+2. Archivos relacionados a la ejecución de scripts:
+/etc/profile
+~/.bash_profile
+~/.bash_login
+~/.profile
+
+  a)¿En qué orden se leen estos archivos cuando un nuevo 
+  shell se ejecuta? Realice alguna prueba. 
+  b)¿Qué diferencia fundamental hay entre usar el archivo en 
+    /etc y los guardados en el home del usuario? 
+  c) Observe el contenido del archivo /etc/profile. ¿Es sólo
+     una lista de variables asignadas? ¿Qué es? ¿Qué hace?
+
+3. Lea las páginas 29 y 30 del manual de referencia y, desarrolle
+un script que muestre el contenido de cada una de las variables
+listadas en la tabla; las modifique y vuelva a mostrar su contenido,
+evidenciando su efecto. 
+
+4. Lea el script a continuación y complete los incisos listados: 
+  a)  Documente el uso de variables y parámetros posicionales. Indique 
+  tipo de variables/parámetros, localidad.
+  b) Observe y documente el uso de las variables de ambiente listadas en la 
+  tabla de la página 29. 
+  c) ¿Qué condición se evalúa en el if? ¿De qué tipo es? ¿Puede escribirla 
+  de otra forma? ¿Puede utilizar test o [ para reemplazarla?    
+
+#Inicio
+#####################
+#!/bin/bash
+
+logfile=/tmp/users.log
+echo COMIENZO > $logfile
+
+while true; do
+     for i in `cut -f1 -d:  /etc/passwd`;do 
+	  procs=`ps -u ${i} --no-headers |wc -l`
+	  if [[ $procs -ne 0 ]];then 
+	    echo ${i}: $procs
+	  fi 
+        let k++
+     done | sort -n -k2  
+     date
+     sleep 30
+done >> $logfile
+
+exit 0
+# Fin del script
+
+
+4. Lea el script a continuación y complete los incisos listados: 
+  a)  Documente el uso de variables y parámetros posicionales. Indique 
+  tipo de variables/parámetros, localidad.
+  b) Observe y documente el uso de las variables de ambiente listadas en la 
+  tabla de la página 29. 
+  c) ¿Qué condición se evalúan con [[ ]]? ¿De qué tipo son? ¿Puede escribirla 
+  de otra forma? ¿Puede utilizar test o [ para reemplazarla?    
+  d) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
+     de las listas observadas en el script. 
+
+#Inicio
+#####################
+#!/bin/bash
+[[ `id -u` -ne 0 ]] || exit
+
+until [[ $# -eq 0 ]]; do
+   if [ -d $1 ];then 
+      cd $1
+      for i in `ls *jpg`;do
+	cp $i ${i%%jpg}JPG
+      done
+      cd $OLDPWD
+      shift 
+   fi 
+done 
+
+5. Lea el script findshell.
+  a)  Documente el uso de variables y parámetros posicionales. Indique 
+  tipo de variables/parámetros, localidad.
+  b) ¿Cuál es el efecto de la sentencia "declare -u resp" ¿Qué sucede 
+  si no se declara de ese tipo?
+  c) ¿La función recibe argumentos? Modifique el script para que muestre los 
+  parámetros posicionales al principio y fin de la ejecución del script y, 
+  dentro de de la función. Ejecute el script pasando al menos dos paquetes 
+  pasados como argumento. Documente el resultado observado.  
+  d) Observe y documente el uso de las variables de ambiente listadas en la 
+  tabla de la página 29. 
+  e) Observe y explique el funcionamiento del último while (líneas 48 a
+  51). ¿Puede crear una forma alternativa de hacer lo mismo?
+  
+6. Lea el script a continuación y complete los incisos listados: 
+  a)  Documente el uso de variables y parámetros posicionales. Indique 
+  tipo de variables/parámetros, localidad.
+  b) ¿Qué sucede con el valor de la variable "nota" si se le asigna algo 
+  distinto de número? 
+  c) ¿La función recibe argumentos? Modifique el script para que muestre los 
+  parámetros posicionales al principio y fin de la ejecución del script y dentro 
+  de la función. Ejecute el script cargando al menos dos alumnos y documente el 
+  resultado observado. 
+  d) Observe y documente el uso de las variables de ambiente listadas en la 
+  tabla de la página 29. 
+  e) ¿Puede crear una manera alternativa de realizar un bucle infinito?
+  f) Lea páginas 43,44 y 45 del manual de referencias. Explique el funcionamiento
+     de las listas observadas en el script. 
+
+#Inicio
+#####################
+#!/bin/bash
+
+declare -i nota 
+declare -u nombre 
+declare -u apellido 
+declare -u resp
+
+temp=`tempfile` || temp=/tmp/listado.$$
+
+function calificar (){
+	echo -n "Nombre: $1, Apellido: $2," 
+	if [[ $3 -lt 4 ]];then 
+	   echo " DESAPROBADO"
+	else
+           echo " APROBADO"
+	fi   
+}
+
+while true; do
+	echo -n "Por favor ingrese Nombre: " 
+	read nombre
+	echo -n "Por favor ingrese Apellido: " 
+	read apellido
+	echo -n "Nota correspondiente a $nombre $apellido: " 
+	read nota 
+	calificar $nombre $apellido $nota >> $temp
+        
+	resp="N"
+	while [[ "$resp" != "S" ]];do 	
+	  echo -n "¿Otro ingreso? S/N": 
+	  read resp 
+          if [[ "$resp" == "N" ]];then 
+		break 2 
+	  fi 
+          echo
+        done 	
+done
+cat $temp
+
+rm $temp 
+exit 0
+# Fin del script
