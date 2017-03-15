@@ -4,9 +4,12 @@ FAI - TUASSL - Variables/parámetros,
 ambiente, condiciones y listas. 
 ----------------------------------
 
+Los ejercicios a continuación están relacionados a los temas 
+de variables, parámetros posicionales, variables de ambiente, 
+condiciones y listas. 
+
 ---------------------------------------------------
 MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
----------------------------------------------------
 
 VIM TIPS: 
 --------------------------------------------------------
@@ -21,11 +24,7 @@ En modo normal:
 !!comando <- copia la salida de comando dentro del archivo actual 
 :n1,n2y <- Copiar lineas n1 a n2, luego p para
            pegar donde crea conveniente.
---------------------------------------------------------
 
-Los ejercicios a continuación están relacionados a los temas 
-de variables, parámetros posicionales, variables de ambiente, 
-condiciones y listas. 
 
 BACKGROUND ACERCA DE CONDICIONES: 
 ---------------------------------
@@ -74,11 +73,11 @@ y vuelva a mostrar para observar el efecto.
    la comprobación observando las variables $$ y $PPID. 
 
 5. Lea el script a continuación y complete los incisos listados: 
-  a)  Documente el uso de variables y parámetros posicionales. Indique 
+  a) Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
-  b)  Agregue las sentencia declare o local convenientes. 
+  b) Agregue las sentencia declare o local convenientes. 
   c) Observe y documente el uso de las variables de ambiente listadas en la 
-  tabla de la página 29 que están en uso dentro del script.  
+  tabla de la página 29, que están en uso dentro del script.  
   d) ¿Qué condición se evalúa en el if? ¿De qué tipo es? ¿Puede escribirla 
   de otra forma? ¿Puede utilizar test o [ para reemplazarla?    
 
@@ -109,7 +108,7 @@ exit 0
   a)  Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
   b) Observe y documente el uso de las variables de ambiente listadas en la 
-  tabla de la página 29 que están en uso en el script.  
+  tabla de la página 29, que están en uso en el script.  
   c) ¿Se utiliza alguna otra variable de ambiente no documentada en la tabla?
   d) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
   ¿Puede escribirla de otra forma? ¿Puede utilizar [[ ]], test o [] 
@@ -133,17 +132,17 @@ until [[ $# -eq 0 ]]; do
    fi 
 done 
 
-5. Lea el script findshell.
-  a)  Documente el uso de variables y parámetros posicionales. Indique 
+5. Lea el script findshell (PEDCO) y complete los incisos listados: 
+  a) Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
   b) ¿Cuál es el efecto de la sentencia "declare -u resp" ¿Qué sucede 
   si no se declara de ese tipo? ¿Agregaría alguna sentencia declare o local?
   c) ¿La función recibe argumentos? Modifique el script para que muestre los 
   parámetros posicionales al principio y fin de la ejecución del script y, 
   dentro de de la función. Ejecute el script pasando al menos dos paquetes 
-  pasados como argumento. Documente el resultado observado.  
+  como argumento. Documente el resultado observado.  
   d) Observe y documente el uso de las variables de ambiente listadas en la 
-  tabla de la página 29 que se observan en el script. 
+  tabla de la página 29, que están en uso en el script.
   e) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
   ¿Puede escribirla de otra forma? ¿Puede utilizar [[ ]], test o [] 
   para reemplazarla?    
@@ -161,7 +160,7 @@ done
   dentro de la función. Ejecute el script cargando al menos dos alumnos y 
   documente el resultado observado. 
   e) Observe y documente el uso de las variables de ambiente listadas en la 
-  tabla de la página 29 que se utilizan en el script. 
+  tabla de la página 29, que están en uso en el script.
   f) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
   ¿Puede escribirla de otra forma? ¿Puede utilizar [[ ]], test o [] 
   para reemplazarla?    
