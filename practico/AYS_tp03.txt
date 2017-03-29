@@ -1,0 +1,174 @@
+----------------------------------
+TP03 - Automatización y scripting 
+Estructuras de control; funciones; 
+expresiones aritméticas; ejecución 
+de comandos; ordenes internas
+FAI - TUASSL  
+----------------------------------
+
+MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
+---------------------------------------------------
+NOTA1: Los temas cubiertos en este práctico incluyen los
+desarrollados en las páginas 34 a 58 y, 68 a 70 del 
+manual de referencia. 
+
+NOTA2: Cuando los ejercicios pidan modificar código, repita
+el bloque a continuación del original y haga las modificaciones.  
+
+EJERCITACIÓN:
+---------------------------------
+1. ¿Qué es una órden simple y una órden compuesta para bash?
+
+2. ¿Cómo obtiene ayuda para saber cómo interpretar o escribir 
+una sentencia if, for, while, until, case o una función? Escriba 
+a continuación la sintaxis y _sólo la sintaxis_ de cada una de las
+estructuras de control mencionadas.  
+
+Ejemplo: 
+if: if ÓRDENES; then ÓRDENES; [ elif ÓRDENES; then ÓRDENES; ]...[ else ÓRDENES; ] fi
+
+3. Lea el script a continuación y complete los incisos listados: 
+ a)Indique qué hace el script línea a línea y de manera general.  
+ b)Reemplace el ciclo for con un while. 
+ c)Investigue el uso de la orden interna ':'. ¿En qué lugar podría utilizarla? 
+   ¿Se obtiene algún beneficio con el cambio? 
+ d)Modifique el script tal que exista una función que retorne el valor de los
+   procesos para un usuario recibido como argumento. 
+ e)Modifique el script tal que todos los usuarios se evalúen para el mismo 
+   instante de tiempo. 
+ f)Modifique el script tal que se muestre el total de procesos para cada 
+   intante, evaluado como suma de lo calculado para cada usuario. 
+ 
+
+#Inicio
+#####################
+#!/bin/bash
+
+logfile=/tmp/users.log
+echo COMIENZO > $logfile
+
+while true; do
+     for i in `cut -f1 -d:  /etc/passwd`;do 
+	  procs=`ps -u ${i} --no-headers |wc -l`
+	  if [[ $procs -ne 0 ]];then 
+	    echo ${i}: $procs
+	  fi 
+     done | sort -n -k2  
+     date
+     sleep 30
+done >> $logfile
+
+exit 0
+# Fin del script
+
+
+4. Lea el script a continuación y complete los incisos listados: 
+ a)Indique qué hace el script línea a línea y de manera general.  
+ b)Reemplace el ciclo until con un while y en otra versión con for. 
+ c)¿Podría cambiar la construcción `ls *jpg` del for?¿Cuál es la 
+   diferencia?
+ d)Modifique el script para que guarde las nuevas versiones de los 
+   archivos en un subdirectorio llamado JPG dentro del directorio de 
+   trabajo actual. ¿Qué política asume si el directorio JPG ya se
+   encuentra creado? Verifique el comportamiento del script en esta 
+   situación. 
+ d)Modifique el script tal que exista una función que verifique si el 
+   usuario es root y, en ese caso, pregunte al usuario si desea continuar
+   con la ejecución del script. Caso contrario, deberá terminar la 
+   ejecución. 
+
+#Inicio
+#####################
+#!/bin/bash
+[[ `id -u` -ne 0 ]] || exit
+
+until [[ $# -eq 0 ]]; do
+   if [ -d $1 ];then 
+      cd $1
+      for i in `ls *jpg`;do
+	cp $i ${i%%jpg}JPG
+      done
+      cd $OLDPWD
+      shift 
+   fi 
+done 
+
+5. Lea el script findshell (PEDCO) y complete los incisos listados: 
+  a) Documente el uso de variables y parámetros posicionales. Indique 
+  tipo de variables/parámetros, localidad.
+  b) ¿Cuál es el efecto de la sentencia "declare -u resp" ¿Qué sucede 
+  si no se declara de ese tipo? ¿Agregaría alguna sentencia declare o local?
+  c) ¿La función recibe argumentos? Modifique el script para que muestre los 
+  parámetros posicionales al principio y fin de la ejecución del script y, 
+  dentro de de la función. Ejecute el script pasando al menos dos paquetes 
+  como argumento. Documente el resultado observado.  
+  d) Observe y documente el uso de las variables de ambiente listadas en la 
+  tabla de la página 29, que están en uso en el script.
+  e) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
+  ¿Puede escribirla de otra forma? ¿Puede utilizar [[ ]], test o [] 
+  para reemplazarla?    
+  f) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
+  de las listas observadas en el script. 
+  
+6. Lea el script a continuación y complete los incisos listados: 
+  a)  Documente el uso de variables y parámetros posicionales. Indique 
+  tipo de variables/parámetros, localidad.
+  b) ¿Qué sucede con el valor de la variable "nota" si se le asigna algo 
+  distinto de número? 
+  c) ¿Agregaría alguna sentencia declare o local?
+  d) ¿La función recibe argumentos? Modifique el script para que muestre los 
+  parámetros posicionales al principio y fin de la ejecución del script y 
+  dentro de la función. Ejecute el script cargando al menos dos alumnos y 
+  documente el resultado observado. 
+  e) Observe y documente el uso de las variables de ambiente listadas en la 
+  tabla de la página 29, que están en uso en el script.
+  f) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
+  ¿Puede escribirla de otra forma? ¿Puede utilizar [[ ]], test o [] 
+  para reemplazarla?    
+  g) Lea páginas 43,44 y 45 del manual de referencias. Explique el 
+  funcionamiento de las listas observadas en el script. 
+
+#Inicio
+#####################
+#!/bin/bash
+
+declare -i nota 
+declare -u nombre 
+declare -u apellido 
+declare -u resp
+
+temp=`tempfile` || temp=/tmp/listado.$$
+
+function calificar (){
+	echo -n "Nombre: $1, Apellido: $2," 
+	if [[ $3 -lt 4 ]];then 
+	   echo " DESAPROBADO"
+	else
+           echo " APROBADO"
+	fi   
+}
+
+while true; do
+	echo -n "Por favor ingrese Nombre: " 
+	read nombre
+	echo -n "Por favor ingrese Apellido: " 
+	read apellido
+	echo -n "Nota correspondiente a $nombre $apellido: " 
+	read nota
+	calificar $nombre $apellido $nota >> $temp
+        
+	resp="N"
+	while [[ "$resp" != "S" ]];do 	
+	  echo -n "¿Otro ingreso? S/N": 
+	  read resp 
+          if [[ "$resp" == "N" ]];then 
+		break 2 
+	  fi 
+          echo
+        done 	
+done
+cat $temp
+
+rm $temp 
+exit 0
+# Fin del script

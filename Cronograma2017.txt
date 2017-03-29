@@ -35,24 +35,32 @@ Semana 1 - 09/3
 	Enunciado primer TP1 
 
 Semana 2 - 16/3 
+	Variables 
 	Viernes entrega TP1 / Enunciado segundo TP2
 
-
 Semana 3  - 23/3
-	Viernes feriado - Día Nacional de la Memoria por la Verdad y la Justicia. 
+ 	Jueves: Condiciones y listas  
+	Viernes feriado - Día Nacional de la Memoria por la Verdad y la 
+	Justicia.
 
 Semana 4  - 30/3
+	Estructuras de control y funciones
 	Viernes entrega TP2 / Enunciado segundo TP3 (más extenso)
 
 Semana 5  - 06/4
+	Expresiones aritméticas 
+	Ejecución de comando 
 
 Semana 6  - 13/4
 	Semana santa, no hay clases jueves y viernes. 
 
 Semana 7  - 20/4
 	Viernes Entrega TP / Enunciado segundo TP4
+	Ordenes internas 
+	Filtros 
 
 Semana 8  - 27/4
+	Filtros 
 
 Semana 9  - 04/5
 	Viernes Entrega TP / Enunciado segundo TP5
