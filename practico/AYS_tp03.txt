@@ -15,6 +15,9 @@ manual de referencia.
 NOTA2: Cuando los ejercicios pidan modificar código, repita
 el bloque a continuación del original y haga las modificaciones.  
 
+NOTA3: Cada vez que modifique el código VERIFIQUE su correcto 
+funcionamiento.  
+
 EJERCITACIÓN:
 ---------------------------------
 1. ¿Qué es una orden simple y una orden compuesta para bash?
@@ -123,9 +126,11 @@ done
     reescriba el while utilizando for y until. ¿Qué sucede con la 
     localidad de la variable pkg en cada caso? ¿Qué sucede con 
     los parámetros posicionales en cada caso?
+  g) Reemplace el uso de `` por su equivalente. 
 
 
-
+#Inicio
+#####################
 #!/bin/bash 
 
 declare -u resp
@@ -173,6 +178,7 @@ else
 	shift
    done 
 fi 
+# Fin del script
   
 6. Lea el script a continuación y complete los incisos listados: 
  a)Indique qué hace el script línea a línea y de manera general.  
@@ -242,3 +248,15 @@ cat $temp
 rm $temp 
 exit 0
 # Fin del script
+
+7. Sobre el script /usr/sbin/iptables-apply :
+   a) ¿A qué paquete de software pertenece el script?
+   b) Liste el nombre de todas las funciones del script. Para cada una
+   de ellas, y sin entrar en detalles del total del script, intente 
+   dar una breve descripción de su funcionalidad (Ayuda: lea la 
+   página 73 del manual de referencia. El guión - que marca 
+   el string delimitante de un here-document <<-StringDelimitante 
+   suprime los tabs (pero no los espacios) en la salida). 
+   Ejemplo: 
+   c) Explique qué hace la sentencia case en las líneas 153 a 160. 
+
