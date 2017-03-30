@@ -17,7 +17,7 @@ el bloque a continuación del original y haga las modificaciones.
 
 EJERCITACIÓN:
 ---------------------------------
-1. ¿Qué es una órden simple y una órden compuesta para bash?
+1. ¿Qué es una orden simple y una orden compuesta para bash?
 
 2. ¿Cómo obtiene ayuda para saber cómo interpretar o escribir 
 una sentencia if, for, while, until, case o una función? Escriba 
@@ -29,6 +29,7 @@ if: if ÓRDENES; then ÓRDENES; [ elif ÓRDENES; then ÓRDENES; ]...[ else ÓRDE
 
 3. Lea el script a continuación y complete los incisos listados: 
  a)Indique qué hace el script línea a línea y de manera general.  
+   Agregue como comentario al inicio la funcionalidad general. 
  b)Reemplace el ciclo for con un while. 
  c)Investigue el uso de la orden interna ':'. ¿En qué lugar podría utilizarla? 
    ¿Se obtiene algún beneficio con el cambio? 
@@ -37,14 +38,16 @@ if: if ÓRDENES; then ÓRDENES; [ elif ÓRDENES; then ÓRDENES; ]...[ else ÓRDE
  e)Modifique el script tal que todos los usuarios se evalúen para el mismo 
    instante de tiempo. 
  f)Modifique el script tal que se muestre el total de procesos para cada 
-   intante, evaluado como suma de lo calculado para cada usuario. 
+   instante, evaluado como suma de lo calculado para cada usuario. 
+ g) Reemplace el uso de `` por su equivalente. 
  
 
 #Inicio
 #####################
 #!/bin/bash
 
-logfile=/tmp/users.log
+declare -i procs 
+declare -r logfile=/tmp/users.log
 echo COMIENZO > $logfile
 
 while true; do
@@ -63,10 +66,14 @@ exit 0
 
 
 4. Lea el script a continuación y complete los incisos listados: 
- a)Indique qué hace el script línea a línea y de manera general.  
- b)Reemplace el ciclo until con un while y en otra versión con for. 
- c)¿Podría cambiar la construcción `ls *jpg` del for?¿Cuál es la 
-   diferencia?
+ a)Indique qué hace el script línea a línea y de manera general. Ver
+   página 71 del manual de referencia para explicar la sentencia 'cp'. 
+   ¿En qué sección del capítulo 2 se encuentra la tabla?  
+   Agregue como comentario al inicio la funcionalidad general. 
+ b)Reemplace el ciclo until con un while y en otra versión con for.
+   En el caso de for, ¿es exactamente el mismo comportamiento? 
+ c)¿Podría cambiar la sentencia `ls *jpg` del for por una más
+   eficiente?¿Cuál es la diferencia?
  d)Modifique el script para que guarde las nuevas versiones de los 
    archivos en un subdirectorio llamado JPG dentro del directorio de 
    trabajo actual. ¿Qué política asume si el directorio JPG ya se
@@ -76,6 +83,7 @@ exit 0
    usuario es root y, en ese caso, pregunte al usuario si desea continuar
    con la ejecución del script. Caso contrario, deberá terminar la 
    ejecución. 
+ e) Reemplace el uso de `` por su equivalente. 
 
 #Inicio
 #####################
@@ -83,7 +91,7 @@ exit 0
 [[ `id -u` -ne 0 ]] || exit
 
 until [[ $# -eq 0 ]]; do
-   if [ -d $1 ];then 
+   if [[ -d $1 ]];then 
       cd $1
       for i in `ls *jpg`;do
 	cp $i ${i%%jpg}JPG
@@ -92,42 +100,104 @@ until [[ $# -eq 0 ]]; do
       shift 
    fi 
 done 
+# Fin del script
 
-5. Lea el script findshell (PEDCO) y complete los incisos listados: 
-  a) Documente el uso de variables y parámetros posicionales. Indique 
-  tipo de variables/parámetros, localidad.
-  b) ¿Cuál es el efecto de la sentencia "declare -u resp" ¿Qué sucede 
-  si no se declara de ese tipo? ¿Agregaría alguna sentencia declare o local?
-  c) ¿La función recibe argumentos? Modifique el script para que muestre los 
-  parámetros posicionales al principio y fin de la ejecución del script y, 
-  dentro de de la función. Ejecute el script pasando al menos dos paquetes 
-  como argumento. Documente el resultado observado.  
-  d) Observe y documente el uso de las variables de ambiente listadas en la 
-  tabla de la página 29, que están en uso en el script.
-  e) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
-  ¿Puede escribirla de otra forma? ¿Puede utilizar [[ ]], test o [] 
-  para reemplazarla?    
-  f) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
-  de las listas observadas en el script. 
+5. Lea el script a continuación y complete los incisos listados: 
+ a)Indique qué hace el script línea a línea y de manera general.  
+   Agregue como comentario al inicio la funcionalidad general. 
+ b)Modifique la función buscarscript tal que: 
+	* Reemplace el while con for. Lea la sección "Tuberías"  
+        de man bash. Explique el impacto de la localidad de la 
+        variable 'a' dentro del while. ¿Puede observar su valor
+        fuera del while?¿Qué sucede al reemplazarla por un for?
+	* Además del listado de scripts encontrados, retorne un 
+        valor entero con el total scripts encontrados. 
+  c)Modifique el script para que se emita al final del listado,
+    el total de scripts encontrados. 
+  d)En el caso de no proveer argumentos, critique y mejore la 
+    sección de código entre los comentarios ###Mejorar. 
+  e)Reescriba el while en el elif sin usar redirección (<). 
+    ¿Cambia la localidad de la variable pkg en la versión 
+    modificada? 
+  f)En la sentencia else de la estructura de control principal, 
+    reescriba el while utilizando for y until. ¿Qué sucede con la 
+    localidad de la variable pkg en cada caso? ¿Qué sucede con 
+    los parámetros posicionales en cada caso?
+
+
+
+#!/bin/bash 
+
+declare -u resp
+
+function buscarscript(){
+local a
+   
+   if ! dpkg -l $1 &> /dev/null; then
+     echo "$1 no instalado"
+     return 
+   fi
+   echo $1 
+   dpkg -L $1 | while read archivo; do
+      a=`file "$archivo"|grep "Bourne-Again"|cut -f1 -d:`
+      if [[ -n "$a" ]];then  echo "    $a";fi 
+   done   
+}
+
+if [[ $# -eq 0 ]];then 
+   ###Mejorar
+   echo -n "Se creará un listado para todos los paquetes instalados en el sistema, ¿esta de acuerdo? S/N "
+   read resp 
+   if [[ "$resp" == "N" ]];then 
+	echo "Saliendo..." 
+	exit 1 
+   elif [[ "$resp" != "S" ]];then 
+	echo "Respuesta inválida, saliendo..."
+        exit 2
+   fi 
+   ###Mejorar
+   #Crear listado para todos los paquetes del sistema 
+   dpkg -l |awk '$1=="ii" {print $2}'|while read pkg; do
+      buscarscript $pkg 
+   done 
+elif [[ -f "$1" ]];then
+   # Si el primer argumento es un archivo regular, se asume que contiene una
+   #lista de nombres de paquetes separada por nueva linea, sin lineas vacías. 
+   while read pkg;do
+      buscarscript $pkg 
+   done < $1 
+else
+   #Asume que los argumentos son un listado de nombres de paquetes
+   while [[ $# -gt 0 ]];do
+	buscarscript $1
+	shift
+   done 
+fi 
   
 6. Lea el script a continuación y complete los incisos listados: 
-  a)  Documente el uso de variables y parámetros posicionales. Indique 
-  tipo de variables/parámetros, localidad.
-  b) ¿Qué sucede con el valor de la variable "nota" si se le asigna algo 
-  distinto de número? 
-  c) ¿Agregaría alguna sentencia declare o local?
-  d) ¿La función recibe argumentos? Modifique el script para que muestre los 
-  parámetros posicionales al principio y fin de la ejecución del script y 
-  dentro de la función. Ejecute el script cargando al menos dos alumnos y 
-  documente el resultado observado. 
-  e) Observe y documente el uso de las variables de ambiente listadas en la 
-  tabla de la página 29, que están en uso en el script.
-  f) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
-  ¿Puede escribirla de otra forma? ¿Puede utilizar [[ ]], test o [] 
-  para reemplazarla?    
-  g) Lea páginas 43,44 y 45 del manual de referencias. Explique el 
-  funcionamiento de las listas observadas en el script. 
-
+ a)Indique qué hace el script línea a línea y de manera general.  
+   Agregue como comentario al inicio la funcionalidad general. 
+ b)Utilizando la estructura de control más apropiada, modifique la función 
+   calificar tal que: 
+	* Si la nota es 0 se devuelva REPROBADO
+  	* Si la nota está entre 1 y 3 se devuelva INSUFICIENTE
+	* Si la nota es 4 se devuelva APROBADO
+	* Si la nota está entre 5 y 7 se devuelva BUENO 
+	* Si la nota está entre 8 y 9 se devuelva MUY BUENO 
+	* Si la nota es 10 se devuelva EXCELENTE 
+ 	* EN cualquier otro caso se devuelve "NOTA INVALIDA"
+ c)Crear una nueva función que realice la función de ingreso de 
+   datos. La misma deberá verificar que la nota se encuentre en 
+   el rango 0-10. ¿Qué puede decir acerca de las verificaciones 
+   en el inciso anterior, en relación a esta verificación?
+ d)¿Qué otra función podría agregar?
+ e)Explique claramente el funcionamiento de la sentencia "break 2". 
+   Reemplace el if que lo contiene por una lista (&& o ||). 
+ f)Modifique el script para que se muestre el promedio de notas 
+   ingresadas, al finalizar la carga de alumnos. 
+ g) Reemplace el uso de `` por su equivalente. 
+  
+  
 #Inicio
 #####################
 #!/bin/bash

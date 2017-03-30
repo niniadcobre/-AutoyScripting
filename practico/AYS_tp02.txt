@@ -104,7 +104,7 @@ exit 0
 # Fin del script
 
 
-4. Lea el script a continuación y complete los incisos listados: 
+6. Lea el script a continuación y complete los incisos listados: 
   a)  Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
   b) Observe y documente el uso de las variables de ambiente listadas en la 
@@ -132,7 +132,7 @@ until [[ $# -eq 0 ]]; do
    fi 
 done 
 
-5. Lea el script findshell (PEDCO) y complete los incisos listados: 
+7. Lea el script findshell (PEDCO) y complete los incisos listados: 
   a) Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
   b) ¿Cuál es el efecto de la sentencia "declare -u resp" ¿Qué sucede 
@@ -149,7 +149,7 @@ done
   f) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
   de las listas observadas en el script. 
   
-6. Lea el script a continuación y complete los incisos listados: 
+8. Lea el script a continuación y complete los incisos listados: 
   a)  Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
   b) ¿Qué sucede con el valor de la variable "nota" si se le asigna algo 
