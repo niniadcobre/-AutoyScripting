@@ -18,6 +18,9 @@ el bloque a continuación del original y haga las modificaciones.
 NOTA3: Cada vez que modifique el código VERIFIQUE su correcto 
 funcionamiento.  
 
+NOTA4: Cuando se pida modificar un script, todas las modificaciones
+deben hacerse en simultáneo en la misma versión. 
+
 EJERCITACIÓN:
 ---------------------------------
 1. ¿Qué es una orden simple y una orden compuesta para bash?
@@ -33,7 +36,7 @@ if: if ÓRDENES; then ÓRDENES; [ elif ÓRDENES; then ÓRDENES; ]...[ else ÓRDE
 3. Lea el script a continuación y complete los incisos listados: 
  a)Indique qué hace el script línea a línea y de manera general.  
    Agregue como comentario al inicio la funcionalidad general. 
- b)Reemplace el ciclo for con un while. 
+ b)Reemplace el ciclo for con un while.  
  c)Investigue el uso de la orden interna ':'. ¿En qué lugar podría utilizarla? 
    ¿Se obtiene algún beneficio con el cambio? 
  d)Modifique el script tal que exista una función que retorne el valor de los
@@ -42,7 +45,9 @@ if: if ÓRDENES; then ÓRDENES; [ elif ÓRDENES; then ÓRDENES; ]...[ else ÓRDE
    instante de tiempo. 
  f)Modifique el script tal que se muestre el total de procesos para cada 
    instante, evaluado como suma de lo calculado para cada usuario. 
- g) Reemplace el uso de `` por su equivalente. 
+ g)Reemplace el uso de `` por su equivalente. 
+ h)Modifique el script para que la salida se vea _TAMBIEN_ por pantalla
+   (Ayuda: tee) 
  
 
 #Inicio
@@ -75,6 +80,7 @@ exit 0
    Agregue como comentario al inicio la funcionalidad general. 
  b)Reemplace el ciclo until con un while y en otra versión con for.
    En el caso de for, ¿es exactamente el mismo comportamiento? 
+   ¿Qué sucede con los parámetros posicionales?. 
  c)¿Podría cambiar la sentencia `ls *jpg` del for por una más
    eficiente?¿Cuál es la diferencia?
  d)Modifique el script para que guarde las nuevas versiones de los 
@@ -106,27 +112,31 @@ done
 # Fin del script
 
 5. Lea el script a continuación y complete los incisos listados: 
- a)Indique qué hace el script línea a línea y de manera general.  
+ a) Indique qué hace el script línea a línea y de manera general.  
    Agregue como comentario al inicio la funcionalidad general. 
- b)Modifique la función buscarscript tal que: 
+ b) Modifique la función buscarscript tal que: 
 	* Reemplace el while con for. Lea la sección "Tuberías"  
         de man bash. Explique el impacto de la localidad de la 
         variable 'a' dentro del while. ¿Puede observar su valor
         fuera del while?¿Qué sucede al reemplazarla por un for?
 	* Además del listado de scripts encontrados, retorne un 
         valor entero con el total scripts encontrados. 
-  c)Modifique el script para que se emita al final del listado,
+  c) Modifique el script para que se emita al final del listado,
     el total de scripts encontrados. 
-  d)En el caso de no proveer argumentos, critique y mejore la 
+  d) En el caso de no proveer argumentos, critique y mejore la 
     sección de código entre los comentarios ###Mejorar. 
-  e)Reescriba el while en el elif sin usar redirección (<). 
+  e) Reescriba el while en el elif sin usar redirección (<). 
     ¿Cambia la localidad de la variable pkg en la versión 
     modificada? 
-  f)En la sentencia else de la estructura de control principal, 
+  f) En la sentencia else de la estructura de control principal, 
     reescriba el while utilizando for y until. ¿Qué sucede con la 
     localidad de la variable pkg en cada caso? ¿Qué sucede con 
     los parámetros posicionales en cada caso?
   g) Reemplace el uso de `` por su equivalente. 
+  h) Reemplace el último while del código con un for. 
+  i) Agregue una función tal que si el usuario no es root, consulte
+     al usuario si quiere continuar ejecutando el script. ¿Por qué
+     puede ser necesaria esta verificación? 
 
 
 #Inicio
@@ -256,7 +266,32 @@ exit 0
    dar una breve descripción de su funcionalidad (Ayuda: lea la 
    página 73 del manual de referencia. El guión - que marca 
    el string delimitante de un here-document <<-StringDelimitante 
-   suprime los tabs (pero no los espacios) en la salida). 
-   Ejemplo: 
+   suprime los tabs (pero no los espacios) en la salida). ¿Devuelve
+   algún valor la función? ¿Tiene variables locales la función? 
+   ¿Consideraría agregar alguna sentencia local?
    c) Explique qué hace la sentencia case en las líneas 153 a 160. 
+   Reescriba ese case utilizando if
 
+8. Sobre el script /usr/bin/ldd
+   a) ¿A qué paquete de software pertenece el script?
+   b) Liste el nombre de todas las funciones del script. ¿Devuelve 
+   algún valor la función? ¿Tiene variables locales la función? 
+   ¿Consideraría agregar alguna sentencia local?
+   c) Explique el comportamiento de manera general, del while y 
+   case en las líneas 34 a 94. Sin entrar en detalle línea a línea. 
+   Explique sobre qué se itera y cuál parece ser la idea de esa 
+   sección de código.
+
+9. Encuentre un script en el sistema que haga uso de la sentencia 
+   local dentro de funciones. Copie una de esas funciones aquí (junto
+   al nombre del script al que pertenece). 
+   Ayuda: 
+      use findshell.sh y  |xargs grep 'local '
+
+10. Encuentre un script en el sistema que utilice let, otro expr.
+    Copie algunas de esas sentencias aquí (junto al nombre del 
+    script al que pertenece). ¿Qué otra forma conoce
+    para realizar operaciones aritméticas? Reescriba las sentencias
+    extraídas de los scripts utilizando las diferentes variantes.
+   Ayuda: 
+      use findshell.sh y  |xargs grep 'let '
