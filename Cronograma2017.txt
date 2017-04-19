@@ -36,7 +36,7 @@ Semana 1 - 09/3
 
 Semana 2 - 16/3 
 	Variables 
-	Viernes entrega TP1 / Enunciado segundo TP2
+	Viernes entrega TP1 / Enunciado TP2
 
 Semana 3  - 23/3
  	Jueves: Condiciones y listas  
@@ -45,7 +45,7 @@ Semana 3  - 23/3
 
 Semana 4  - 30/3
 	Estructuras de control y funciones
-	Viernes entrega TP2 / Enunciado segundo TP3 (más extenso)
+	Viernes entrega TP2 / Enunciado TP3 (más extenso)
 
 Semana 5  - 06/4
 	Expresiones aritméticas 
@@ -55,20 +55,20 @@ Semana 6  - 13/4
 	Semana santa, no hay clases jueves y viernes. 
 
 Semana 7  - 20/4
-	Viernes Entrega TP / Enunciado segundo TP4
-	Ordenes internas 
-	Filtros 
+	Jueves práctica. Debug. 
+        Viernes: OWASP Latam. 
 
 Semana 8  - 27/4
+	Jueves: Entrega TP3 / Enunciado TP4
 	Filtros 
 
 Semana 9  - 04/5
-	Viernes Entrega TP / Enunciado segundo TP5
+	Viernes Entrega TP4 / Enunciado TP5
 
 Semana 10 - 11/5
 
 Semana 11 - 18/5
-	Viernes Entrega TP / Enunciado segundo TP6
+	Viernes Entrega TP / Enunciado TP6
 
 Semana 12 - 25/5
 	Jueves feriado - Revolución de Mayo 
