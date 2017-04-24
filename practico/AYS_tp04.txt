@@ -1,0 +1,311 @@
+----------------------------------
+TP03 - Automatización y scripting 
+Estructuras de control; funciones; 
+expresiones aritméticas; ejecución 
+de comandos; ordenes internas
+FAI - TUASSL  
+----------------------------------
+
+MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
+---------------------------------------------------
+NOTA1: Los temas cubiertos en este práctico incluyen los
+desarrollados en las páginas 74 y 75 del manual de referencia. 
+
+NOTA2: Cuando los ejercicios pidan modificar código, repita
+el bloque a continuación del original y haga las modificaciones.  
+
+NOTA3: Cada vez que modifique el código VERIFIQUE su correcto 
+funcionamiento.  
+
+NOTA4: Cuando se pida modificar un script, todas las modificaciones
+deben hacerse en simultáneo en la misma versión. 
+
+EJERCITACIÓN:
+---------------------------------
+3. Lea el script a continuación y complete los incisos listados: 
+ 
+
+#Inicio
+#####################
+#!/bin/bash
+
+# El siguiente script emite cada 30 segundos un resumen de la 
+# cantidad de procesos por usuario, ordenado de menor a mayor. 
+# Dicho resumen se emite por pantalla y se guarda en un archivo
+# temporal. 
+
+declare -i procs total 
+declare -r logfile=$(tempfile)
+declare -r instante=$(tempfile)
+declare -r temp=$(tempfile)
+
+
+function total_proc (){ 
+  echo $(grep "^$1 " $instante |wc -l)
+}
+
+
+echo COMIENZO | tee $logfile 
+
+while :; do
+     ps -ef --no-headers > $instante 
+     total=0 
+     date
+     for usr in $(cut -f1 -d:  /etc/passwd);do 
+	  procs=$(total_proc $usr)
+	  if [[ $procs -ne 0 ]];then 
+	    echo ${usr}: $procs
+	    let total=total+procs
+	  fi 
+     done > $temp 
+     sort -n -k2 $temp 
+     echo Total de procesos: $total
+     sleep 30
+done | tee $logfile 
+
+#Limpieza
+[[ -f $instante ]] && rm $instante 
+[[ -f $temp ]] && rm $temp 
+echo $logfile debe ser borrado manualmente. 
+
+exit 0
+# Fin del script
+
+
+4. Lea el script a continuación y complete los incisos listados: 
+
+#Inicio
+#####################
+
+# El siguiente script debe ser ejecutado por usuario no 
+# administrador. Realiza copias de archivo finalizados en 
+# jpg, eliminando esta extensión y reemplazandola por JPG. 
+# El script trabaja sobre un conjunto de directorios obtenidos
+# como argumento del script. 
+
+#!/bin/bash
+
+function es_root() {
+local -u resp
+
+if [[ $(id -u) -eq 0 ]] ;then
+    while : ;do 
+       echo "DVERTENCIA: ud. es root, realmente desea continuar? S/N"
+       read resp
+       case $resp in
+         S*) return ;;
+         N*) echo saliendo.. ; exit ;;
+       esac 
+    done 
+ fi 
+}
+
+es_root
+ 
+for dir; do
+   if [[ -d $dir ]];then 
+      cd $dir
+      [[ ! -d JPG ]] && mkdir JPG 
+      for i in *jpg;do
+	cp -i $i JPG/${i%%jpg}JPG #Expansión de parámetro: remueve jpg del final de $i, agregando JPG.  
+      done
+      cd $OLDPWD
+   fi 
+done 
+# Fin del script
+
+5. Lea el script a continuación y complete los incisos listados: 
+
+
+#Inicio
+#####################
+#!/bin/bash 
+
+# El objetivo del script es encontrar scripts escritos en bash 
+# contenidos en paquetes instalados en el sistema. Asumiendo una 
+# distribución debian o derivado. Se puede indicar un listado de 
+# nombres de paquete, un archivo con una lista de nombres de paquete, 
+# o bien si no se proveen argumentos se genera el listado para todos
+# los paquetes instalados en el sistema. 
+
+declare -u resp
+declare -i total=0 
+
+function buscarscript(){
+local a
+local -i total=0
+   
+   if ! dpkg -l $1 &> /dev/null; then
+     echo "$1 no instalado"
+     return 
+   fi
+   echo $1 
+   for archivo in $(dpkg -L $1); do
+      a=$(file "$archivo"|grep "Bourne-Again"|cut -f1 -d:)
+      if [[ -n "$a" ]];then  
+	echo "    $a"
+        let total++
+      fi 
+   done   
+   return $total 
+}
+
+function todo_sistema(){
+local -u resp 
+   while :;do
+     echo -n "Se creará un listado para todos los paquetes instalados en el sistema, ¿esta de acuerdo? S/N "
+     read resp 
+     case resp in
+        S) return ;; 
+        N) echo saliendo...; exit ;; 
+     esac
+   done  
+}
+
+function no_es_root(){
+local -u resp 
+if [[ $(id -u) -ne 0 ]] ;then
+    while : ;do 
+       echo "DVERTENCIA: ud. NO es root, realmente desea continuar? S/N"
+       read resp
+       case $resp in
+         S*) return ;;
+         N*) echo saliendo.. ; exit ;;
+       esac 
+    done 
+ fi 
+}
+
+no_es_root 
+
+if [[ $# -eq 0 ]];then 
+   #Crear listado para todos los paquetes del sistema 
+   todo_sistema
+   for pkg in $(dpkg -l |awk '$1=="ii" {print $2}'); do
+      buscarscript $pkg
+      let total=total+$?
+   done 
+   echo Total de scripts de bash encontrados: $total  
+elif [[ -f "$1" ]];then
+   # Si el primer argumento es un archivo regular, se asume que contiene una
+   #lista de nombres de paquetes separada por nueva linea, sin lineas vacías. 
+   for pkg in $(cat $1);do
+      buscarscript $pkg 
+      let total=total+$?
+   done 
+else
+   #Asume que los argumentos son un listado de nombres de paquetes
+   while [[ $# -gt 0 ]];do
+	buscarscript $1
+        let total=total+$?
+	shift
+   done 
+fi 
+echo Total de scripts de bash encontrados: $total  
+# Fin del script
+  
+6. Lea el script a continuación y complete los incisos listados: 
+ a)Indique qué hace el script línea a línea y de manera general.  
+   Agregue como comentario al inicio la funcionalidad general. 
+ b)Utilizando la estructura de control más apropiada, modifique la función 
+   calificar tal que: 
+	* Si la nota es 0 se devuelva REPROBADO
+  	* Si la nota está entre 1 y 3 se devuelva INSUFICIENTE
+	* Si la nota es 4 se devuelva APROBADO
+	* Si la nota está entre 5 y 7 se devuelva BUENO 
+	* Si la nota está entre 8 y 9 se devuelva MUY BUENO 
+	* Si la nota es 10 se devuelva EXCELENTE 
+ 	* EN cualquier otro caso se devuelve "NOTA INVALIDA"
+ c)Crear una nueva función que realice la función de ingreso de 
+   datos. La misma deberá verificar que la nota se encuentre en 
+   el rango 0-10. ¿Qué puede decir acerca de las verificaciones 
+   en el inciso anterior, en relación a esta verificación?
+ d)¿Qué otra función podría agregar?
+ e)Explique claramente el funcionamiento de la sentencia "break 2". 
+   Reemplace el if que lo contiene por una lista (&& o ||). 
+ f)Modifique el script para que se muestre el promedio de notas 
+   ingresadas, al finalizar la carga de alumnos. 
+ g) Reemplace el uso de `` por su equivalente. 
+  
+  
+#Inicio
+#####################
+#!/bin/bash
+
+declare -i nota 
+declare -u nombre 
+declare -u apellido 
+declare -u resp
+
+temp=`tempfile` || temp=/tmp/listado.$$
+
+function calificar (){
+	echo -n "Nombre: $1, Apellido: $2," 
+	if [[ $3 -lt 4 ]];then 
+	   echo " DESAPROBADO"
+	else
+           echo " APROBADO"
+	fi   
+}
+
+while true; do
+	echo -n "Por favor ingrese Nombre: " 
+	read nombre
+	echo -n "Por favor ingrese Apellido: " 
+	read apellido
+	echo -n "Nota correspondiente a $nombre $apellido: " 
+	read nota
+	calificar $nombre $apellido $nota >> $temp
+        
+	resp="N"
+	while [[ "$resp" != "S" ]];do 	
+	  echo -n "¿Otro ingreso? S/N": 
+	  read resp 
+          if [[ "$resp" == "N" ]];then 
+		break 2 
+	  fi 
+          echo
+        done 	
+done
+cat $temp
+
+rm $temp 
+exit 0
+# Fin del script
+
+7. Sobre el script /usr/sbin/iptables-apply :
+   a) ¿A qué paquete de software pertenece el script?
+   b) Liste el nombre de todas las funciones del script. Para cada una
+   de ellas, y sin entrar en detalles del total del script, intente 
+   dar una breve descripción de su funcionalidad (Ayuda: lea la 
+   página 73 del manual de referencia. El guión - que marca 
+   el string delimitante de un here-document <<-StringDelimitante 
+   suprime los tabs (pero no los espacios) en la salida). ¿Devuelve
+   algún valor la función? ¿Tiene variables locales la función? 
+   ¿Consideraría agregar alguna sentencia local?
+   c) Explique qué hace la sentencia case en las líneas 153 a 160. 
+   Reescriba ese case utilizando if
+
+8. Sobre el script /usr/bin/ldd
+   a) ¿A qué paquete de software pertenece el script?
+   b) Liste el nombre de todas las funciones del script. ¿Devuelve 
+   algún valor la función? ¿Tiene variables locales la función? 
+   ¿Consideraría agregar alguna sentencia local?
+   c) Explique el comportamiento de manera general, del while y 
+   case en las líneas 34 a 94. Sin entrar en detalle línea a línea. 
+   Explique sobre qué se itera y cuál parece ser la idea de esa 
+   sección de código.
+
+9. Encuentre un script en el sistema que haga uso de la sentencia 
+   local dentro de funciones. Copie una de esas funciones aquí (junto
+   al nombre del script al que pertenece). 
+   Ayuda: 
+      use findshell.sh y  |xargs grep 'local '
+
+10. Encuentre un script en el sistema que utilice let, otro expr.
+    Copie algunas de esas sentencias aquí (junto al nombre del 
+    script al que pertenece). ¿Qué otra forma conoce
+    para realizar operaciones aritméticas? Reescriba las sentencias
+    extraídas de los scripts utilizando las diferentes variantes.
+   Ayuda: 
+      use findshell.sh y  |xargs grep 'let '
