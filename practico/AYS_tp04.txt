@@ -1,8 +1,6 @@
 ----------------------------------
-TP03 - Automatización y scripting 
-Estructuras de control; funciones; 
-expresiones aritméticas; ejecución 
-de comandos; ordenes internas
+TP04 - Automatización y scripting 
+DEBUG
 FAI - TUASSL  
 ----------------------------------
 
@@ -22,8 +20,29 @@ deben hacerse en simultáneo en la misma versión.
 
 EJERCITACIÓN:
 ---------------------------------
-3. Lea el script a continuación y complete los incisos listados: 
- 
+
+0. Dado el siguiente script
+Utilizando la/s opción/es apropiada del shell (-x o -xv), observe 
+la ejecución del script a continuación  y responda:
+  a) ¿Se ejecutan las líneas anteriores al error de sintaxis? 
+  b) ¿Se ejecutan las líneas posteriores al error de sintaxis? 
+  c) ¿Es importante verificar la sintaxis de un script antes de 
+     ejecutarlo? ¿Cómo puede hacerlo?
+  d) Elimine los errores de sintaxis y verifique. 
+
+1. Lea el script a continuación y complete los incisos listados: 
+  a) Busque errores de sintaxis y elimine los mismos, sin ejecutar 
+     efectivamente hasta en tanto no haya eliminado los errores. 
+     Para cada error, copie aquí la línea y el error indicado por
+     bash. Ademá indique la resolución. ¿La corrección fue aplicada 
+     en la línea indicada por bash? 
+     Utilice la opción apropiada de bash para lograrlo. 
+  b) Para cada variable del script analice qué sucedería si dicha 
+     variable quedase sin definir (es decir, no se le asigna valor 
+     en ningún momento). Además indique si, dada la lógica del script,
+     es posible que quede sin definir. En caso de ser posible, 
+     indique cuál sería el impacto y qué haría para mejorar el script. 
+      
 
 #Inicio
 #####################
@@ -42,7 +61,7 @@ declare -r temp=$(tempfile)
 
 function total_proc (){ 
   echo $(grep "^$1 " $instante |wc -l)
-}
+
 
 
 echo COMIENZO | tee $logfile 
@@ -53,18 +72,18 @@ while :; do
      date
      for usr in $(cut -f1 -d:  /etc/passwd);do 
 	  procs=$(total_proc $usr)
-	  if [[ $procs -ne 0 ]];then 
+	  if [ $procs -ne 0 ];then 
 	    echo ${usr}: $procs
 	    let total=total+procs
 	  fi 
      done > $temp 
      sort -n -k2 $temp 
-     echo Total de procesos: $total
+     echo "Total de procesos: $total
      sleep 30
 done | tee $logfile 
 
 #Limpieza
-[[ -f $instante ]] && rm $instante 
+[[ -f $instante ] && rm $instante 
 [[ -f $temp ]] && rm $temp 
 echo $logfile debe ser borrado manualmente. 
 
@@ -72,8 +91,18 @@ exit 0
 # Fin del script
 
 
-4. Lea el script a continuación y complete los incisos listados: 
-
+2. Lea el script a continuación y complete los incisos listados: 
+  a) Busque errores de sintaxis y elimine los mismos, sin ejecutar 
+     efectivamente hasta en tanto no haya eliminado los errores. 
+     Para cada error, copie aquí la línea y el error indicado por
+     bash. Ademá indique la resolución. ¿La corrección fue aplicada 
+     en la línea indicada por bash? 
+     Utilice la opción apropiada de bash para lograrlo. 
+  b) Para cada variable del script analice qué sucedería si dicha 
+     variable quedase sin definir (es decir, no se le asigna valor 
+     en ningún momento). Además indique si, dada la lógica del script,
+     es posible que quede sin definir. En caso de ser posible, 
+     indique cuál sería el impacto y qué haría para mejorar el script. 
 #Inicio
 #####################
 
@@ -114,8 +143,18 @@ for dir; do
 done 
 # Fin del script
 
-5. Lea el script a continuación y complete los incisos listados: 
-
+3. Lea el script a continuación y complete los incisos listados: 
+  a) Busque errores de sintaxis y elimine los mismos, sin ejecutar 
+     efectivamente hasta en tanto no haya eliminado los errores. 
+     Para cada error, copie aquí la línea y el error indicado por
+     bash. Ademá indique la resolución. ¿La corrección fue aplicada 
+     en la línea indicada por bash? 
+     Utilice la opción apropiada de bash para lograrlo. 
+  b) Para cada variable del script analice qué sucedería si dicha 
+     variable quedase sin definir (es decir, no se le asigna valor 
+     en ningún momento). Además indique si, dada la lógica del script,
+     es posible que quede sin definir. En caso de ser posible, 
+     indique cuál sería el impacto y qué haría para mejorar el script. 
 
 #Inicio
 #####################
@@ -126,10 +165,8 @@ done
 # distribución debian o derivado. Se puede indicar un listado de 
 # nombres de paquete, un archivo con una lista de nombres de paquete, 
 # o bien si no se proveen argumentos se genera el listado para todos
-# los paquetes instalados en el sistema. 
-
-declare -u resp
-declare -i total=0 
+# los paquetes instalados en el sistema. El listado será emitido por 
+# la salida estándar. 
 
 function buscarscript(){
 local a
@@ -145,7 +182,6 @@ local -i total=0
       if [[ -n "$a" ]];then  
 	echo "    $a"
         let total++
-      fi 
    done   
    return $total 
 }
@@ -153,10 +189,10 @@ local -i total=0
 function todo_sistema(){
 local -u resp 
    while :;do
-     echo -n "Se creará un listado para todos los paquetes instalados en el sistema, ¿esta de acuerdo? S/N "
+     echo "Se creará un listado para todos los paquetes instalados en el sistema, ¿esta de acuerdo? S/N "
      read resp 
-     case resp in
-        S) return ;; 
+     case $resp in
+        S) return  
         N) echo saliendo...; exit ;; 
      esac
    done  
@@ -176,6 +212,8 @@ if [[ $(id -u) -ne 0 ]] ;then
  fi 
 }
 
+declare -i total=0 
+
 no_es_root 
 
 if [[ $# -eq 0 ]];then 
@@ -185,8 +223,7 @@ if [[ $# -eq 0 ]];then
       buscarscript $pkg
       let total=total+$?
    done 
-   echo Total de scripts de bash encontrados: $total  
-elif [[ -f "$1" ]];then
+elif [[ -f "$1"]];then
    # Si el primer argumento es un archivo regular, se asume que contiene una
    #lista de nombres de paquetes separada por nueva linea, sin lineas vacías. 
    for pkg in $(cat $1);do
@@ -195,117 +232,113 @@ elif [[ -f "$1" ]];then
    done 
 else
    #Asume que los argumentos son un listado de nombres de paquetes
-   while [[ $# -gt 0 ]];do
-	buscarscript $1
+   for pkg ;do
+	buscarscript $pkg
         let total=total+$?
-	shift
    done 
 fi 
 echo Total de scripts de bash encontrados: $total  
+exit 0
 # Fin del script
   
-6. Lea el script a continuación y complete los incisos listados: 
- a)Indique qué hace el script línea a línea y de manera general.  
-   Agregue como comentario al inicio la funcionalidad general. 
- b)Utilizando la estructura de control más apropiada, modifique la función 
-   calificar tal que: 
-	* Si la nota es 0 se devuelva REPROBADO
-  	* Si la nota está entre 1 y 3 se devuelva INSUFICIENTE
-	* Si la nota es 4 se devuelva APROBADO
-	* Si la nota está entre 5 y 7 se devuelva BUENO 
-	* Si la nota está entre 8 y 9 se devuelva MUY BUENO 
-	* Si la nota es 10 se devuelva EXCELENTE 
- 	* EN cualquier otro caso se devuelve "NOTA INVALIDA"
- c)Crear una nueva función que realice la función de ingreso de 
-   datos. La misma deberá verificar que la nota se encuentre en 
-   el rango 0-10. ¿Qué puede decir acerca de las verificaciones 
-   en el inciso anterior, en relación a esta verificación?
- d)¿Qué otra función podría agregar?
- e)Explique claramente el funcionamiento de la sentencia "break 2". 
-   Reemplace el if que lo contiene por una lista (&& o ||). 
- f)Modifique el script para que se muestre el promedio de notas 
-   ingresadas, al finalizar la carga de alumnos. 
- g) Reemplace el uso de `` por su equivalente. 
-  
+4. Lea el script a continuación y complete los incisos listados: 
+  a) Busque errores de sintaxis y elimine los mismos, sin ejecutar 
+     efectivamente hasta en tanto no haya eliminado los errores. 
+     Para cada error, copie aquí la línea y el error indicado por
+     bash. Ademá indique la resolución. ¿La corrección fue aplicada 
+     en la línea indicada por bash? 
+     Utilice la opción apropiada de bash para lograrlo. 
+  b) Para cada variable del script analice qué sucedería si dicha 
+     variable quedase sin definir (es decir, no se le asigna valor 
+     en ningún momento). Además indique si, dada la lógica del script,
+     es posible que quede sin definir. En caso de ser posible, 
+     indique cuál sería el impacto y qué haría para mejorar el script. 
   
 #Inicio
 #####################
 #!/bin/bash
+# El siguiente script es utilizado por un usuario para ingresar 
+# tuplas constituidas de: Nombre, Apellido y nota, correspondientes 
+# a un alumno. Basado en cada tupla se emitirá, por la salida 
+# estándar, el mismo listado pero con una nota alfabética basada 
+# en la nota numérica ingresada. 
 
-declare -i nota 
-declare -u nombre 
-declare -u apellido 
-declare -u resp
 
-temp=`tempfile` || temp=/tmp/listado.$$
-
-function calificar (){
-	echo -n "Nombre: $1, Apellido: $2," 
-	if [[ $3 -lt 4 ]];then 
-	   echo " DESAPROBADO"
-	else
-           echo " APROBADO"
-	fi   
+function carga_nota(){
+  echo -n "Por favor ingrese Nombre: " 
+  read nombre
+  echo -n "Por favor ingrese Apellido: " 
+  read apellido
+  while : ;do 
+     echo -n "Nota correspondiente a $nombre $apellido: " 
+     read nota
+     case $nota in 
+     [0-9]|10) return ;;
+     esac 
+  done 
 }
 
-while true; do
-	echo -n "Por favor ingrese Nombre: " 
-	read nombre
-	echo -n "Por favor ingrese Apellido: " 
-	read apellido
-	echo -n "Nota correspondiente a $nombre $apellido: " 
-	read nota
-	calificar $nombre $apellido $nota >> $temp
-        
-	resp="N"
-	while [[ "$resp" != "S" ]];do 	
-	  echo -n "¿Otro ingreso? S/N": 
-	  read resp 
-          if [[ "$resp" == "N" ]];then 
-		break 2 
-	  fi 
-          echo
-        done 	
-done
-cat $temp
+function otro_ingreso () {
+  local -u resp 
+  resp="N"
+  while [[ "$resp" != "S" ]];do 	
+    echo -n "¿Otro ingreso? S/N": 
+    read resp 
+    if [[ "$resp" == "N" ]];then 
+       return 1
+    fi 
+  done 	
+}
 
-rm $temp 
+function calificar (){
+  echo -n "Nombre: $1, Apellido: $2," 
+  case $3 in
+    0) echo REPROBADO ;;
+    [1-3]) echo INSUFICIENTE ;; 
+    4) echo APROBADO ;;
+    [5-7]) echo BUENO;;
+    [8-9]) echo MUY BUENO;;
+    10) echo EXCELENTE ;;  
+    *) echo NOTA INVALIDA ;;
+  esac 
+}
+
+declare -u nombre apellido 
+declare -i otro=0 cont=0 prom=0
+declare nota
+declare -r temp=`tempfile` || temp=/tmp/listado.$$
+
+while [[ $otro -eq 0 ]]; do
+  carga_nota   
+  let prom=prom+nota
+  let cont++
+  calificar $nombre $apellido $nota >> $temp
+  otro_ingreso 
+  otro=$?
+done
+
+let prom=prom/cont
+echo PROMEDIO DE NOTAS: $prom  >> $temp 
+
+cat $temp
+[[ -f $temp ]] && rm $temp 
+
 exit 0
 # Fin del script
 
-7. Sobre el script /usr/sbin/iptables-apply :
-   a) ¿A qué paquete de software pertenece el script?
-   b) Liste el nombre de todas las funciones del script. Para cada una
-   de ellas, y sin entrar en detalles del total del script, intente 
-   dar una breve descripción de su funcionalidad (Ayuda: lea la 
-   página 73 del manual de referencia. El guión - que marca 
-   el string delimitante de un here-document <<-StringDelimitante 
-   suprime los tabs (pero no los espacios) en la salida). ¿Devuelve
-   algún valor la función? ¿Tiene variables locales la función? 
-   ¿Consideraría agregar alguna sentencia local?
-   c) Explique qué hace la sentencia case en las líneas 153 a 160. 
-   Reescriba ese case utilizando if
+5. Sobre el script /usr/sbin/iptables-apply : 
+   a) Invocando el script en modo debug (bash -x o -xv), pase como a
+   rgumento la opción -h y observe la ejecución. 
+   b) Invocando el script en modo debug (bash -x o -xv), pase como a
+   rgumento la opción --version y observe la ejecución. 
+   c) ¿Qué opciones se ha/n configurado en el script, que permita/n 
+   ayudar al correcto funcionamiento y capturar errores comunes?
 
-8. Sobre el script /usr/bin/ldd
-   a) ¿A qué paquete de software pertenece el script?
-   b) Liste el nombre de todas las funciones del script. ¿Devuelve 
-   algún valor la función? ¿Tiene variables locales la función? 
-   ¿Consideraría agregar alguna sentencia local?
-   c) Explique el comportamiento de manera general, del while y 
-   case en las líneas 34 a 94. Sin entrar en detalle línea a línea. 
-   Explique sobre qué se itera y cuál parece ser la idea de esa 
-   sección de código.
 
-9. Encuentre un script en el sistema que haga uso de la sentencia 
-   local dentro de funciones. Copie una de esas funciones aquí (junto
-   al nombre del script al que pertenece). 
-   Ayuda: 
-      use findshell.sh y  |xargs grep 'local '
+6. Sobre el script /usr/bin/ldd
+   a) Invocando el script en modo debug (bash -x o -xv), pase como a
+   rgumento la opción --hel y observe la ejecución. 
+   b) Invocando el script en modo debug (bash -x o -xv), pase como a
+   rgumento la opción --ver y observe la ejecución. 
 
-10. Encuentre un script en el sistema que utilice let, otro expr.
-    Copie algunas de esas sentencias aquí (junto al nombre del 
-    script al que pertenece). ¿Qué otra forma conoce
-    para realizar operaciones aritméticas? Reescriba las sentencias
-    extraídas de los scripts utilizando las diferentes variantes.
-   Ayuda: 
-      use findshell.sh y  |xargs grep 'let '
+
