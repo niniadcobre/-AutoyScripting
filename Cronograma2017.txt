@@ -36,7 +36,7 @@ Semana 1 - 09/3
 
 Semana 2 - 16/3 
 	Variables 
-	Viernes entrega TP1 / Enunciado TP2
+	Viernes entrega TP1 (discusión resolución) / Enunciado TP2
 
 Semana 3  - 23/3
  	Jueves: Condiciones y listas  
@@ -45,7 +45,7 @@ Semana 3  - 23/3
 
 Semana 4  - 30/3
 	Estructuras de control y funciones
-	Viernes entrega TP2 / Enunciado TP3 (más extenso)
+	Viernes entrega TP2 (discusión resolución) / Enunciado TP3 (más extenso)
 
 Semana 5  - 06/4
 	Expresiones aritméticas 
@@ -59,28 +59,35 @@ Semana 7  - 20/4
         Viernes: OWASP Latam. 
 
 Semana 8  - 27/4
-	Jueves: Entrega TP3 / Enunciado TP4
-	Filtros 
+	Jueves: Entrega TP3 (discusión resolución) / Enunciado TP4
+        Discusión TP3 / debug 	
 
 Semana 9  - 04/5
-	Viernes Entrega TP4 / Enunciado TP5
-
+	Jueves trabajo con TP3
+	Viernes: presentación 
+		 find, sed, grep, awk, perl
+      
 Semana 10 - 11/5
-
+        Jueves entrega TP4 (discusión resolución) / Enunciado TP5	
+        Expresiones regulares
+        
 Semana 11 - 18/5
-	Viernes Entrega TP / Enunciado TP6
+ 	cron/at
 
 Semana 12 - 25/5
 	Jueves feriado - Revolución de Mayo 
+        Viernes Entrega TP5 (discusión resolución)
 
 Semana 13 - 01/6
-	Jueves examen parcial 
+	Jueves examen práctico
+	Viernes examen coloquio
 
 Semana 14 - 08/6
-	Entrega TP6
+	A determinar 
 
 Semana 15 - 15/6
-	Jueves examen recuperatorio 
+	Jueves examen recuperatorio práctico
+	Jueves examen recuperatorio coloquio
 
 Semana 16 - 22/6
 	A determinar
