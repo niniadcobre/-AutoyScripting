@@ -7,21 +7,9 @@ FAI - TUASSL
 
 MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
 ---------------------------------------------------
-NOTA1: Los temas cubiertos en este práctico incluyen los
-desarrollados en las páginas 
-
-NOTA2: Cuando los ejercicios pidan modificar código, repita
-el bloque a continuación del original y haga las modificaciones.  
-
-NOTA3: Cada vez que modifique el código VERIFIQUE su correcto 
-funcionamiento.  
-
-NOTA4: Cuando se pida modificar un script, todas las modificaciones
-deben hacerse en simultáneo en la misma versión. 
 
 EJERCITACIÓN:
 ---------------------------------
-
 0. Comando find. En cada caso indique cuál es el directorio de búsqueda. 
 Cuáles son las opciones que afectan toda la operación; las pruebas que 
 afectan archivos individuales, y las acciones a realizar. ¿Es necesario 
