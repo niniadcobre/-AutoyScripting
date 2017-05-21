@@ -268,7 +268,32 @@ exit 0
 
 Cron/at: 
 --------
-6. Agregue una línea en el crontab de root tal que ejecute todos los días 
+6. Lea el script a continuación y complete los incisos:  
+   a) Indique la funcionalidad del mismo. 
+   b) ¿Podría reemplazar la órden compuesta creada con llaves, por 
+      la misma orden creada con paréntesis? ¿Por qué?
+   c) Realice el/los cambios necesarios para que el umbral MIN sea 
+      ingresado como parámetro posicional del script. 
+
+#Inicio del script
+#!/bin/bash
+
+temp=$(tempfile)
+MIN=3
+
+while : ;do 
+   who > $temp 
+   users=$(cat $temp |cut -f1 -d\ |uniq | wc -l)
+   if [[ $users -ge $MIN ]];then 
+     { echo '!! ALERTA: MAS DE DOS USUARIOS PRESENTES !!'; cat $temp ; } | wall 
+   fi 
+   sleep 10 
+done 
+exit 
+#Fin del script
+
+
+7. Agregue una línea en el crontab de root tal que ejecute todos los días 
 cada 10 minutos el script del ejercicio anterior, pero cuya 
 salida sea guardada en el archivo /var/log/usuarios_presentes. Dicho archivo 
 debe ser acumulativo, esto es, no debe ser sobrescrito con 
@@ -277,7 +302,7 @@ infinito, pues cron se encarga de la ejecución periódica. ¿Por qué utilizamo
 el cron de root y no el de cualquier usuario como en el ejercicio anterior? 
 
 
-7. Ud es un administrador precavido y sabe que hoy a las 18hs alguien mas va 
+8. Ud es un administrador precavido y sabe que hoy a las 18hs alguien mas va 
 a implementar cambios en la configuración del sistema. Por ende decide que un
 rato antes de que suceda, quisiera realizar un backup del directorio de 
 configuración de sistema en el home de root, sin embargo, le ha surgido una 
@@ -285,7 +310,7 @@ cita importante que le impide realizarlo alrededor de las 17hs. Utilice el
 comando at para planificar la tarea. 
 
 
-8. Indique cómo sería la planificación por crontab para los siguientes casos:
+9. Indique cómo sería la planificación por crontab para los siguientes casos:
 	a) Todos los viernes del mes de diciembre
 	b) Cada 3 días
 	c) El primer día de cada mes. 
@@ -293,9 +318,8 @@ comando at para planificar la tarea.
 	e) En los minutos 0 a 14 y 24 a 35, de las 0hs,7hs y23hs, los días 
 	     miércoles.
 	f) Una vez por año
-	 
 
-9. Indique expresiones válidas para indicar a at que comience:
+10. Indique expresiones válidas para indicar a at que comience:
 	a) dentro de 5 minutos
 	b) dentro de 3 días 
 	c) A las 18:23hs 
