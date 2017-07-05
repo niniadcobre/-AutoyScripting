@@ -1,0 +1,38 @@
+Examen recuperatorio Automatización y scripting 
+TUASSL - UNCOMA - 15 de junio de 2017
+Nombre y Apellido 
+Legajo 
+
+
+Ejercicio 1) 
+Dado el script a continuación realice las modificaciones y, responda las
+preguntas listadas: 
+   a) Indique qué hace el script de manera general y, línea a línea. 
+   b) Reemplace el uso de la herramienta cut por awk. 
+   c) El valor de la variable umbral debe ser pasado como parámetro posicional. 
+   d) Agregue una función que verifique si el usuario no es root y en ese caso 
+      muestre un mensaje de error, finalizando la ejecución. Invoque 
+      la misma donde corresponda. ¿Por qué es necesario?
+   e) Toda la salida además de mostrarse por pantalla deberá guardarse en el 
+      archivo indicado por la variable logfile. 
+   f) El listado de archivos por cada punto de montaje, se muestre ordenado 
+      por tamaño de archivo y sólo se listen los primeros 5. 
+   g) Agregue salidas más representativas acerca de lo que se muestra por pantalla. 
+   h/2pt) Para cada PID listado por lsof muestre la información del proceso asociado. 
+   i) Agregue las sentencias declare y local que corresponda. 
+
+
+#!/bin/bash 
+
+logfile=$(mktemp)
+: ${logfile:=/tmp/log.$$}
+
+umbral=2G
+
+for fs in ext2 ext3 ext4;do 
+  for mpt in $( mount -t $fs | cut -f3 -d\ );do 
+      echo ${mpt}: 
+      find $mpt -xdev -size +${umbral} -exec ls -lh {} \; 2>/dev/null
+      lsof -t  $mpt 2>/dev/null
+  done 
+done 

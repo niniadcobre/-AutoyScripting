@@ -1,0 +1,101 @@
+Examen Automatización y scripting 2017
+Nombre Apellido:         
+Legajo:  
+--------------------------------------
+
+Ejercicio 1) (4pt) 
+  a) Indique la funcionalidad línea a línea y  general del script. 
+  b) Reemplace el for indicado por el comentario #inciso a utilizando while. 
+     Indique si se genera o no un subshell con el cambio introducido.  
+  c) Agregue una función que verifique que el usuario que ejecuta el script
+     es root. En caso contrario, muestre una advertencia que indique que la  
+     información se reduce al usuario en ejecución. ¿Por qué 
+     sucede esto?
+  d) Agregue una función que cuente la cantidad de procesos para cada usuario. 
+     Invoque dicha función en el lugar más apropiado. ¿Se evalúan todos en el 
+     mismo instante o instantes distintos? (cualquier opción es válida, sólo 
+     indique su elección) 
+  e) Modifique el script tal que se muestre al final el número total de 
+     usuarios analizados. 
+  f) Agregue las sentencias declare y local que corresponda. 
+  g) ¿Es posible que alguna variable quede sin definir o con un valor nulo?
+     ¿Tiene algún impacto?¿Podría mejorar algo?
+     
+
+#!/bin/bash
+
+usuarios=$(tempfile)
+
+function generar_usuarios() {
+temp=$(tempfile)
+  cut -f1,7 -d: /etc/passwd > $temp
+  for shell in $(grep '^/' /etc/shells);do 
+    grep $shell $temp |cut -f1 -d:
+  done > $usuarios
+rm $temp
+}
+ 
+function archivos() {
+  lsof -u $1 2>/dev/null| awk '$5 == "REG" {print $0}'  |wc -l 
+}
+
+generar_usuarios
+
+#inciso a 
+for usr in $(cat $usuarios);do 
+   echo "Reporte para $usr ($(grep $usr /etc/passwd |cut -f5 -d:))"
+   echo "	Archivos abiertos: $(archivos $usr)"
+done 
+#inciso a 
+
+Ejercicio 2 - DEBUG  
+Busque errores de sintaxis y elimine los mismos, sin ejecutar 
+efectivamente hasta en tanto no haya eliminado los errores. 
+Para cada error, copie aquí la línea y el error indicado por
+bash. Además indique la resolución. ¿La corrección fue aplicada 
+en la línea indicada por bash? 
+
+#!/bin/bash
+
+declare -i procs total 
+declare -r instante=$(tempfile)
+declare -r temp=$(tempfile)
+
+
+function total_proc (){ 
+  echo $(grep "^$1  $instante |wc -l)
+}
+
+echo COMIENZO 
+
+while :; do
+     ps -ef --no-headers > $instante 
+     total=0 
+     date
+     for usr in $(cut -f1 -d:  /etc/passwd);do 
+	  procs=$(total_proc $usr)
+	  if [ $procs -ne 0 ];then 
+	    echo "${usr}: $procs
+	    let total=total+procs
+     done > $temp 
+     sort -n -k2 $temp 
+     echo "Total de procesos: $total"
+     sleep 30
+done 
+
+#Limpieza
+[[ -f $instante ]] && rm $instante 
+[ -f $temp ]] && rm $temp 
+
+exit 0
+# Fin del script
+
+Ejercicio 3 - Cron/anacron/at: 
+Asumiendo que se encuentra la siguiente configuración en el crontab de la 
+usuaria juana: indique cuándo se ejecutará miscript.sh 
+    i) @reboot /home/miuser/bin/miscript.sh 
+   ii) */5 18-23 * dec-feb * /home/miuser/bin/miscript.sh 
+
+Ejercicio 4 - Comando find:
+Utilizando find, busque todos los archivos en los directorios /home y /tmp 
+que pertenezcan al usuario isaac y cuyo tamaño supere los 100Mb. 
