@@ -1,0 +1,100 @@
+#SCRIPT01
+#####################
+#!/bin/bash
+
+declare -i nota 
+declare -u nombre 
+declare -u apellido 
+declare -u resp
+
+temp=`tempfile` || temp=/tmp/listado.$$
+
+function calificar (){
+	echo -n "Nombre: $1, Apellido: $2," 
+	if [[ $3 -lt 4 ]];then 
+	   echo " DESAPROBADO"
+	else
+           echo " APROBADO"
+	fi   
+}
+
+while true; do
+	echo -n "Por favor ingrese Nombre: " 
+	read nombre
+	echo -n "Por favor ingrese Apellido: " 
+	read apellido
+	echo -n "Nota correspondiente a $nombre $apellido: " 
+	read nota 
+	calificar $nombre $apellido $nota >> $temp
+        
+	resp="N"
+	while [[ "$resp" != "S" ]];do 	
+	echo -n "¿Otro ingreso? S/N": 
+	read resp 
+        if [[ "$resp" == "N" ]];then 
+		break 2 
+	fi 
+        echo
+        done 	
+done
+cat $temp
+
+rm $temp 
+exit 0
+
+#SCRIPT02
+#####################
+#!/bin/bash
+
+logfile=/tmp/users.log
+echo COMIENZO > $logfile
+
+while true; do
+     for i in `cut -f1 -d:  /etc/passwd`;do 
+	  procs=`ps -u ${i} --no-headers |wc -l`
+	  if [[ $procs -ne 0 ]];then 
+	    echo ${i}: $procs
+	  fi 
+        let k++
+     done | sort -n -k2  
+     date
+     sleep 30
+done >> $logfile
+
+exit 0
+
+#SCRIPT03
+#####################
+#!/bin/bash 
+[[ `id -u` -ne 0 ]] && exit
+
+until [ $# -eq 0 ] ;do 
+	if [[ -d $1 ]] ;then 
+	 	echo Directorio: $1	
+		for usr in `find $1 -ls |awk '{print $5}' |sort -u `;do
+			arch=`find $1 -user $usr |wc -l `
+			printf "\t ${usr}: $arch \n"
+		done
+	else
+		echo "No existe el directorio $1"
+        fi 
+	shift 
+done 
+
+#SCRIPT04
+#####################
+#!/bin/bash
+[[ `id -u` -ne 0 ]] || exit
+
+until [[ $# -eq 0 ]]; do
+   if [ -d $1 ];then 
+      cd $1
+      for i in `ls *jpg`;do
+	cp $i ${i%%jpg}JPG
+      done
+      cd $OLDPWD
+      shift 
+   fi 
+done 
+
+
