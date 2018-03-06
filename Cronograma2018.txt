@@ -3,8 +3,8 @@ Sujeto a modificaciones que serán publicadas en PEDCO y en clase.
 
 Horarios:
 
-Jueves 16 a 17 LAB 3 FAEA 
-Viernes 18 a 21 Biblioteca 
+Jueves 18hs a 20hs LAB 3 FAEA 
+Viernes 16hs a 18hs LAB 2 FAEA 
 
 Calendario: 
 ==========
@@ -41,24 +41,21 @@ Semana 2 - 19/3
 	Viernes entrega TP1 (discusión resolución) / Enunciado TP2
 
 Semana 3  - 26/3
- 	Jueves: Condiciones y listas  
-	Viernes feriado - Día Nacional de la Memoria por la Verdad y la 
-	Justicia.
+        Jueves y viernes santo. No hay clases. 
 
 Semana 4  - 02/4
+ 	Jueves: Condiciones y listas  
+
+Semana 5  - 09/4
 	Estructuras de control y funciones
 	Viernes entrega TP2 (discusión resolución) / Enunciado TP3 (más extenso)
 
-Semana 5  - 09/4
+Semana 6  - 16/4
 	Expresiones aritméticas 
 	Ejecución de comando 
 
-Semana 6  - 16/4
-	Semana santa, no hay clases jueves y viernes. 
-
 Semana 7  - 23/4
 	Jueves práctica. Debug. 
-        Viernes: OWASP Latam. 
 
 Semana 8  - 30/4
 	Jueves: Entrega TP3 (discusión resolución) / Enunciado TP4
@@ -75,9 +72,9 @@ Semana 10 - 14/5
         
 Semana 11 - 21/5
  	cron/at
+        Viernes 25 de mayo, feriado Revolución de Mayo. 
 
 Semana 12 - 28/5
-	Jueves feriado - Revolución de Mayo 
         Viernes Entrega TP5 (discusión resolución)
 
 Semana 13 - 04/6
@@ -89,15 +86,10 @@ Semana 14 - 11/6
 
 Semana 15 - 18/6
 	Jueves examen recuperatorio práctico
-	Jueves examen recuperatorio coloquio
+	Viernes examen recuperatorio coloquio
 
 Semana 16 - 25/6
 	A determinar
 
 ===============================================================
-
-
-Bibliografía: 
-"Beginning Linux Programming". Neil Mathew, Richard Stones. 
-Chapter 2: shell programming 
 
