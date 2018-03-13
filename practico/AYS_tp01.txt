@@ -12,20 +12,21 @@ MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
    ¿Cuáles son sus permisos?
 
 2. ¿De qué tipo de archivo, son todos los shells disponibles en su sistema?
+   (responda utilizando comandos para verificar su respuesta)
 
-3. ¿Cómo saber cuál es el shell que estoy ejecutando al abrir una terminal o
-cuando me conecto a una consola?
-¿Dónde se define el shell predeterminado para un usuario? 
-¿Cómo puedo hacer para ejecutar un shell diferente?
+3. a) ¿Cómo saber cuál es el shell que estoy ejecutando al abrir una terminal o
+      cuando me conecto a una consola?
+   b) ¿Dónde se define el shell predeterminado para un usuario? 
+   c) ¿Cómo puedo hacer para ejecutar un shell diferente?
 
-4. Obtenga la versión de bash que esta utilizando, opción --version. 
+4. Obtenga la versión de bash que esta utilizandon. 
 
 5. ¿Cuántos procesos se encuentran en ejecución en el sistema?. Recuerde
-descontar los encabezados si utiliza ps y wc, a menos que use la opción 
-apropiada para evitar dicho encabezado ¿Cuál es?. 
+   descontar los encabezados si utiliza ps y wc, a menos que use la opción
+   apropiada para evitar dicho encabezado ¿Cuál es?. 
 
-6. ¿Qué comando utiliza para mostrar el nombre del sistema y sólo el nombre 
-del sistema?  
+6. ¿Qué comando utiliza para mostrar el nombre del host y sólo el nombre 
+   del host?  
 
 7. ¿Cómo obtiene ayuda, en la terminal, acerca de las funcionalidades de bash?
 
@@ -46,8 +47,16 @@ dentro de un proceso (programa en ejecución):
 1 Salida estándar (lo escrito por un proceso durante un funcionamiento normal) 
 2 Error estándar (lo escrito por un proceso cuando sucedió algún acontecimiento anormal)
 
+Ejemplo: 
+$ read palabra #<- en este caso la entrada estándar se espera desde la terminal. 
+ls | wc        #<- en este caso la salida estándar de ls será la entrada estándar de wc. 
+                   El error estándar de ambos comandos se dirige a la terminal. 
+
+¿Todos los programas reciben una entrada?
+
+
 9. Explique el funcionamiento de las siguientes redirecciones. Indique además cuál es 
-la entrada, la salida y los errores si los hubiera. 
+la entrada, la salida y el error _si lo hubiera_. 
 
 	ls > archivo.txt 
 	ls >> archivo.txt 
@@ -62,7 +71,7 @@ El pipe es un mecanismo que permite vincular la entrada y salida de los procesos
 modo lo escrito por un proceso es leído por el siguiente en la cadena de pipes. 
 
 10. Explique el funcionamiento de los siguientes pipes. Indique cómo debiera reemplazar
-las sentencias si no existiera el pipe. 
+cada sentencia si no existiera el pipe. 
 
 	du -sh * |sort -h 
 	ps -ef |grep root  
