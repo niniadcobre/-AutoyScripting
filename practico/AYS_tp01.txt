@@ -19,7 +19,7 @@ MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
    b) ¿Dónde se define el shell predeterminado para un usuario? 
    c) ¿Cómo puedo hacer para ejecutar un shell diferente?
 
-4. Obtenga la versión de bash que esta utilizandon. 
+4. Obtenga la versión de bash que esta utilizando. 
 
 5. ¿Cuántos procesos se encuentran en ejecución en el sistema?. Recuerde
    descontar los encabezados si utiliza ps y wc, a menos que use la opción
@@ -185,21 +185,7 @@ a) ¿Cuál es el objetivo de la sentencia anterior?
 b) ¿Cuántos programas utiliza?¿Puede hacer esto mismo con menos programas? 
    Generalice la solución para cualquier número de línea. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-23. Lea páginas 31 a 36 del manual de referencia, luego
+22. LEA PÁGINAS 31 A 36 DEL MANUAL DE REFERENCIA, LUEGO
 Ejecute y explique estos casos :
 
 Caso a)
@@ -255,12 +241,11 @@ else
 	echo "Alguno NO existe"
 fi
 
-
-24. Ejecute y explique :
+23. Ejecute y explique :
 
 echo "2 2 2 1 2 1 3 4 5 6 6" | tr " " "\n" | sort | uniq -u
 
-25. Ejecute y explique : 
+24. Ejecute y explique : 
 
 echo "a b c" > /tmp/uno
 echo "d e f" > /tmp/dos
