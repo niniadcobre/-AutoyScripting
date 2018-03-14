@@ -105,12 +105,15 @@ el uso de una u otra opción. Generalice esta idea al resto de los programas.
 
 ¿Puede generar una secuencia que comience en el número 22 y termine en el 60?
 
-12. Ejecute y explique : echo {01..100}
+12. Ejecute y explique : 
+   echo {01..100}
+   echo {15..25..5}
+
+Nota: ver "Brace Expansion" (Expansión de llaves) - man bash, sección Expansión. 
 
 ¿Puede generar una secuencia que comience con 0022 y termine en el 0060?
 
 13. Ejecute y explique: echo soy_{isaac,asimov}_escritor
-
 
 14. Ejecute y explique : echo {z..a}
 
@@ -119,18 +122,20 @@ la Q?
 
 ¿Qué programa hace la expansión de las llaves en los ejercicios 2, 3 y 4?
 
-
 -----------------------------------------------------------------------------
 OBSERVACIÓN: es muy importante prestar atención a cuál es el 
-programa que realiza la expansión de comodines. ¿Lo hace el shell o él 
+programa que realiza la expansión de metacaracteres*. ¿Lo hace el shell o él 
 programa que recibe la entrada? En este sentido, hay programas que aceptan 
-el uso de comodines para armar expresiones regulares. Por ejemplo, 
+el uso de metacaracteres para armar expresiones regulares. Por ejemplo, 
 
 grep '^s.*e' /etc/passwd
 
-Los comodines que se encuentran entre las comillas simples son 
+Los metacaracteres que se encuentran entre las comillas simples son 
 interpretados por grep y no por bash.  
--------------------------------------------------------------------
+
+*Se considera metacaracter a aquellos caracteres que tienen un significado no 
+literal para el programa que los interpreta. 
+-----------------------------------------------------------------------------
 
 15. Ejecute y explique : 
 
@@ -144,26 +149,18 @@ seq 10 | xargs -n 2
 
 Encuentre al menos otros dos usos del programa xargs.  
 
-17.  Obtener un archivo desde un servidor web con el comando telnet :
-
-(echo 'GET /'; echo; sleep 1; ) | telnet www.google.com 80
-
-¿Puede explicar que sucedió en el comando anterior?
-
-
-18. Ejecute y explique :
+17. Ejecute y explique :
 
 echo "linux" | tr a-z A-Z 
 
-19. Ejecute y explique :
+18. a) Ejecute y explique :
+       cat /etc/passwd |cut -f 3 -d:   
 
-cat /etc/passwd |cut -f 3 -d:   
+    b) ¿Puede listar el ID del usuario y su nombre completo y ordenar la lista
+       de manera inversa?
+    c) ¿La versión de cut que utiliza soporta trabajar sobre archivos directamente? 
 
-¿Puede listar el ID del usuario y su nombre completo y ordenar la lista
-de manera inversa?
-¿La versión de cut que utiliza soporta trabajar sobre archivos directamente? 
-
-20. Listar los paquetes instalados :
+19. Listar los paquetes instalados :
 
 dpkg -l | awk '$1=="ii" {print $2}' 
 
@@ -174,21 +171,33 @@ a) ¿Qué diferencias hay entre la primer y segunda sentencia?
 b) ¿Puede generar los dos listados pero que incluyan la versión del paquete?
 c) ¿Por qué se seleccionan aquellos con ii? 
 
-
-21. Ejecute y explique :
+20. Ejecute y explique :
 
 tac /etc/passwd 
 
 ¿Conoce algún programa que haga la operación inversa?
 
-22. Ejecute y explique :
+21. Ejecute y explique :
 
 cat /etc/passwd |head -20 | tail -1
 
-¿Cuál es el objetivo de la sentencia anterior? ¿Es eficiente? 
-¿Cuántos programas utiliza?¿Puede obtener una forma mejor de 
-hacer esto mismo? Generalice la solución para cualquier número 
-de línea. 
+a) ¿Cuál es el objetivo de la sentencia anterior? 
+b) ¿Cuántos programas utiliza?¿Puede hacer esto mismo con menos programas? 
+   Generalice la solución para cualquier número de línea. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 23. Lea páginas 31 a 36 del manual de referencia, luego
 Ejecute y explique estos casos :
