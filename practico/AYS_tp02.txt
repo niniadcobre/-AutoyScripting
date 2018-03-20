@@ -10,6 +10,8 @@ condiciones y listas.
 
 ---------------------------------------------------
 MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
+Manual en línea de bash: SECCIÓN "PARAMETERS" (PARÁMETROS)
+
 
 VIM TIPS: 
 --------------------------------------------------------
@@ -34,13 +36,11 @@ principales:
 	2) comparaciones aritméticas
 	3) condiciones sobre archivos
 
-NOTA1: Cuando en los ejercicios se pregunta de "qué tipo es la 
-condición", se refiere a en cuál de estas categorías 
-se incluye la misma. 
+NOTA1: Cuando en los ejercicios se pregunta de "qué tipo es la condición", se 
+refiere a en cuál de estas categorías se incluye la misma. 
 
-Ver "EXPRESIONES CONDICIONALES" en man bash en español 
-("CONDITIONAL EXPRESSIONS" en man bash inglés) y páginas 
-31 a 33 del manual de referencia. 
+Ver "CONDITIONAL EXPRESSIONS" en man bash inglés ("EXPRESIONES CONDICIONALES"
+en man bash en español) y páginas 31 a 33 del manual de referencia. 
 ---------------------------------
 
 NOTA2: Cuando los ejercicios pidan modificar código, repita
@@ -48,21 +48,33 @@ el bloque a continuación del original y haga las modificaciones.
 
 EJERCITACIÓN:
 ---------------------------------
-1. ¿De dónde provienen las variables de ambiente que 
-están definidas al comenzar la ejecución de un script? 
-
-2. Archivos relacionados a la ejecución de scripts:
+1. Archivos relacionados a la ejecución de scripts:
 /etc/profile
 ~/.bash_profile
 ~/.bash_login
+~/.bashrc
 ~/.profile
 
+  a) i)  Ejecute ssh a la máquina en la que se encuentra trabajando y observe 
+     el contenido de $0. Termine la ejecución del shell. ¿Con qué palabra se
+     despide el shell?
+     ii) Ejecute bash --login en una terminal. Busque el proceso correspondiente
+     a dicho shell y oberve sus argumentos. Observe $0. Termine la ejecución 
+     del shell. ¿Con qué palabra se despide el shell? 
+     iii) Ejecute bash sin la opción --login. Observe $0. Termine la ejecución 
+     del shell. ¿Con qué palabra se despide el shell?
+     iv) ¿Puede decir en cada caso si se trata de un shell de entrada o no? 
   a)¿En qué orden se leen estos archivos cuando un nuevo 
-  shell se ejecuta? Realice alguna prueba. 
+  shell se ejecuta? Lea la sección "INVOCATION/LLAMADA"
   b)¿Qué diferencia fundamental hay entre usar el archivo en 
     /etc y los guardados en el home del usuario? 
   c) Observe el contenido del archivo /etc/profile. ¿Es sólo
-     una lista de variables asignadas? ¿Qué es? ¿Qué hace?
+     una lista de variables asignadas? Explique de manera general: 
+     ¿Qué es? ¿Qué hace?
+
+2. ¿De dónde provienen las variables de ambiente que están definidas al 
+   comenzar la ejecución de un script? (Observar subsección "Shell Variables" 
+   o "Variables del shell")
 
 3. Lea las páginas 29 y 30 del manual de referencia y, desarrolle
 un script que muestre el contenido de cada una de las variables
@@ -79,7 +91,7 @@ y vuelva a mostrar para observar el efecto.
   c) Observe y documente el uso de las variables de ambiente listadas en la 
   tabla de la página 29, que están en uso dentro del script.  
   d) ¿Qué condición se evalúa en el if? ¿De qué tipo es? ¿Puede escribirla 
-  de otra forma? ¿Puede utilizar test o [ para reemplazarla?    
+  de otra forma? ¿Puede utilizar test o [ para reemplazarla?     
 
 #Inicio
 #####################
@@ -89,12 +101,11 @@ logfile=/tmp/users.log
 echo COMIENZO > $logfile
 
 while true; do
-     for i in `cut -f1 -d:  /etc/passwd`;do 
-	  procs=`ps -u ${i} --no-headers |wc -l`
+     for usr in $(cut -f1 -d:  /etc/passwd);do 
+	  procs=$(ps -u ${usr} --no-headers |wc -l)
 	  if [[ $procs -ne 0 ]];then 
-	    echo ${i}: $procs
+	    echo ${usr}: $procs
 	  fi 
-        let k++
      done | sort -n -k2  
      date
      sleep 30
