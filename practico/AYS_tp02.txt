@@ -59,7 +59,7 @@ EJERCITACIÓN:
      el contenido de $0. Termine la ejecución del shell. ¿Con qué palabra se
      despide el shell?
      ii) Ejecute bash --login en una terminal. Busque el proceso correspondiente
-     a dicho shell y oberve sus argumentos. Observe $0. Termine la ejecución 
+     a dicho shell y observe sus argumentos. Observe $0. Termine la ejecución 
      del shell. ¿Con qué palabra se despide el shell? 
      iii) Ejecute bash sin la opción --login. Observe $0. Termine la ejecución 
      del shell. ¿Con qué palabra se despide el shell?
@@ -77,12 +77,12 @@ EJERCITACIÓN:
    o "Variables del shell")
 
 3. Lea las páginas 29 y 30 del manual de referencia y, desarrolle
-un script que muestre el contenido de cada una de las variables
-listadas en la tabla; en caso de ser posible, modifique su contenido, 
-y vuelva a mostrar para observar el efecto. 
+   un script que muestre el contenido de cada una de las variables
+   listadas en la tabla; en caso de ser posible, modifique su contenido, 
+   y vuelva a mostrar para observar el efecto. 
 
 4. Cuando se ejecuta un script ¿se crea un nuevo proceso? Responda haciendo 
-   la comprobación observando las variables $$ y $PPID. 
+   la comprobación observando las variables especiales $$ y $PPID. 
 
 5. Lea el script a continuación y complete los incisos listados: 
   a) Documente el uso de variables y parámetros posicionales. Indique 
