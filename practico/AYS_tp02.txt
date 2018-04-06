@@ -64,11 +64,11 @@ EJERCITACIÓN:
      iii) Ejecute bash sin la opción --login. Observe $0. Termine la ejecución 
      del shell. ¿Con qué palabra se despide el shell?
      iv) ¿Puede decir en cada caso si se trata de un shell de entrada o no? 
-  a)¿En qué orden se leen estos archivos cuando un nuevo 
+  b)¿En qué orden se leen estos archivos cuando un nuevo 
   shell se ejecuta? Lea la sección "INVOCATION/LLAMADA"
-  b)¿Qué diferencia fundamental hay entre usar el archivo en 
+  c)¿Qué diferencia fundamental hay entre usar el archivo en 
     /etc y los guardados en el home del usuario? 
-  c) Observe el contenido del archivo /etc/profile. ¿Es sólo
+  d) Observe el contenido del archivo /etc/profile. ¿Es sólo
      una lista de variables asignadas? Explique de manera general: 
      ¿Qué es? ¿Qué hace?
 
