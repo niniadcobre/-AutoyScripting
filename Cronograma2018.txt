@@ -44,10 +44,11 @@ Semana 3  - 26/3
         Jueves y viernes santo. No hay clases. 
 
 Semana 4  - 02/4
- 	Jueves: Condiciones y listas  
+ 	Estructuras de control y funcionies
+        Listas  
 
 Semana 5  - 09/4
-	Estructuras de control y funciones
+        Expansión	
 	Viernes entrega TP2 (discusión resolución) / Enunciado TP3 (más extenso)
 
 Semana 6  - 16/4
