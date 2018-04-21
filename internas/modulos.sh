@@ -4,10 +4,38 @@
 # lo hacemos con ./modulos.sh o con  bash modulos.sh 
 # Pregunta: ¿Cuando una función es definida, las sentencias que la componen son # efectivamente ejecutadas?
 
-printf "Definiendo las funciones guardadas en $0 ...\n"
+ayuda () {
+   printf "Ayuda: 
+   Ejecutar todas las funciones dispoibles: $0 -a
+   Ejecutar un subconjunto de funciones: $0 [nombre1 nombre2 ...]
+   Listar todas las funciones disponubles: $0 -l 
+   Obtener ayuda: $0 -h \n"
+   exit 
+}
+
+salida (){
+     
+     printf "¿Desea salir? S/N "
+     read resp
+     if [[ "$resp" == "S" ]];then 
+       builtin return 0
+     else 
+       builtin return 1;
+     fi
+}
+
+source () {
+
+   FN_SOURCE=source
+   printf "$FUNCNAME :
+   Si queremos ejecutar un script en el shell en curso, es decir 
+   sin crear un nuevo proceso, podemos hacerlo invocando source o . :
+   Forma 1:    source script.sh [argumento1 argumento2..] 
+   Forma 2:    . script.sh [argumento1 argumento2..]\n" 
+}
 
 alias () {
-   FN_ALIAS=1
+   FN_ALIAS=alias
    printf "$FUNCNAME: 
    En esta función definiremos alias que estarán disponibles durante 
    la ejecución del script. Recordar que si definimos alias en archivos
@@ -21,7 +49,7 @@ alias () {
 }
 
 break () {
-   FN_BREAK=1
+   FN_BREAK=break
    local -u resp 
    printf "$FUNCNAME: 
    Permite interrumpir CICLOS (infinitos o no), terminando todas las
@@ -44,18 +72,34 @@ break () {
 }
 
 continue () {
-   FN_CONTINUE=1
+   FN_CONTINUE=continue
    local -u resp 
    printf "$FUNCNAME: 
    Permite interrumpir ITERACIONES individuales, todas las sentencias que 
    siguen a continue, dentro de un ciclo, seran omitidas y se reanuda en 
    la próxima iteración. Probando continue...\n"
    while :;do 
-     printf "Las sentencias a continuación son sorprendentes... ¿quiere verlas? S/N"
+     printf "Las sentencias a continuación son sorprendentes... ¿quiere verlas? S/N "
      read resp
      [[ "$resp" == "N" ]] && builtin continue
-     printf "¿No más sorpresas? S/N"
+     printf "¿No más sorpresas? S/N "
      read resp
      [[ "$resp" == "N" ]] && builtin break
    done    
+}
+
+type () {
+   FN_TYPE=type
+   declare -u resp
+   printf "$FUNCNAME: 
+   Permite identificar cómo interpreta el shell cada comando ejecutado. 
+   ¿Se trata de una función, una orden interna o una orden externa?\n"
+   while :;do
+     printf "Ingrese una orden: " 
+     read orden 
+     builtin type $orden 
+     if salida ;then 
+         builtin break
+     fi  
+  done 
 }
