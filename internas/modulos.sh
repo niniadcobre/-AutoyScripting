@@ -2,12 +2,13 @@
 # Piense si la línea anterior tiene sentido para un archivo que sólo define
 # funciones. Piense qué sucedería si en lugar de invocar el script con source, 
 # lo hacemos con ./modulos.sh o con  bash modulos.sh 
-# Pregunta: ¿Cuando una función es definida, las sentencias que la componen son # efectivamente ejecutadas?
+# Pregunta: ¿Cuando una función es definida, las sentencias que la componen 
+# son efectivamente ejecutadas?
 
 ayuda () {
    printf "Ayuda: 
    Ejecutar todas las funciones dispoibles: $0 -a
-   Ejecutar un subconjunto de funciones: $0 [nombre1 nombre2 ...]
+   Ejecutar un subconjunto de funciones: $0 -s [nombre1 nombre2 ...]
    Listar todas las funciones disponubles: $0 -l 
    Obtener ayuda: $0 -h \n"
    exit 

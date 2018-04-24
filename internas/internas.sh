@@ -13,12 +13,14 @@ source modulos.sh
 
 #La función interna getopts interpreta los parametros posicionales
 #en búsqueda de opciones soportadas por el script. En nuestro caso
-#las opciones soportadas son ahl 
-while getopts ahl opt; do
+#las opciones soportadas son ahls 
+while getopts ahls opt; do
   case $opt in
    a) ALL=1  ;;
    h) ayuda ;;
    l) LIST=1;;
+   s) SUBCONJ=1 ;;
+   *) LIST=1
   esac
 done
 
@@ -39,9 +41,11 @@ elif [[ -v LIST ]];then
      echo -n "${f#FN_*=} "
   done
   echo 
-else
+elif [[ -v SUBCONJ ]];then
    #Este for itera sobre los parámetros posicionales ante la falta de 
    #la sentencia [in ...]
+   shift #Descarto la opción -s, asumo que a continuación se provee el 
+         #listado de funciones a ejecutar. 
    for funct ;do 
    $funct
    done
