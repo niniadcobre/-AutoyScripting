@@ -2,14 +2,16 @@
 
 #NOTA: Observar que estamos re-definiendo nombre de funciones internas de bash
 
+set -eu 
+
 DEBUG=1
 
 source modulos.sh 
 
 #Se requiere siempre al menos un argumento. ¿Cómo haría para cambiar este
 #comportamiento para ejecutar todas las funciones disponibles?
-[[ $# -eq 0 ]] && ayuda 
 
+[[ $# -eq 0 ]] && ayuda 
 
 #La función interna getopts interpreta los parametros posicionales
 #en búsqueda de opciones soportadas por el script. En nuestro caso
@@ -44,10 +46,10 @@ elif [[ -v LIST ]];then
 elif [[ -v SUBCONJ ]];then
    #Este for itera sobre los parámetros posicionales ante la falta de 
    #la sentencia [in ...]
-   shift #Descarto la opción -s, asumo que a continuación se provee el 
+   shift #Descarto la opción -s ($1), asumo que a continuación se provee el 
          #listado de funciones a ejecutar. 
-   for funct ;do 
-   $funct
+   for funct ;do # ¿Sobre qué itera la variable funct?
+     $funct
    done
 fi  
 
