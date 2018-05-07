@@ -59,11 +59,10 @@ Semana 7  - 23/4
 	Jueves práctica. Debug. 
 
 Semana 8  - 30/4
-	Jueves: Entrega TP3 (discusión resolución) / Enunciado TP4
-        Discusión TP3 / debug 	
+	Viernes: Entrega TP3 (discusión resolución) / Enunciado TP4
 
 Semana 9  - 07/5
-	Jueves trabajo con TP3
+	Jueves trabajo con TP04
 	Viernes: presentación 
 		 find, sed, grep, awk, perl
       

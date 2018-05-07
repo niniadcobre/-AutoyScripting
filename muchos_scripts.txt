@@ -144,3 +144,20 @@ done
 cd $OLDPWD
 exit 0
 
+#!/bin/bash 
+
+declare -i total=1 
+declare -u resp 
+
+until [ $total -eq 0 ];do
+   total=$(ls -d */ | wc -l) 
+   select dir in $(ls -d */) ;do 
+     echo Desea borrar $dir? S/N
+     read resp
+     if [ $resp == S ];then  
+       echo rm -rf $dir 
+     else break 
+     fi 
+   done  
+done 
+
