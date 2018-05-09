@@ -151,9 +151,7 @@ done
     ¿Cambia la localidad de la variable pkg en la versión 
     modificada? 
   f) En la sentencia else de la estructura de control principal, 
-    reescriba el while utilizando for y until. ¿Qué sucede con la 
-    localidad de la variable pkg en cada caso? ¿Qué sucede con 
-    los parámetros posicionales en cada caso?
+    reescriba el while utilizando until. 
   g) Reemplace el uso de `` por su equivalente. 
   h) Reemplace el último while del código con un for. 
   i) Agregue una función tal que si el usuario no es root, consulte
