@@ -184,10 +184,7 @@ done
      en ningún momento). Además indique si, dada la lógica del script,
      es posible que quede sin definir. En caso de ser posible, 
      indique cuál sería el impacto y qué haría para mejorar el script. 
-  c) En el caso de recibir un archivo con el listado de paquetes a evaluar.
-     ¿Qué sucede si en dicho archivo hay líneas en blanco? Verifique observando
-     la ejecución con la opción -x de bash. ¿Podría mejorar esta situación?
-  d) ¿Está funcionando correctamente el script? Observe lo que sucede para un 
+  c) ¿Está funcionando correctamente el script? Observe lo que sucede para un 
      sólo paquete (ejemplo a2ps). ¿Puede detectar cuál es el problema y corregirlo?
      ¿Se trata de un error de sintaxis?
 
