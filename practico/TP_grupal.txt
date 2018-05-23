@@ -1,0 +1,30 @@
+GRUPO 1
+ a) Crear una función que permita verificar si una función recibida como 
+    argumento está implementada o no. 
+ b) Crear una función que devuelva el listado de funciones definidas en el 
+    archivo modulos.sh 
+ c) Utilizar dichas funciones en el script principal. 
+ d) ¿Considera útil seguir la convención de agregar una variable 
+    FN[nombre=nombre] en las funciones definidas? ¿En qué difieren estas 
+    funciones con respecto a las funciones que re-definen ordenes internas?
+GRUPO 2
+ a) Implemente una función que explique y muestre el uso de la orden interna 
+    history
+GRUPO 3
+ a) Implemente una función que explique y muestre el uso de la orden interna 
+    dirs pushd y popd
+GRUPO 4
+ a) Implemente una función que explique y muestre el uso de la orden interna 
+    jobs bg fg
+GRUPO 5 
+ a) Implemente una función que explique y muestre el uso de la orden interna 
+    shift
+GRUPO 6 
+ a) Implemente una función que explique y muestre el uso de la orden interna 
+    suspend
+GRUPO 7
+ a) Implemente una función que explique y muestre el uso de la orden interna 
+    umask 
+Grupo 8
+ a) Implemente una función que explique y muestre el uso de la orden interna 
+    wait 
