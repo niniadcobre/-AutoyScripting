@@ -1,0 +1,141 @@
+.TH internas.sh 1 "Junio 2018" "Equipo de desarrollo de TUASSL"
+.SH "NOMBRE" 
+	internas.sh \- Mostrar el comportamiento de órdenes internas del shell Bash. 
+.SH "SYNOPSIS"
+.PP
+internas/internas.sh 
+
+.SH "DESCRIPTION"
+.PP 
+El script \fBinternas.sh\fR . 
+.PP 
+When running \fBinternas.sh\fR a set of modules will be executed in order, the items checked on each module are listed below. 
+.PP 
+The script takes a configuration file as argument \fB(see internas.conf (4))\fR. Some modules uses the information contained to verify current system configuration against the data provided (like dns servers, ntp, etc.), and will not run if the information is not provided on the file. Others like rootshell do not use any information an will be executed in all the cases. 
+
+.PP
+Current list and description of available modules are:
+
+.PP 
+\fBchk_01_hostname\fR
+.br 
+This module will check the configured hostname (hardcoded) and the hostname currently in use. 
+
+.PP 
+\fBchk_02_gateway\fR
+.br 
+This module will check if the gateway is properly configured and reachable. 
+
+.PP 
+\fBchk_03_hosts\fR
+.br 
+This module will check if a pair <IP address> <system name> exist in /etc/hosts file.
+
+.PP 
+\fBchk_04_dns\fR
+.br 
+This module will check if: 
+.br
+	* the name server is configured and if it is reachable
+.br
+	* there are other entries aside the ones specified in internas.conf file
+.br
+	* the domain name is properly configured
+.br
+	* there is an entry for SHOSTNAME (or SHOSTNAME.DOMAIN) in DNS servers.
+
+.PP 
+\fBchk_05_ntp\fR
+.br
+This module will check if: 
+.br
+	* ntp service is online (daemon running)
+.br
+For each NTP server defined \fBasdo_opcheck.conf(4)\fR the following items will be checked: 
+.br
+	* ntp server response when available. 
+.br
+		\fBAll\fR:ntpq output and ping. 
+.br
+	* ntp server present in the proper configuration files:
+.br
+		\fBSolaris\fR:  /etc/inet/ntp.conf
+.br
+		\fBLinux\fR: /etc/ntp.conf and  /etc/ntp/step-tickers
+.br
+		\fBHPUX\fR: /etc/ntp.conf and  /etc/rc.config.d/netdaemons
+.br
+		\fBAIX\fR: /etc/ntp.conf and /etc/rc.tcpip for service 
+
+.PP 
+\fBchk_06_timezone\fR
+.br
+This module will check if: 
+.br 
+	* The Timezone variable is properly configured. 
+.br 
+	* When possible (Linux and Solaris) will check if the STZ timezone is valid. 
+
+.PP 
+\fBchk_07_rootprompt\fR
+.br
+This module will look for PS1 defined variable on /etc/profile and $ROOTHOME/.profile. 
+.PP 
+\fBchk_08_rootshell\fR
+.br
+This module will check if the current root shell defined in /etc/passwd is set to sh. 
+
+.PP 
+\fBchk_09_dump\fR
+.br
+This module will check current dump configuration: 
+.br
+	* Current dump device
+.br
+	* save core directory name and size and, 
+.br 
+	* required services running:
+.br
+		\fBSolaris\fR: dumpadm service (native)
+.br
+		\fBLinux\fR: kdump (no native, check if installed too).
+.br
+		\fBHPUX\fR: livedumpkd (native)
+.br
+		\fBAIX\fR:  still not implemented
+
+
+.PP 
+\fBchk_10_sendmail\fR
+.br
+This module will check if sendmail is installed, configured and properly running and if the relay server is reachable.
+.PP
+\fBchk_11_snmp\fR
+.br
+This module will check snmp retrieving a sub tree of management values from localhost using the proper community string.
+.PP 
+\fBchk_12_sudo\fR
+.br
+This module will check SUDO and compare their template with the HP standard.
+.PP 
+\fBchk_13_hardware\fR
+.br
+This module will check the quantity of cpus and their maximum speed in MHZ, the total amount of physical memory in MB and will show the system architecture. 
+
+.SH "EXAMPLES"
+.SH "NOTES"                                                                     
+.PP 
+No se requieren permisos especiales para ejecutar este script. 
+
+.SH "VEA TAMBIÉN"
+.PP 
+builtins(1), bash-builtins(1)                                                                         
+
+.SH "BUGS"
+.pp
+Esta no es una versión estable, si encuentra errores por favor enviarlos al mail que corresponda. 
+
+.SH "AUTHOR"
+.PP
+Miriam Lechner, mtl@fi.uncoma.edu.ar
+.br

@@ -371,8 +371,7 @@ exit 0
 
 7. Sobre el script internas.sh y módulos.sh 
    a) ¿Es visible la variable DEBUG en las funciones del archivo módulos.sh?
-      ¿Qué cambios haría para que sea visible? ¿Para qué podría servir este 
-      cambio?¿Cuál es el efecto de esta variable?
+      ¿Cuál es el efecto de esta variable?
    b) Genere tres errores de sintaxis simultáneamente, y verifique cuál es 
       el/los error/s reportado/s por bash. Indique las líneas de error aquí. 
    c) ¿Al utilizar la opción -x ¿Se observa la ejecución interna de las 
