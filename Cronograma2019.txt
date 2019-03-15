@@ -3,7 +3,7 @@ Sujeto a modificaciones que serán publicadas en PEDCO y en clase.
 
 Horarios:
 
-Jueves 18hs a 20hs LAB Biblioteca
+Miércoles 18hs a 20hs LAB Biblioteca
 Viernes 16hs a 18hs LAB 2 FAEA 
 
 Calendario: 
@@ -38,36 +38,37 @@ Semana 1 - 08/3
 
 Semana 2 - 14/3 
 	Variables 
-	Viernes entrega TP1 (discusión) / Enunciado TP2
+	Enunciado TP2
 
 Semana 3  - 21/3
  	Estructuras de control y funciones
-        Listas  
+        Listas - Entrega TP1
 
 Semana 4  - 28/3
         Expansión	
-	Viernes entrega TP2 (discusión) / Enunciado TP3 
+	Enunciado TP3 
 
 Semana 5  - 04/4
-	Expresiones aritméticas 
+	Expresiones aritméticas / Miércoles Entrega TP2 (discusión)
 	Ejecución de comando 
 
 Semana 6  - 11/4
-        Jueves y viernes santo, no hay clases. 
+        Miércoles  
+        Viernes santo, no hay clases. 
 
 Semana 7  - 18/4
-	Jueves práctica. Debug. 
+	Miércoles práctica. Debug. 
 
 Semana 8  - 25/4
 	Viernes: Entrega TP3 (discusión) / Enunciado TP4
 
 Semana 9  - 02/5
-	Jueves trabajo con TP04
+	Miércoles trabajo con TP04
 	Viernes: presentación 
 		 find, sed, grep, awk, perl
       
 Semana 10 - 09/5
-        Jueves entrega TP4 (discusión) / Enunciado TP5	
+        Miércoles entrega TP4 (discusión) / Enunciado TP5	
         Expresiones regulares
         
 Semana 11 - 16/5
@@ -77,18 +78,17 @@ Semana 12 - 23/5
         Viernes Entrega TP5 (discusión)
 
 Semana 13 - 30/5
-	Jueves examen práctico
+	Miércoles examen práctico
 	Viernes examen coloquio
 
 Semana 14 - 06/6
 	A determinar 
 
 Semana 15 - 13/6
-	Jueves examen recuperatorio práctico
+	Miércoles examen recuperatorio práctico
 	Viernes examen recuperatorio coloquio
 
 Semana 16 - 20/6
-        Jueves Feriado Paso a la inmortalidad Manuel Belgrano. 
 	A determinar
 
 ===============================================================
