@@ -34,32 +34,32 @@ Cronograma semanal:
 ===============================================================
 Semana 1 - 08/3
 	Presentación - Introducción 
-	Enunciado primer TP1 
+	Enunciado TP1 publicado. 
 
 Semana 2 - 14/3 
-	Variables 
-	Enunciado TP2
+        Miércoles: práctica 
+	Viernes: teoría de Variables / práctica.  
+	
+Semana 3  - 20/3
+        Miércoles: Enunciado TP2 publicado. 
+ 	Viernes: Estructuras de control y funciones / Entrega TP1  (discusión). 
 
-Semana 3  - 21/3
- 	Estructuras de control y funciones
-        Listas - Entrega TP1
+Semana 4  - 27/3
+        Miércoles: práctica TP2 
+        Viernes: Listas / Expansión 
 
-Semana 4  - 28/3
-        Expansión	
-	Enunciado TP3 
+Semana 5  - 03/4
+        Miércoles: Enunciado TP3 /  Entrega TP2 (discusión)
+	Viernes: Expresiones aritméticas / Ejecución de comando 
 
-Semana 5  - 04/4
-	Expresiones aritméticas / Miércoles Entrega TP2 (discusión)
-	Ejecución de comando 
-
-Semana 6  - 11/4
-        Miércoles  
+Semana 6  - 10/4
+        Miércoles:práctica  
         Viernes santo, no hay clases. 
 
-Semana 7  - 18/4
+Semana 7  - 17/4
 	Miércoles práctica. Debug. 
 
-Semana 8  - 25/4
+Semana 8  - 24/4
 	Viernes: Entrega TP3 (discusión) / Enunciado TP4
 
 Semana 9  - 02/5
@@ -67,28 +67,28 @@ Semana 9  - 02/5
 	Viernes: presentación 
 		 find, sed, grep, awk, perl
       
-Semana 10 - 09/5
+Semana 10 - 08/5
         Miércoles entrega TP4 (discusión) / Enunciado TP5	
         Expresiones regulares
         
-Semana 11 - 16/5
+Semana 11 - 15/5
  	cron/at
 
-Semana 12 - 23/5
+Semana 12 - 22/5
         Viernes Entrega TP5 (discusión)
 
-Semana 13 - 30/5
+Semana 13 - 29/5
 	Miércoles examen práctico
 	Viernes examen coloquio
 
-Semana 14 - 06/6
+Semana 14 - 05/6
 	A determinar 
 
-Semana 15 - 13/6
+Semana 15 - 12/6
 	Miércoles examen recuperatorio práctico
 	Viernes examen recuperatorio coloquio
 
-Semana 16 - 20/6
+Semana 16 - 19/6
 	A determinar
 
 ===============================================================
