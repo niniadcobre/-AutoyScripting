@@ -11,27 +11,34 @@ MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
    ¿De qué tipo es el archivo? 
    ¿Cuáles son sus permisos?
 
-2. ¿De qué tipo de archivo, son todos los shells disponibles en su sistema?
+2. Liste todos los shells de su sistema. ¿De qué tipo de archivo son?
    (responda utilizando comandos para verificar su respuesta)
-
+     
 3. a) ¿Cómo saber cuál es el shell que estoy ejecutando al abrir una terminal o
       cuando me conecto a una consola?
    b) ¿Dónde se define el shell predeterminado para un usuario? 
    c) ¿Cómo puedo hacer para ejecutar un shell diferente?
 
-4. Obtenga la versión de bash que esta utilizando. 
+4. Indique la diferencia entre info, man y help.
 
-5. ¿Cuántos procesos se encuentran en ejecución en el sistema?. Recuerde
-   descontar los encabezados si utiliza ps y wc, a menos que use la opción
-   apropiada para evitar dicho encabezado ¿Cuál es?. 
+5. Obtenga la versión de bash que esta utilizando. 
 
-6. ¿Qué comando utiliza para mostrar el nombre del host y sólo el nombre 
-   del host?  
+6. ¿Cómo obtiene ayuda, en la terminal, acerca de las funcionalidades de bash?
 
-7. ¿Cómo obtiene ayuda, en la terminal, acerca de las funcionalidades de bash?
+7. Ejecute rbash o bash -r en su consola. ¿Puede explicar que sucede?. Amplíe 
+   su respuesta usando man bash.
 
-8. Indique la diferencia entre info, man y help.
-  
+8. Algunos juegos y curiosidades
+	8.1) Ejecute telnet towel.blinkenlights.nl ¿Explique con sus palabras 
+             lo que sucede?
+	8.2) Ejecute rev y a continuación escriba una palabra cualquiera ¿Que 
+             sucede?
+	8.3) Instale los siguientes juegos: cowsay y fortune (Ayuda: apt-get 
+             install nbeDelPrograma). Luego ejecútelos por separado y explique 
+             qué hace cada uno. 
+        8.4) Según el principio del uso de flujo de texto que propone la 
+             filosofía UNIX ¿cómo se le ocurre usar estos 2 programas en 
+             conjunto?  
 -----------------------------------------------------------------------------
 Redirección y pipe
 LEA LAS PÁGINAS 21 A 23 DEL MANUAL DE REFERENCIA. 
@@ -39,24 +46,24 @@ LEA LAS PÁGINAS 21 A 23 DEL MANUAL DE REFERENCIA.
 
 El uso de la redirección y los pipes es fundamental en la construcción de 
 scripts ya que, siguiendo la filosofía UNIX, nos permite combinar programas
-para construir nuevas funcionalidades. En tal sentido es importante RECORDAR que 
-existen tres descriptores de archivos frecuentemente utilizados y redireccionados
-dentro de un proceso (programa en ejecución): 
+para construir nuevas funcionalidades. En tal sentido es importante RECORDAR 
+que existen tres descriptores de archivos frecuentemente utilizados y 
+redireccionados dentro de un proceso (programa en ejecución): 
 
 0 Entrada estándar (lo leído por un proceso)  
 1 Salida estándar (lo escrito por un proceso durante un funcionamiento normal) 
 2 Error estándar (lo escrito por un proceso cuando sucedió algún acontecimiento anormal)
 
 Ejemplo: 
-$ read palabra #<- en este caso la entrada estándar se espera desde la terminal. 
-ls | wc        #<- en este caso la salida estándar de ls será la entrada estándar de wc. 
-                   El error estándar de ambos comandos se dirige a la terminal. 
-
+$ read palabra #<- en este caso la entrada estándar se espera desde la terminal.
+ls | wc        #<- en este caso la salida estándar de ls será la entrada 
+	       estándar de wc.  El error estándar de ambos comandos se dirige 
+               a la terminal. 
 ¿Todos los programas reciben una entrada?
 
 
-9. Explique el funcionamiento de las siguientes redirecciones. Indique además cuál es 
-la entrada, la salida y el error _si lo hubiera_. 
+9. Explique el funcionamiento de las siguientes redirecciones. Indique además 
+   cuál es la entrada, la salida y el error (si lo hubiera). 
 
 	ls > archivo.txt 
 	ls >> archivo.txt 
@@ -67,11 +74,12 @@ la entrada, la salida y el error _si lo hubiera_.
 	ls archivoinexistente.txt &> /dev/null 
 	read palabra < archivocontexto.txt ; echo $palabra
 
-El pipe es un mecanismo que permite vincular la entrada y salida de los procesos. De este
-modo lo escrito por un proceso es leído por el siguiente en la cadena de pipes. 
+El pipe es un mecanismo que permite vincular la entrada y salida de los 
+procesos. De este modo lo escrito por un proceso es leído por el siguiente en 
+la cadena de pipes. 
 
-10. Explique el funcionamiento de los siguientes pipes. Indique cómo debiera reemplazar
-cada sentencia si no existiera el pipe. 
+10. Explique el funcionamiento de los siguientes pipes. Indique cómo debiera 
+    reemplazar cada sentencia si no existiera el pipe. 
 
 	du -sh * |sort -h 
 	ps -ef |grep root  
@@ -120,11 +128,11 @@ Nota: ver "Brace Expansion" (Expansión de llaves) - man bash, sección Expansi�
 ¿Puede generar la secuencia de letras desde la B (mayúscula) hasta
 la Q?
 
-¿Qué programa hace la expansión de las llaves en los ejercicios 2, 3 y 4?
+¿Qué programa hace la expansión de las llaves en los ejercicios 12, 13 y 14?
 
 -----------------------------------------------------------------------------
 OBSERVACIÓN: es muy importante prestar atención a cuál es el 
-programa que realiza la expansión de metacaracteres*. ¿Lo hace el shell o él 
+programa que realiza la expansión de metacaracteres*. ¿Lo hace el shell o el 
 programa que recibe la entrada? En este sentido, hay programas que aceptan 
 el uso de metacaracteres para armar expresiones regulares. Por ejemplo, 
 
@@ -151,33 +159,40 @@ Encuentre al menos otros dos usos del programa xargs.
 
 17. Ejecute y explique :
 
-echo "linux" | tr a-z A-Z 
+	17.1) echo "linux" | tr a-z A-Z 
 
-18. a) Ejecute y explique :
+	17.2) Convertir cualquier palabra que contenga vocales en la misma 
+              palabra pero reemplazando las vocales por números: Ejemplo: La 
+              palabra abecedario  --> 4b3c3d4r10
+	      IMPORTANTE: Debe respetar que cada vocal siempre se corresponda 
+              con el mismo número.
+
+18. Ejecute y explique :
+
+echo "2 2 2 1 2 1 3 4 5 6 6" | tr " " "\n" | sort | uniq -u
+
+19. Ejecute y explique : 
+
+echo "a b c" > /tmp/uno
+echo "d e f" > /tmp/dos
+paste /tmp/uno /tmp/dos
+
+20. a) Ejecute y explique :
        cat /etc/passwd |cut -f 3 -d:   
 
     b) ¿Puede listar el ID del usuario y su nombre completo y ordenar la lista
        de manera inversa?
-    c) ¿La versión de cut que utiliza soporta trabajar sobre archivos directamente? 
+    c) ¿La versión de cut que utiliza soporta trabajar sobre archivos 
+       directamente? En caso afirmativo muestre un ejemplo, en caso contrario 
+       justifique.
 
-19. Listar los paquetes instalados :
-
-dpkg -l | awk '$1=="ii" {print $2}' 
-
-dpkg -l | grep ii | awk '{print $2}' | sort 
-
-a) ¿Qué diferencias hay entre la primer y segunda sentencia? 
-   ¿Cuántos programas se invocan en cada uno?¿Cuál es más exacta?
-b) ¿Puede generar los dos listados pero que incluyan la versión del paquete?
-c) ¿Por qué se seleccionan aquellos con ii? 
-
-20. Ejecute y explique :
+21. Ejecute y explique :
 
 tac /etc/passwd 
 
 ¿Conoce algún programa que haga la operación inversa?
 
-21. Ejecute y explique :
+22. Ejecute y explique :
 
 cat /etc/passwd |head -20 | tail -1
 
@@ -185,68 +200,3 @@ a) ¿Cuál es el objetivo de la sentencia anterior?
 b) ¿Cuántos programas utiliza?¿Puede hacer esto mismo con menos programas? 
    Generalice la solución para cualquier número de línea. 
 
-22. LEA PÁGINAS 31 A 36 DEL MANUAL DE REFERENCIA, LUEGO
-Ejecute y explique estos casos :
-
-Caso a)
-
-[[ -d /var ]]
-echo $?
-
-test -d /var
-echo $?
-
-
-Caso b)
-
-[[ -d /directorio ]]
-echo $?
-
-test -d /directorio
-echo $?
-
-
-Caso c)
-
-if [[ -d /var ]] ; then
-	echo "El dir existe"
-else
-	echo "NO existe"
-fi
-
-
-Caso d)
-
-if test -d /var  ; then
-	echo "El dir existe"
-else
-	echo "NO existe"
-fi
-
-
-Caso e)
-
-if test -d /var && [[ -d /etc ]] ; then
-	echo "Los dos directorios existen "
-else
-	echo "Alguno NO existe"
-fi
-
-
-Caso f)
-
-if test -d /var && test -d /directorio ; then
-	echo "Los dos directorios existen "
-else
-	echo "Alguno NO existe"
-fi
-
-23. Ejecute y explique :
-
-echo "2 2 2 1 2 1 3 4 5 6 6" | tr " " "\n" | sort | uniq -u
-
-24. Ejecute y explique : 
-
-echo "a b c" > /tmp/uno
-echo "d e f" > /tmp/dos
-paste /tmp/uno /tmp/dos
