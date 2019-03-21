@@ -1,7 +1,7 @@
 ----------------------------------
 TP02 - Automatización y scripting 
 FAI - TUASSL - Variables/parámetros, 
-ambiente, condiciones y listas. 
+ambiente, condiciones, listas y repetitivas. 
 ----------------------------------
 
 Los ejercicios a continuación están relacionados a los temas 
@@ -27,7 +27,6 @@ En modo normal:
 :n1,n2y <- Copiar lineas n1 a n2, luego p para
            pegar donde crea conveniente.
 
-
 BACKGROUND ACERCA DE CONDICIONES: 
 ---------------------------------
 Las condiciones evaluadas con test o [[ caen en tres categorías 
@@ -35,6 +34,7 @@ principales:
 	1) comparaciones de cadenas
 	2) comparaciones aritméticas
 	3) condiciones sobre archivos
+        4) condiciones sobre variables (nueva categoría)
 
 NOTA1: Cuando en los ejercicios se pregunta de "qué tipo es la condición", se 
 refiere a en cuál de estas categorías se incluye la misma. 
@@ -48,43 +48,90 @@ el bloque a continuación del original y haga las modificaciones.
 
 EJERCITACIÓN:
 ---------------------------------
-1. Archivos relacionados a la ejecución de scripts:
-/etc/profile
-~/.bash_profile
-~/.bash_login
-~/.bashrc
-~/.profile
 
-  a) i)  Ejecute ssh a la máquina en la que se encuentra trabajando y observe 
-     el contenido de $0. Termine la ejecución del shell. ¿Con qué palabra se
-     despide el shell?
-     ii) Ejecute bash --login en una terminal. Busque el proceso correspondiente
-     a dicho shell y observe sus argumentos. Observe $0. Termine la ejecución 
-     del shell. ¿Con qué palabra se despide el shell? 
-     iii) Ejecute bash sin la opción --login. Observe $0. Termine la ejecución 
-     del shell. ¿Con qué palabra se despide el shell?
-     iv) ¿Puede decir en cada caso si se trata de un shell de entrada o no? 
-  b)¿En qué orden se leen estos archivos cuando un nuevo 
-  shell se ejecuta? Lea la sección "INVOCATION/LLAMADA"
-  c)¿Qué diferencia fundamental hay entre usar el archivo en 
-    /etc y los guardados en el home del usuario? 
-  d) Observe el contenido del archivo /etc/profile. ¿Es sólo
-     una lista de variables asignadas? Explique de manera general: 
-     ¿Qué es? ¿Qué hace?
+1. ¿Cómo obtiene ayuda para saber cómo interpretar o escribir 
+una sentencia if, for, while, until, case o una función? Escriba 
+a continuación la sintaxis y _sólo la sintaxis_ de cada una de las
+estructuras de control mencionadas.  
 
-2. ¿De dónde provienen las variables de ambiente que están definidas al 
+Ejemplo: 
+if: if ÓRDENES; then ÓRDENES; [ elif ÓRDENES; then ÓRDENES; ]...[ else ÓRDENES; ] fi
+
+
+2. LEA PÁGINAS 31 A 36 DEL MANUAL DE REFERENCIA, LUEGO
+Ejecute y explique estos casos :
+
+Caso a)
+
+    [[ -d /var ]]
+    echo $?
+
+    test -d /var
+    echo $?
+
+    /usr/bin/test -d /var
+    echo $?
+
+
+Caso b)
+
+    [[ -d /directorio ]]
+    echo $?
+
+    test -d /directorio
+    echo $?
+
+    /usr/bin/test -d /directorio
+    echo $?
+    
+Caso c)
+
+    if [[ -d /var ]] ; then
+	    echo "El dir existe"
+    else
+	    echo "NO existe"
+    fi
+
+
+Caso d)
+
+    if test -d /var  ; then
+	    echo "El dir existe"
+    else
+	    echo "NO existe"
+    fi
+
+
+Caso e)
+
+    if test -d /var && [[ -d /etc ]] ; then
+	    echo "Los dos directorios existen "
+    else
+	    echo "Alguno NO existe"
+    fi
+
+
+Caso f)
+
+    if test -d /var && test -d /directorio ; then
+	    echo "Los dos directorios existen "
+    else
+	    echo "Alguno NO existe"
+    fi
+
+3. ¿De dónde provienen las variables de ambiente que están definidas al 
    comenzar la ejecución de un script? (Observar subsección "Shell Variables" 
    o "Variables del shell")
 
-3. Lea las páginas 29 y 30 del manual de referencia y, desarrolle
+4. Lea las páginas 29 y 30 del manual de referencia y, desarrolle
    un script que muestre el contenido de cada una de las variables
    listadas en la tabla; en caso de ser posible, modifique su contenido, 
    y vuelva a mostrar para observar el efecto. 
 
-4. Cuando se ejecuta un script ¿se crea un nuevo proceso? Responda haciendo 
+5. Cuando se ejecuta un script ¿se crea un nuevo proceso? Responda haciendo 
    la comprobación observando las variables especiales $$ y $PPID. 
 
-5. Lea el script a continuación y complete los incisos listados: 
+6. Lea el script a continuación y complete los incisos listados: 
   a) Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
   b) Agregue las sentencia declare o local convenientes. 
@@ -115,7 +162,7 @@ exit 0
 # Fin del script
 
 
-6. Lea el script a continuación y complete los incisos listados: 
+7. Lea el script a continuación y complete los incisos listados: 
   a)  Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
   b) Observe y documente el uso de las variables de ambiente listadas en la 
@@ -143,14 +190,14 @@ until [[ $# -eq 0 ]]; do
    fi 
 done 
 
-7. Lea el script findshell (PEDCO) y complete los incisos listados: 
+8. Lea el script findshell (PEDCO) y complete los incisos listados: 
   a) Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
   b) ¿Cuál es el efecto de la sentencia "declare -u resp" ¿Qué sucede 
   si no se declara de ese tipo? ¿Agregaría alguna sentencia declare o local?
   c) ¿La función recibe argumentos? Modifique el script para que muestre los 
-  parámetros posicionales al principio y fin de la ejecución del script y, 
-  dentro de de la función. Ejecute el script pasando al menos dos paquetes 
+  parámetros posicionales al principio y fin de la ejecución del script y 
+  dentro de la función. Ejecute el script pasando al menos dos paquetes 
   como argumento. Documente el resultado observado.  
   d) Observe y documente el uso de las variables de ambiente listadas en la 
   tabla de la página 29, que están en uso en el script.
@@ -160,7 +207,7 @@ done
   f) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
   de las listas observadas en el script. 
   
-8. Lea el script a continuación y complete los incisos listados: 
+9. Lea el script a continuación y complete los incisos listados: 
   a)  Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
   b) ¿Qué sucede con el valor de la variable "nota" si se le asigna algo 
@@ -222,3 +269,102 @@ cat $temp
 rm $temp 
 exit 0
 # Fin del script
+
+10. Complete el siguiente script (observar etiqueta TODO) y tenga presente que 
+    debe cumplir los siguientes requerimientos de funcionalidad.
+
+    REQUERIMIENTOS:
+    10.1. La longitud de la clave debe ser igual o mayor a 8 dígitos.
+    10.2. La clave debe contener letras mayúsculas y minúsculas.
+    10.3. Debe imprimir por pantalla el resultado de la evaluación según 
+          corresponda.
+
+OBS: ¡No olvide probar bien su script verificando que cada camino posible 
+     funcione correctamente!
+
+SCRIPT:
+
+#Inicio
+#####################
+// TODO
+echo "Enter your password"
+read password
+len="${#password}" // Explique con sus palabras qué sucede en esta línea
+
+if test //TODO ; then
+     echo "$password" | grep -q [0-9]
+     if test $? -eq 0 ; then
+                //TODO
+                if test $? -eq 0 ; then
+                    //TODO   
+                      if test $? -eq 0 ; then
+                       //TODO
+                   else
+                       //TODO
+                   fi
+            else
+               //TODO
+            fi
+     else
+       //TODO
+     fi
+else
+    //TODO
+fi
+
+
+11. La empresa donde trabajamos necesita enviar una carta de notificación a 
+    todos sus clientes. Por lo que se nos solicita crear un script para 
+    automatizar la personalización de la carta, de manera que esté dirigida a 
+    cada cliente. Para ello, contamos con un archivo que contiene el listado de
+    todos los clientes de la empresa y, por otra parte otro archivo que contiene
+    la carta de notificación (template).
+
+    11.1 Cree un archivo de texto que se llame listadoClientes.txt con la 
+         siguiente información:
+
+    Horacio Perez
+    Juan José López
+    Roberto Lorenzo
+    Mirtha Pasturiza
+
+    11.2 Tenga en cuenta el siguiente texto para armar el template de 
+         notificación:
+
+Estimado xxxxx, 
+
+    Por medio de la presente me permito informarle que nuestras oficinas de 
+atención al cliente se encontraran cerradas desde el 01/01/2019 al 02/01/2019 
+debido a vacaciones de nuestro personal. 
+    Por cuestiones de urgencia deberá comunicarse a nuestro help desk en el 
+horario de 8 a 21 hrs., al teléfono 555-3322. 
+    Sin otro particular lo saludo atte. 
+
+Dirección de logística BBQ 
+
+    11.3 Ud deberá crear dos shell script, el primero carta.sh contendrá la 
+        lógica que permita recorrer el archivo de clientes y por cada cliente 
+        invocará, creando un subshell, a cartaCustom.sh que recibirá por 
+        parámetro posicional el cliente y modificará el template de la carta 
+        generando un archivo personalizado. Para finalmente guardar cada 
+        archivo dentro del directorio "cartas". 
+
+Por lo tanto, la salida de la ejecución debería ser como el siguiente ejemplo:
+cartas/Horacio Perez.txt
+cartas/Juan josé López.txt
+.... y así con cada cliente.
+El contenido de cada archivo deberá tener al nombre COMPLETO de cada cliente.
+ 
+AYUDA: Use parámetros posicionales y la repetitiva while para lectura de 
+       archivos.
+
+
+
+
+
+
+
+   
+
+
+
