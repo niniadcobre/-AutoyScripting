@@ -1,46 +1,38 @@
 ----------------------------------
 TP03 - Automatización y scripting 
-Estructuras de control; funciones; 
-expresiones aritméticas; ejecución 
-de comandos; ordenes internas
-Expansión
+Expansión; expresiones aritméticas; 
+ordenes internas; funciones y 
+estructuras de control
+
 FAI - TUASSL  
 ----------------------------------
 
 MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
 ---------------------------------------------------
-NOTA1: Los temas cubiertos en este práctico incluyen los
-desarrollados en las páginas 34 a 58 y, 68 a 70 del 
-manual de referencia. 
 
-NOTA2: Cuando los ejercicios pidan modificar código, repita
-el bloque a continuación del original y haga las modificaciones.  
-
-NOTA3: Cada vez que modifique el código VERIFIQUE su correcto 
+NOTA1: Cada vez que modifique el código VERIFIQUE su correcto 
 funcionamiento.  
 
-NOTA4: Cuando se pida modificar un script, todas las modificaciones
-deben hacerse en simultáneo en la misma versión. 
+NOTA2: Cuando se pida modificar un script, todas las modificaciones
+deben hacerse en simultáneo, esto es, en la misma versión. 
+
+NOTA3: Cuando se pida modificar un script del sistema, haga una copia
+y trabaje con él en su directorio de ejercitaciones. NO MODIFIQUE LOS SCRIPTS 
+DEL SISTEMA 
 
 EJERCITACIÓN:
 ---------------------------------
 1. ¿Qué es una orden simple y una orden compuesta para bash? 
 
-2. ¿Cómo obtiene ayuda para saber cómo interpretar o escribir 
-una sentencia if, for, while, until, case o una función? Escriba 
-a continuación la sintaxis y _sólo la sintaxis_ de cada una de las
-estructuras de control mencionadas.  
-
-Ejemplo: 
-if: if ÓRDENES; then ÓRDENES; [ elif ÓRDENES; then ÓRDENES; ]...[ else ÓRDENES; ] fi
-
-3. Escriba en líneas sucesivas las distintas expansiones que suceden
-    en los comandos a continuación. 
+2. Escriba en líneas sucesivas las distintas expansiones que suceden
+   en la ejecución de los comandos a continuación. 
 
 Ejemplo:
 cat archivo{a,b,c}.txt ; date=$(date +%Y%m%d)
-cat archivoa.txt archivob.txt archivoc.txt ; date=$(date +%Y%m%d) -> Expansión de llave
-cat archivoa.txt archivob.txt archivoc.txt ; date=20180415 -> Sustitución de comando 
+cat archivoa.txt archivob.txt archivoc.txt ; date=$(date +%Y%m%d) -> Expansión 
+de llave
+cat archivoa.txt archivob.txt archivoc.txt ; date=20180415 -> Sustitución de 
+comando 
    
     a) arch=Nuevo_archivo.txt ; mv ${arch} ${arch##Nuevo_}
     b) for i in $(date);do val=$val$i;done ; touch=/tmp/{uno,dos}.$val
@@ -53,25 +45,24 @@ cat archivoa.txt archivob.txt archivoc.txt ; date=20180415 -> Sustitución de co
  b) Reemplace el ciclo for con un while; y el ciclo while con for. 
  c) Investigue el uso de la orden interna ':'. ¿En qué lugar podría utilizarla? 
     ¿Se obtiene algún beneficio con el cambio? 
- d) Modifique el script tal que exista una función que retorne el valor de los
-    procesos para un usuario recibido como argumento. 
- e) Modifique el script tal que todos los usuarios se evalúen para el mismo 
-    instante de tiempo. 
+ d) Modifique el script tal que exista una función que retorne la cantidad de 
+    procesos para un usuario recibido como argumento. Indique al menos dos 
+    métodos para retornar este valor. 
+ e) ¿Se evalúan todos los usuarios en el mismo instante de tiempo? Modifique el
+    script para que así sea. 
  f) Modifique el script tal que se muestre el total de procesos para cada 
-    instante, evaluado como suma de lo calculado para cada usuario. 
+    instante, evaluado como suma de lo calculado para cada usuario (utilice 
+    expresiones aritméticas). 
     Explique cómo resuelve la obtención del valor de procs modificado dentro 
-    del subshell.  
+    del subshell. ¿Existe más de una manera?  
  g) Reemplace el uso de `` por su equivalente. 
  h) Modifique el script para que la salida se vea _TAMBIEN_ por pantalla
     (Ayuda: tee) 
- 
 
 #Inicio
 #####################
 #!/bin/bash
 
-#NOTA: observe las siguientes declaraciones corresponden a lo 
-#pedido en el práctico anterior. 
 declare -i procs 
 declare -r logfile=/tmp/users.log
 echo COMIENZO > $logfile
@@ -94,26 +85,25 @@ exit 0
 5. Lea el script a continuación y complete los incisos listados: 
  a) Indique qué hace el script línea a línea y de manera general. Ver
     Agregue como comentario al inicio la funcionalidad general. 
- b) Ver página 71 del manual de referencia para explicar la sentencia 'cp'. 
+ b) Ver página 71 del manual de referencia para explicar la sentencia que 
+    contiene al comando 'cp'. 
     ¿En qué sección del capítulo 2 se encuentra la tabla? Indique además
     en qué sección del manual de bash se encuentra la información referente
     a esta línea. 
- b) Reemplace el ciclo until con un while y en otra versión con for.
-    En el caso de for, ¿es exactamente el mismo comportamiento? 
-    ¿Qué sucede con los parámetros posicionales?. 
- c) ¿Podría cambiar la sentencia `ls *jpg` del for por una más
-    eficiente?¿Cuál es la diferencia?¿Quién se encarga de interpretar 
-    el metacaracter *?
+ c) Reemplace el ciclo until con un while y en otra versión con for.
+    En el caso de for, ¿es necesario utilizar shift?. En caso de que no lo sea,
+    ¿es exactamente el mismo comportamiento? ¿Qué sucede con los parámetros 
+    posicionales?.
  d) Modifique el script para que guarde las nuevas versiones de los 
     archivos en un subdirectorio llamado JPG dentro del directorio de 
     trabajo actual. ¿Qué política asume si el directorio JPG ya se
     encuentra creado? Verifique el comportamiento del script en esta 
     situación. 
- d) Modifique el script tal que exista una función que verifique si el 
+ e) Modifique el script tal que exista una función que verifique si el 
     usuario es root y, en ese caso, pregunte al usuario si desea continuar
     con la ejecución del script. Caso contrario, deberá terminar la 
     ejecución. 
- e) Reemplace el uso de `` por su equivalente. ¿Se crea un subshell al usar
+ f) Reemplace el uso de `` por su equivalente. ¿Se crea un subshell al usar
     la sustitución de comandos? 
 
 #Inicio
@@ -144,20 +134,21 @@ done
 	* Además del listado de scripts encontrados, retorne un 
         valor entero con el total scripts encontrados. 
   c) Modifique el script para que se emita al final del listado,
-    el total de scripts encontrados. 
+     el total de scripts encontrados. 
   d) En el caso de no proveer argumentos, critique y mejore la 
-    sección de código entre los comentarios ###Mejorar. 
+     sección de código entre los comentarios ###Mejorar. 
   e) Reescriba el while en el elif sin usar redirección (<). 
     ¿Cambia la localidad de la variable pkg en la versión 
     modificada? 
   f) En la sentencia else de la estructura de control principal, 
-    reescriba el while utilizando until. 
+    reescriba el while utilizando for y until. ¿Qué sucede con la 
+    localidad de la variable pkg en cada caso? ¿Qué sucede con 
+    los parámetros posicionales en cada caso?
   g) Reemplace el uso de `` por su equivalente. 
   h) Reemplace el último while del código con un for. 
   i) Agregue una función tal que si el usuario no es root, consulte
      al usuario si quiere continuar ejecutando el script. ¿Por qué
      puede ser necesaria esta verificación? 
-
 
 #Inicio
 #####################
@@ -316,3 +307,7 @@ exit 0
     Ayuda: 
     use findshell.sh y  |xargs grep 'let '
 
+12. En los ejercicios que incluyen sentencias condicionales que utilizan 
+    [[ ]], test o [ ], evalúe de manera general qué sucedería en caso de 
+    reemplazar por alguna de las otras implementaciones. Es decir, si usamos
+    [[ ]] por ejemplo, qué sucede si reemplazo por [] o por /usr/bin/test
