@@ -65,8 +65,8 @@ Semana 8  - 24/4
 	Viernes: OWASP - 17hs presentación 
 		 find, sed, grep, awk, perl
 
-Semana 9  - 02/5
-	Miércoles trabajo con TP04
+Semana 9  - 01/5
+	Miércoles: Feriado, día del trabajador  
 	Viernes: find, sed, grep, awk, perl
       
 Semana 10 - 08/5
