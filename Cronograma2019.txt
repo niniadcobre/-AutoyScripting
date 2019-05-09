@@ -63,35 +63,39 @@ Semana 7  - 17/4
 Semana 8  - 24/4
         Miércoles: Entrega TP3 (discusión) / Enunciado TP4
 	Viernes: OWASP - 17hs presentación 
-		 find, sed, grep, awk, perl
+		 find, sed, grep, awk, perl -> No se dicto por 
+                 falta de alumnos. 
 
 Semana 9  - 01/5
 	Miércoles: Feriado, día del trabajador  
 	Viernes: find, sed, grep, awk, perl
       
 Semana 10 - 08/5
-        Miércoles entrega TP4 (discusión) / Enunciado TP5	
-        Expresiones regulares
+        Miércoles - Clase suspendida
+        Viernes: find, sed, grep, awk, perl - entrega TP4 (discusión) / Enunciado TP5	
         
 Semana 11 - 15/5
- 	cron/at
+        Miércoles práctica 
+ 	Expresiones regulares / cron/at
 
 Semana 12 - 22/5
-        Viernes Entrega TP5 (discusión)
+        Miércoles práctica 
+ 	Expresiones regulares / cron/at
 
 Semana 13 - 29/5
-	Miércoles examen práctico
-	Viernes examen coloquio
+	Miércoles práctica - Entrega TP5 (discusión)
+	Viernes examen práctico 
 
 Semana 14 - 05/6
-	A determinar 
+        Miércoles examen coloquio 	
+        Viernes a determinar 
 
 Semana 15 - 12/6
-	Miércoles examen recuperatorio práctico
-	Viernes examen recuperatorio coloquio
+        Miércoles/Viernes práctica
 
 Semana 16 - 19/6
-	A determinar
+	Miércoles examen recuperatorio práctico
+	Viernes examen recuperatorio coloquio
 
 ===============================================================
 

@@ -45,8 +45,8 @@ ser root para ejecutar estos comandos? ¿Siempre será necesario?
 	iv) find /tmp -printf "%p %k %\n"
 	 v) find / -type f -exec grep -l -m 1 '^#!/bin/bash' {} \;
             Más allá del formato, ¿qué diferencias encuentra entre el resultado 
-            del comando anterior y findshell.sh?¿Qué sucede si la expresión regular
-            se encuentra en una línea distinta de la primera? 
+            del comando anterior y findshell.sh?¿Qué sucede si la expresión 
+            regular se encuentra en una línea distinta de la primera? 
         
 Expresiones regulares:  
 ----------------------
@@ -87,14 +87,12 @@ http://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap09.html
         se encuentren concatenados a caracteres alfabéticos.
     ii) Encontrar una patrón que conforme una palabra completa, esto es
         que no sea sub-cadena.
-   iii) Mostrar sólo la palabra coincidente con el patrón, no la línea 
-        completa. 
-    iv) Encontrar líneas vacías. 
-     v) Encontrar en la base de datos de usuarios, aquellos que no tengan 
+   iii) Encontrar líneas vacías. 
+    iv) Encontrar en la base de datos de usuarios, aquellos que no tengan 
         un shell asignado.  
-    vi) Encontrar en la base de datos de usuarios, aquellos que comiencen 
+    v) Encontrar en la base de datos de usuarios, aquellos que comiencen 
         con la letra m o M. 
-   vii) Encontrar palabras de 5 caracteres que comiencen con m y terminen 
+   vi) Encontrar palabras de 5 caracteres que comiencen con m y terminen 
         con a (Usar /usr/share/dict/words para probar). 
 
 2. Uso de awk.  
@@ -306,8 +304,8 @@ el cron de root y no el de cualquier usuario como en el ejercicio anterior?
 a implementar cambios en la configuración del sistema. Por ende decide que un
 rato antes de que suceda, quisiera realizar un backup del directorio de 
 configuración de sistema en el home de root, sin embargo, le ha surgido una 
-cita importante que le impide realizarlo alrededor de las 17hs. Utilice el 
-comando at para planificar la tarea. 
+cita importante que le impide realizarlo. Utilice el comando at para planificar la tarea
+para que se ejecute a las 17:20 hrs 
 
 
 9. Indique cómo sería la planificación por crontab para los siguientes casos:
