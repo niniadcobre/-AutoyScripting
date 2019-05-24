@@ -6,6 +6,7 @@
 # son efectivamente ejecutadas?
 
 ayuda () {
+   [[ -v DEBUG ]] && echo DEBUG es $DEBUG
    printf "Ayuda: 
    Ejecutar todas las funciones dispoibles: $0 -a
    Ejecutar un subconjunto de funciones: $0 -s [nombre1 nombre2 ...]
