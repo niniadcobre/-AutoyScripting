@@ -6,6 +6,11 @@ Horarios:
 Miércoles 18hs a 20hs LAB Biblioteca
 Viernes 16hs a 18hs LAB 2 FAEA 
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Inscripción a materias 1° cuatrimestre (por SIU- Guaraní): 02/03 al 31/03/2020 (sin excepción)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 Calendario: 
 ==========
      Marzo 2020            Abril 2020            Mayo 2020        
@@ -42,39 +47,37 @@ Semana 2 - 16/3
 Semana 3  - 23/3
         Miércoles: Enunciado TP2 publicado. 
  	Viernes: Estructuras de control y funciones / Entrega TP1  (discusión). 
-        ### FERIADO 23 y 24 Día Nacional de la Memoria por la Verdad y la Justicia ###
+        ### FERIADO lunes y martes, 23 y 24 Día Nacional de la Memoria por la Verdad y la Justicia ###
 
 Semana 4  - 30/3
         Miércoles: práctica TP2 
         Viernes: Listas / Expansión 
-        ### FERIADO 2 de abril - Día del Veterano y de los Caídos en la Guerra de Malvinas ###
+        ### FERIADO jueves 2 de abril - Día del Veterano y de los Caídos en la Guerra de Malvinas ###
 
 Semana 5  - 06/4
         Miércoles: Enunciado TP3 /  Entrega TP2 (discusión)
-	Viernes: Expresiones aritméticas / Ejecución de comando 
         ### FERIADO 9 y 10 - jueves y VIERNES santo ###
 
 Semana 6  - 13/4
-	Miércoles práctica.
-        Viernes:  Debug. 
+	Miércoles: Expresiones aritméticas / Ejecución de comando 
+        Viernes:  Práctica. 
 
 Semana 7  - 20/4
-        Miércoles:práctica  
+        Miércoles: Debug   
         ### OWASP: Viernes 24 -  Día de acción por la tolerancia y el respeto entre los pueblos (a).
         ### FLISOL: Sábado 25
 
 Semana 8  - 27/4
         Miércoles: Entrega TP3 (discusión) / Enunciado TP4
-	Viernes: find, sed, grep, awk, perl
         ### FERIADO VIERNES 1/5 - Día del trabajador ###
 
 Semana 9  - 04/5
-	Miércoles: 
+	Miércoles: práctica
 	Viernes: find, sed, grep, awk, perl
       
 Semana 10 - 11/5
-        Miércoles - Clase suspendida
-        Viernes: find, sed, grep, awk, perl - entrega TP4 (discusión) / Enunciado TP5	
+        Miércoles: find, sed, grep, awk, perl - entrega TP4 (discusión) / Enunciado TP5	 
+        Viernes: práctica 
         
 Semana 11 - 18/5
         Miércoles práctica 
