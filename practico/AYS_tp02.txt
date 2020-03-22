@@ -8,13 +8,12 @@ Los ejercicios a continuación están relacionados a los temas
 de variables, parámetros posicionales, variables de ambiente, 
 condiciones y listas. 
 
----------------------------------------------------
 MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
 Manual en línea de bash: SECCIÓN "PARAMETERS" (PARÁMETROS)
 
 
 VIM TIPS: 
---------------------------------------------------------
+---------------------------------
 En modo normal: 
 :set number  <- muestra los números de línea
 :syntax enable <- colorea el código siguiendo la sintaxis 
@@ -36,19 +35,24 @@ principales:
 	3) condiciones sobre archivos
         4) condiciones sobre variables (nueva categoría)
 
-NOTA1: Cuando en los ejercicios se pregunta de "qué tipo es la condición", se 
+Cuando en los ejercicios se pregunta de "qué tipo es la condición", se 
 refiere a en cuál de estas categorías se incluye la misma. 
 
 Ver "CONDITIONAL EXPRESSIONS" en man bash inglés ("EXPRESIONES CONDICIONALES"
 en man bash en español) y páginas 31 a 33 del manual de referencia. 
----------------------------------
 
-NOTA2: Cuando los ejercicios pidan modificar código, repita
+ACLARACIONES GENERALES
+---------------------------------
+* Cuando los ejercicios pidan modificar código, repita
 el bloque a continuación del original y haga las modificaciones.  
+
+* Este práctico contiene scripts que pueden no ser comprendidos en 
+su totalidad en un principio, no se preocupe, haga su mejor intento y 
+enfóquese en la consigna, todo será revelado a su tiempo. 
+
 
 EJERCITACIÓN:
 ---------------------------------
-
 1. ¿Cómo obtiene ayuda para saber cómo interpretar o escribir 
 una sentencia if, for, while, until, case o una función? Escriba 
 a continuación la sintaxis y _sólo la sintaxis_ de cada una de las
@@ -120,25 +124,66 @@ Caso f)
     fi
 
 3. ¿De dónde provienen las variables de ambiente que están definidas al 
-   comenzar la ejecución de un script? (Observar subsección "Shell Variables" 
-   o "Variables del shell")
+   comenzar la ejecución de un script? 
+   Ayuda en man bash:
+          *Sección INVOCATION 
+          *Subsección "Shell Variables" ("Variables del shell").  
 
-4. Lea las páginas 29 y 30 del manual de referencia y, desarrolle
+4. 
+   a)  
+   Lea las páginas 29 y 30 del manual de referencia y, desarrolle
    un script que muestre el contenido de cada una de las variables
    listadas en la tabla; en caso de ser posible, modifique su contenido, 
    y vuelva a mostrar para observar el efecto. 
 
-5. Cuando se ejecuta un script ¿se crea un nuevo proceso? Responda haciendo 
-   la comprobación observando las variables especiales $$ y $PPID. 
+   b) 
+   Observe el script a continuación y complete los incisos: 
+     i) ¿Cuál es la función del script?  
+     ii) ¿Cómo debe invocar al script para cada variable? ¿Es necesario
+         utilizar comillas?¿Cuáles?¿Por qué?
+     ii) Agregue una opción que si el argumento es -h muestre ayuda 
+         acerca de cómo invocar el script. 
+     iv) ¿Qué sucede si se lo invoca de las siguientes maneras? 
+         $ ./script.sh \@ a b c 
+         $ ./script.sh \# a b c 
+         Explique el resultado en cada caso 
+     v) Agregue una opción para poder evaluar el metacaracter * y 
+        PPID. Verifique el funcionamiento para ambos.  
+   
+#!/bin/bash 
+
+eval var='$'$1
+
+case $1 in
+  '#')  echo El número de parámetros posicionales es $var ;;
+  '@')  echo Los parámetros posicionales son: $var ;;
+  '$')  echo El PID del script actual es: $var;;
+  PATH) echo Los directorios de búsqueda de binarios son: $var;;
+  HOME) echo El directorio de inicio es: $var;;
+  PWD)  echo El directorio de trabajo actual es: $var;;
+  *)    echo El valor de la variable $1 es $var;;
+esac
+ 
+5. a) Explique los distintos métodos para ejecutar un script. En cada caso
+      indique qué condiciones son necesarias para que la ejecución sea 
+      exitosa (permisos de ejecución, ruta, variables de entorno, etc): 
+      i) ./script.sh 
+      ii) /home/usuario/bin/script.sh
+      iii) script.sh
+      iv) bash script.sh 
+      v) . script.sh 
+   b) Para cada inciso anterior verifique a través de las variables especiales 
+      $$ y $PPID si se crea un nuevo proceso o no.  
 
 6. Lea el script a continuación y complete los incisos listados: 
   a) Documente el uso de variables y parámetros posicionales. Indique 
   tipo de variables/parámetros, localidad.
-  b) Agregue las sentencia declare o local convenientes. 
+  b) Agregue las sentencia declare o local para cada variable. 
   c) Observe y documente el uso de las variables de ambiente listadas en la 
   tabla de la página 29, que están en uso dentro del script.  
-  d) ¿Qué condición se evalúa en el if? ¿De qué tipo es? ¿Puede escribirla 
-  de otra forma? ¿Puede utilizar test o [ para reemplazarla?     
+  d) ¿Qué condición se evalúa en el if? ¿De qué tipo es? 
+  e) Reescriba la condición de if utilizando el estado de retorno de 
+  algún comando en lugar de test. 
 
 #Inicio
 #####################
@@ -169,8 +214,7 @@ exit 0
   tabla de la página 29, que están en uso en el script.  
   c) ¿Se utiliza alguna otra variable de ambiente no documentada en la tabla?
   d) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
-  ¿Puede escribirla de otra forma? ¿Puede utilizar [[ ]], test o [] 
-  para reemplazarla?    
+  ¿Puede escribirla de otra forma? 
   e) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
   de las listas observadas en el script. 
 
@@ -202,8 +246,7 @@ done
   d) Observe y documente el uso de las variables de ambiente listadas en la 
   tabla de la página 29, que están en uso en el script.
   e) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
-  ¿Puede escribirla de otra forma? ¿Puede utilizar [[ ]], test o [] 
-  para reemplazarla?    
+  ¿Puede escribirla de otra forma? 
   f) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
   de las listas observadas en el script. 
   
@@ -220,8 +263,7 @@ done
   e) Observe y documente el uso de las variables de ambiente listadas en la 
   tabla de la página 29, que están en uso en el script.
   f) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
-  ¿Puede escribirla de otra forma? ¿Puede utilizar [[ ]], test o [] 
-  para reemplazarla?    
+  ¿Puede escribirla de otra forma? 
   g) Lea páginas 43,44 y 45 del manual de referencias. Explique el 
   funcionamiento de las listas observadas en el script. 
 
@@ -274,7 +316,7 @@ exit 0
     debe cumplir los siguientes requerimientos de funcionalidad.
 
     REQUERIMIENTOS:
-    10.1. La longitud de la clave debe ser igual o mayor a 8 dígitos.
+    10.1. La longitud de la clave debe ser igual o mayor a 8 caracteres.
     10.2. La clave debe contener letras mayúsculas y minúsculas.
     10.3. Debe imprimir por pantalla el resultado de la evaluación según 
           corresponda.
@@ -287,29 +329,27 @@ SCRIPT:
 #Inicio
 #####################
 // TODO
-echo "Enter your password"
+echo "Ingrese su clave:"
 read password
-len="${#password}" // Explique con sus palabras qué sucede en esta línea
+len="${#password}" // Explique con sus palabras qué sucede en esta línea, 
+                      ayuda: sección EXPANSION man bash 
 
-if test //TODO ; then
-     echo "$password" | grep -q [0-9]
-     if test $? -eq 0 ; then
-                //TODO
-                if test $? -eq 0 ; then
-                    //TODO   
-                      if test $? -eq 0 ; then
-                       //TODO
-                   else
-                       //TODO
-                   fi
-            else
-               //TODO
-            fi
-     else
-       //TODO
-     fi
+if [[ //TODO ]] ; then
+   if echo "$password" | grep -q [0-9] >/dev/null; then
+      if //TODO ; then
+         if //TODO ; then
+           //TODO
+         else
+           //TODO
+         fi
+      else
+          //TODO
+      fi
+   else
+     //TODO
+   fi
 else
-    //TODO
+   //TODO
 fi
 
 
@@ -318,7 +358,7 @@ fi
     automatizar la personalización de la carta, de manera que esté dirigida a 
     cada cliente. Para ello, contamos con un archivo que contiene el listado de
     todos los clientes de la empresa y, por otra parte otro archivo que contiene
-    la carta de notificación (template).
+    la carta de notificación (plantilla).
 
     11.1 Cree un archivo de texto que se llame listadoClientes.txt con la 
          siguiente información:
@@ -334,10 +374,11 @@ fi
 Estimado xxxxx, 
 
     Por medio de la presente me permito informarle que nuestras oficinas de 
-atención al cliente se encontraran cerradas desde el 01/01/2019 al 02/01/2019 
-debido a vacaciones de nuestro personal. 
-    Por cuestiones de urgencia deberá comunicarse a nuestro help desk en el 
-horario de 8 a 21 hrs., al teléfono 555-3322. 
+atención al cliente se encontraran cerradas desde el 01/01/2020 al 31/01/2020 
+correspondiente al período vacacional. 
+    Por urgencias deberá comunicarse a nuestro centro de ayuda en el horario 
+de 8 a 21 hrs., al teléfono 555-3322. 
+
     Sin otro particular lo saludo atte. 
 
 Dirección de logística BBQ 
@@ -357,14 +398,3 @@ El contenido de cada archivo deberá tener al nombre COMPLETO de cada cliente.
  
 AYUDA: Use parámetros posicionales y la repetitiva while para lectura de 
        archivos.
-
-
-
-
-
-
-
-   
-
-
-

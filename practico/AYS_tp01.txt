@@ -31,10 +31,10 @@ MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
 8. Algunos juegos y curiosidades
 	8.1) Ejecute telnet towel.blinkenlights.nl ¿Explique con sus palabras 
              lo que sucede?
-	8.2) Ejecute rev y a continuación escriba una palabra cualquiera ¿Que 
+	8.2) Ejecute rev y a continuación escriba un nombre de archivo de texto ¿Qué 
              sucede?
 	8.3) Instale los siguientes juegos: cowsay y fortune (Ayuda: apt-get 
-             install nbeDelPrograma). Luego ejecútelos por separado y explique 
+             install nombreDelPrograma). Luego ejecútelos por separado y explique 
              qué hace cada uno. 
         8.4) Según el principio del uso de flujo de texto que propone la 
              filosofía UNIX ¿cómo se le ocurre usar estos 2 programas en 
