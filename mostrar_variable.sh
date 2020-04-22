@@ -9,6 +9,7 @@ case $1 in
   PATH) echo Los directorios de búsqueda de binarios son: $var;;
   HOME) echo El directorio de inicio es: $var;;
   PWD)  echo El directorio de trabajo actual es: $var;;
+  PS1)  echo El prompt de primer nivel es: $var;;
    "-h")  echo Invocar ejemplo: $0 \"\#\" ;;
   *)    echo El valor de la variable $1 es $var;;
 esac

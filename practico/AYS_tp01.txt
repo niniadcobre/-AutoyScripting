@@ -7,8 +7,15 @@ FAI - TUASSL
 MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
 -----------------------------------------------------------------------------
 
+
 1. ¿Dónde se encuentra bash ubicado en su sistema? 
+   $ which bash 
+   /bin/bash
    ¿De qué tipo es el archivo? 
+   file /bin/bash 
+/bin/bash: ELF 64-bit LSB pie executable x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=9b00a9866a55254a2beba84dae5f3389f5c85742, stripped
+   Se observa que /bin/bash es binario ejecutable (ELF) 
+
    ¿Cuáles son sus permisos?
 
 2. Liste todos los shells de su sistema. ¿De qué tipo de archivo son?
@@ -20,6 +27,24 @@ MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
    c) ¿Cómo puedo hacer para ejecutar un shell diferente?
 
 4. Indique la diferencia entre info, man y help.
+help: help [-dms] [patrón ...]
+    Display information about builtin commands.
+    
+    Displays brief summaries of builtin commands.  If PATTERN is
+    specified, gives detailed help on all commands matching PATTERN,
+    otherwise the list of help topics is printed.
+    
+    Options:
+      -d	output short description for each topic
+      -m	display usage in pseudo-manpage format
+      -s	output only a short usage synopsis for each topic matching
+    		PATTERN
+    
+    Arguments:
+      PATTERN	Pattern specifiying a help topic
+    
+    Exit Status:
+    Returns success unless PATTERN is not found or an invalid option is given.
 
 5. Obtenga la versión de bash que esta utilizando. 
 

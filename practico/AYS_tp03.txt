@@ -13,7 +13,7 @@ MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
 NOTA1: Cada vez que modifique el código VERIFIQUE su correcto 
 funcionamiento.  
 
-NOTA2: Cuando se pida modificar un script, todas las modificaciones
+NOTA2: Cuando se pida modificar un script, TODAS las modificaciones
 deben hacerse en simultáneo, esto es, en la misma versión. 
 
 NOTA3: Cuando se pida modificar un script del sistema, haga una copia
@@ -31,24 +31,31 @@ Ejemplo:
 cat archivo{a,b,c}.txt ; date=$(date +%Y%m%d)
 cat archivoa.txt archivob.txt archivoc.txt ; date=$(date +%Y%m%d) -> Expansión 
 de llave
-cat archivoa.txt archivob.txt archivoc.txt ; date=20180415 -> Sustitución de 
+cat archivoa.txt archivob.txt archivoc.txt ; date=20200408 -> Sustitución de 
 comando 
    
     a) arch=Nuevo_archivo.txt ; mv ${arch} ${arch##Nuevo_}
     b) for i in $(date);do val=$val$i;done ; touch=/tmp/{uno,dos}.$val
-    c) zcat /var/log/{messages.?.gz,syslog*gz}
-    d) for u in redestec root;do cp archivo.txt ~$u;done 
+    c) err=$(zcat /var/log/{messages.?.gz,syslog*gz} |grep error) 
+    d) for usr in $(cut -f1 -d: /etc/passwd);do 
+           home=$(grep ^${usr}: /etc/passwd |cut -f6 -d:)
+           if [[ -d $home ]];then 
+            eval echo cp /tmp/LEGAL.txt  ~$usr/ 
+           fi 
+       done
+    e) echo Los ejecutables de root son en total: $(echo $(ls /sbin/ |wc -l ; ls /usr/sbin |wc -l)|sed 's/ /+/'| bc) 
+
 
 4. Lea el script a continuación y complete los incisos listados: 
  a) Indique qué hace el script línea a línea y de manera general.  
-    Agregue como comentario al inicio la funcionalidad general. 
+    Agregue como comentario al inicio la FUNCIONALIDAD GENERAL. 
  b) Reemplace el ciclo for con un while; y el ciclo while con for. 
  c) Investigue el uso de la orden interna ':'. ¿En qué lugar podría utilizarla? 
     ¿Se obtiene algún beneficio con el cambio? 
  d) Modifique el script tal que exista una función que retorne la cantidad de 
     procesos para un usuario recibido como argumento. Indique al menos dos 
     métodos para retornar este valor. 
- e) ¿Se evalúan todos los usuarios en el mismo instante de tiempo? Modifique el
+ e) ¿Se evalúan todos los usuarios en el MISMO INSTANTE de tiempo? Modifique el
     script para que así sea. 
  f) Modifique el script tal que se muestre el total de procesos para cada 
     instante, evaluado como suma de lo calculado para cada usuario (utilice 
@@ -84,7 +91,7 @@ exit 0
 
 5. Lea el script a continuación y complete los incisos listados: 
  a) Indique qué hace el script línea a línea y de manera general. Ver
-    Agregue como comentario al inicio la funcionalidad general. 
+    Agregue como comentario al inicio la FUNCIONALIDAD GENERAL. 
  b) Ver página 71 del manual de referencia para explicar la sentencia que 
     contiene al comando 'cp'. 
     ¿En qué sección del capítulo 2 se encuentra la tabla? Indique además
@@ -101,7 +108,7 @@ exit 0
     situación. 
  e) Modifique el script tal que exista una función que verifique si el 
     usuario es root y, en ese caso, pregunte al usuario si desea continuar
-    con la ejecución del script. Caso contrario, deberá terminar la 
+    con la ejecución del script. Caso contrario, deberá TERMINAR la 
     ejecución. 
  f) Reemplace el uso de `` por su equivalente. ¿Se crea un subshell al usar
     la sustitución de comandos? 
@@ -297,7 +304,7 @@ exit 0
    local dentro de funciones. Copie una de esas funciones aquí (junto
    al nombre del script al que pertenece). 
    Ayuda: 
-      use findshell.sh y  |xargs grep 'local '
+      Puede utilizar findshell.sh y  |xargs grep 'local '
 
 11. Encuentre un script en el sistema que utilice let, otro expr.
     Copie algunas de esas sentencias aquí (junto al nombre del 
@@ -305,7 +312,7 @@ exit 0
     para realizar operaciones aritméticas? Reescriba las sentencias
     extraídas de los scripts utilizando las diferentes variantes.
     Ayuda: 
-    use findshell.sh y  |xargs grep 'let '
+    Puede utilizar findshell.sh y  |xargs grep 'let '
 
 12. En los ejercicios que incluyen sentencias condicionales que utilizan 
     [[ ]], test o [ ], evalúe de manera general qué sucedería en caso de 

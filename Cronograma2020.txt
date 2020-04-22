@@ -45,7 +45,8 @@ Semana 2 - 16/3
         Viernes: práctica 
 	
 Semana 3  - 23/3
-        Miércoles: Enunciado TP2 publicado. 
+        Lunes <- Entrega TP01
+        Miércoles: Enunciado TP2 publicado. - práctica 
  	Viernes: Estructuras de control y funciones / Entrega TP1  (discusión). 
         ### FERIADO lunes y martes, 23 y 24 Día Nacional de la Memoria por la Verdad y la Justicia ###
 
