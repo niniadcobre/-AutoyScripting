@@ -16,7 +16,8 @@ NOTA3: Cada vez que modifique el código VERIFIQUE su correcto
 funcionamiento.  
 
 NOTA4: Cuando se pida modificar un script, todas las modificaciones
-deben hacerse en simultáneo en la misma versión. 
+deben hacerse en simultáneo en la misma versión. Si lo hace en versiones 
+separadas, recuerde armar una unificando todas las modificaciones. 
 
 NOTA5: EL uso de algún editor que coloree según la sintaxis suele 
 ser de ayuda. En el caso de el editor vi, la opción syntax enable 
@@ -368,7 +369,7 @@ exit 0
       2) Que se intenten bajar sólo aquellos que no hayan sido ya bajados. 
       3) Que al finalizar se muestre el listado de archivos bajados 
       4) Se agregue una OPCIÓN de número máximo de intentos (-m <valor>), 
-         tal que superado dicho valor se desista de la ejeución.   
+         tal que superado dicho valor se desista de la ejecución.   
       5) Agregar verificaciones, al menos sobre el archivo argumento. 
       6) Agregar una función de ayuda que sea invocada con -h o ante un error 
          de invocación
