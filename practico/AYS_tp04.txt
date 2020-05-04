@@ -1,6 +1,6 @@
 ----------------------------------
 TP04 - Automatización y scripting 
-DEBUG
+Depuración / DEBUG
 FAI - TUASSL  
 ----------------------------------
 
@@ -31,7 +31,7 @@ EJERCITACIÓN:
 shell (-x o -xv), observe la ejecución del script a continuación  y responda:
   a) ¿Se ejecutan las líneas anteriores al error de sintaxis? 
   b) ¿Se ejecutan las líneas posteriores al error de sintaxis? 
-  c) ¿Es importante verificar la sintaxis de un script antes de 
+  c) ¿Es importante verificar la sintaxis de un script antes de efectivamente 
      ejecutarlo? ¿Cómo puede hacerlo?
   d) Elimine los errores de sintaxis y verifique. 
 
@@ -360,7 +360,38 @@ cat $temp
 exit 0
 # Fin del script
 
-6. Sobre el script /usr/sbin/iptables-apply : 
+6. Dado el siguiente script: 
+   1) Verifique su sintaxis 
+   2) Indique la funcionalidad general 
+   3) Modifique el script tal que: 
+      1) El listado de videos se pasa como argumento. 
+      2) Que se intenten bajar sólo aquellos que no hayan sido ya bajados. 
+      3) Que al finalizar se muestre el listado de archivos bajados 
+      4) Se agregue una OPCIÓN de número máximo de intentos (-m <valor>), 
+         tal que superado dicho valor se desista de la ejeución.   
+      5) Agregar verificaciones, al menos sobre el archivo argumento. 
+      6) Agregar una función de ayuda que sea invocada con -h o ante un error 
+         de invocación
+      8) Verifique que el software youtube-dl esté instalado y disponible 
+      9) ¿Se le ocurre algo más que podría modificar/mejorar? 
+
+#Inicio del script
+#!/bin/bash 
+
+todook=0 
+
+while : ;do   
+   for url in "$(cat videos.txt)";do     
+       youtube-dl -f mp4  "$url"; 
+       todook=$(( $todook || $? ))
+   done 
+[[ $todook -eq 0 ]] && break
+done
+
+#Fin del script
+
+
+7. Sobre el script /usr/sbin/iptables-apply : 
    a) Invocando el script en modo debug (bash -x o -xv), pase como argumento 
    la opción -h y observe la ejecución. 
    b) Invocando el script en modo debug (bash -x o -xv), pase como argumento 
@@ -369,7 +400,7 @@ exit 0
    ayudar al correcto funcionamiento y capturar errores comunes?
 
 
-7. Sobre el script internas.sh y módulos.sh 
+8. Sobre el script internas.sh y módulos.sh 
    a) ¿Es visible la variable DEBUG en las funciones del archivo módulos.sh?
       ¿Cuál es el efecto de esta variable?
    b) Genere tres errores de sintaxis simultáneamente, y verifique cuál es 
@@ -379,3 +410,7 @@ exit 0
    d) Observe la línea "source modulos.sh" ¿Qué sucede al ejecutar con -x y con 
       -v?
    e) Genere código que fuerce la acción de las opciones set -eu en el script.  
+
+
+8. 
+
