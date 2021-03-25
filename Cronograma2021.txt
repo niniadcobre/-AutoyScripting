@@ -41,68 +41,49 @@ Semana 1 - 15/3
 	Presentación - Introducción 
 
 Semana 2 - 22/3 
-        Viernes: GIT y TPO
-        ### FERIADO miércoles 24 Día Nacional de la Memoria por la Verdad y la Justicia ###
+        GIT y TPO, TP1 y clase variables
 	
 Semana 3  - 29/3
-        Miércoles: Enunciado TP2 publicado. - práctica 
- 	Viernes: Estructuras de control y funciones / Entrega TP1  (discusión). 
+        FERIADO 2 de abril - Día del Veterano y de los caídos en la 
+        guerra de Malvinas, y viernes santo. 
 
 Semana 4  - 5/4
-        Miércoles: práctica TP2 
-        Viernes: Listas / Expansión 
-        ### FERIADO jueves 2 de abril - Día del Veterano y de los Caídos en la Guerra de Malvinas ###
+        Estructura de control y funciones
+        Listas / Expansión 
 
 Semana 5  - 12/4
-        Miércoles: Enunciado TP3 /  Entrega TP2 (discusión)
-        ### FERIADO 9 y 10 - jueves y VIERNES santo ###
+	Expresiones aritméticas / Ejecución de comando 
 
 Semana 6  - 19/4
-	Miércoles: Expresiones aritméticas / Ejecución de comando 
-        Viernes:  Práctica. 
+        HITO Entrega y revisión TP0 33% 
 
 Semana 7  - 26/4
-        Miércoles: Debug   
-        ### OWASP: Viernes 24 -  Día de acción por la tolerancia y el respeto entre los pueblos (a).
-        ### FLISOL: Sábado 25
+        Debug   
 
 Semana 8  - 3/5
-        Miércoles: Entrega TP3 (discusión) / Enunciado TP4
-        ### FERIADO VIERNES 1/5 - Día del trabajador ###
+	find, sed, grep, awk, perl
 
 Semana 9  - 10/5
-	Miércoles: práctica
-	Viernes: find, sed, grep, awk, perl
       
 Semana 10 - 17/5
-        Miércoles: find, sed, grep, awk, perl - entrega TP4 (discusión) / Enunciado TP5	 
-        Viernes: práctica 
+        HITO Entrega y revisión TP0 66% 
         
 Semana 11 - 24/5
-        Miércoles práctica 
  	Expresiones regulares / cron/at
 
 Semana 12 - 31/5
-        Miércoles práctica 
  	Expresiones regulares / cron/at
-        ### FERIADO lunes 25/5 - Día de la Revolución de Mayo  ###
 
 Semana 13 - 7/6
-	Miércoles práctica - Entrega TP5 (discusión)
-        Viernes práctica - Cuestionario TP5 y discusión general. 
 
 Semana 14 - 14/6
-	Miércoles examen práctico 
-        Viernes examen coloquio 	
+        Examen integral 
 
 Semana 15 - 21/6
-        Miércoles/Viernes práctica
-        ### 22/6 Wiñoy Xipantu
-        ### FERIADO lunes 15 - Día Paso a la Inmortalidad del General Martín Miguel de Güemes (17/06). 
+        HITO Entrega y revisión TP0 100% 
 
 Semana 16 - 28/6
-	Miércoles examen recuperatorio práctico
-	Viernes examen recuperatorio coloquio
+	Examen recuperatorio integral 
 
 ===============================================================
 
