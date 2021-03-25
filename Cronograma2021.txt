@@ -39,15 +39,12 @@ Cronograma semanal:
 ===============================================================
 Semana 1 - 15/3
 	Presentación - Introducción 
-	Enunciado TP1 publicado. 
 
 Semana 2 - 22/3 
-	Miércoles: teoría de Variables / práctica.  
-        Viernes: práctica 
+        Viernes: GIT y TPO
         ### FERIADO miércoles 24 Día Nacional de la Memoria por la Verdad y la Justicia ###
 	
 Semana 3  - 29/3
-        Lunes <- Entrega TP01
         Miércoles: Enunciado TP2 publicado. - práctica 
  	Viernes: Estructuras de control y funciones / Entrega TP1  (discusión). 
 
