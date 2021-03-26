@@ -46,9 +46,9 @@ Semana 2 - 22/3
 Semana 3  - 29/3
         FERIADO 2 de abril - Día del Veterano y de los caídos en la 
         guerra de Malvinas, y viernes santo. 
+        Estructura de control y funciones
 
 Semana 4  - 5/4
-        Estructura de control y funciones
         Listas / Expansión 
 
 Semana 5  - 12/4
@@ -64,6 +64,7 @@ Semana 8  - 3/5
 	find, sed, grep, awk, perl
 
 Semana 9  - 10/5
+ 	Expresiones regulares / cron/at
       
 Semana 10 - 17/5
         HITO Entrega y revisión TP0 66% 
@@ -72,7 +73,6 @@ Semana 11 - 24/5
  	Expresiones regulares / cron/at
 
 Semana 12 - 31/5
- 	Expresiones regulares / cron/at
 
 Semana 13 - 7/6
 

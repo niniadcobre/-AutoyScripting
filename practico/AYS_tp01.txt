@@ -1,21 +1,29 @@
-----------------------------------
+------------------------------------------------------
 TP01 - Automatización y scripting 
-FAI - TUASSL
-----------------------------------
-
------------------------------------------------------------------------------
+FAI - TUASSL - Comandos útiles, variables/parámetros, 
+ambiente, condiciones, listas y repetitivas. 
+------------------------------------------------------
 MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
+Manual en línea de bash: SECCIÓN "PARAMETERS" (PARÁMETROS)
+
+ACLARACIONES GENERALES
+---------------------------------
+* Cuando los ejercicios pidan modificar código, repita
+el bloque a continuación del original y haga las modificaciones.  
+
+* Este práctico contiene scripts que pueden no ser comprendidos en 
+su totalidad en un principio, no se preocupe, haga su mejor intento y 
+enfóquese en la consigna, todo será revelado a su tiempo. 
+
+
+EJERCITACIÓN:
 -----------------------------------------------------------------------------
-
-
+SECCIÓN: sobre el shell
+-----------------------------------------------------------------------------
 1. ¿Dónde se encuentra bash ubicado en su sistema? 
    $ which bash 
    /bin/bash
    ¿De qué tipo es el archivo? 
-   file /bin/bash 
-/bin/bash: ELF 64-bit LSB pie executable x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=9b00a9866a55254a2beba84dae5f3389f5c85742, stripped
-   Se observa que /bin/bash es binario ejecutable (ELF) 
-
    ¿Cuáles son sus permisos?
 
 2. Liste todos los shells de su sistema. ¿De qué tipo de archivo son?
@@ -53,41 +61,14 @@ help: help [-dms] [patrón ...]
 7. Ejecute rbash o bash -r en su consola. ¿Puede explicar que sucede?. Amplíe 
    su respuesta usando man bash.
 
-8. Algunos juegos y curiosidades
-	8.1) Ejecute telnet towel.blinkenlights.nl ¿Explique con sus palabras 
-             lo que sucede?
-	8.2) Ejecute rev y a continuación escriba un nombre de archivo de texto ¿Qué 
-             sucede?
-	8.3) Instale los siguientes juegos: cowsay y fortune (Ayuda: apt-get 
-             install nombreDelPrograma). Luego ejecútelos por separado y explique 
-             qué hace cada uno. 
-        8.4) Según el principio del uso de flujo de texto que propone la 
-             filosofía UNIX ¿cómo se le ocurre usar estos 2 programas en 
-             conjunto?  
 -----------------------------------------------------------------------------
-Redirección y pipe
+SECCIÓN: Redirección y pipe
 LEA LAS PÁGINAS 21 A 23 DEL MANUAL DE REFERENCIA. 
 -----------------------------------------------------------------------------
 
-El uso de la redirección y los pipes es fundamental en la construcción de 
-scripts ya que, siguiendo la filosofía UNIX, nos permite combinar programas
-para construir nuevas funcionalidades. En tal sentido es importante RECORDAR 
-que existen tres descriptores de archivos frecuentemente utilizados y 
-redireccionados dentro de un proceso (programa en ejecución): 
+1. ¿Todos los programas reciben una entrada?
 
-0 Entrada estándar (lo leído por un proceso)  
-1 Salida estándar (lo escrito por un proceso durante un funcionamiento normal) 
-2 Error estándar (lo escrito por un proceso cuando sucedió algún acontecimiento anormal)
-
-Ejemplo: 
-$ read palabra #<- en este caso la entrada estándar se espera desde la terminal.
-ls | wc        #<- en este caso la salida estándar de ls será la entrada 
-	       estándar de wc.  El error estándar de ambos comandos se dirige 
-               a la terminal. 
-¿Todos los programas reciben una entrada?
-
-
-9. Explique el funcionamiento de las siguientes redirecciones. Indique además 
+2. Explique el funcionamiento de las siguientes redirecciones. Indique además 
    cuál es la entrada, la salida y el error (si lo hubiera). 
 
 	ls > archivo.txt 
@@ -103,7 +84,7 @@ El pipe es un mecanismo que permite vincular la entrada y salida de los
 procesos. De este modo lo escrito por un proceso es leído por el siguiente en 
 la cadena de pipes. 
 
-10. Explique el funcionamiento de los siguientes pipes. Indique cómo debiera 
+3. Explique el funcionamiento de los siguientes pipes. Indique cómo debiera 
     reemplazar cada sentencia si no existiera el pipe. 
 
 	du -sh * |sort -h 
@@ -115,8 +96,396 @@ la cadena de pipes.
 En los casos que aparece el programa sort, ¿cómo sabemos sobre qué campo de la
 salida se produce el ordenamiento? 
 
+4. Algunos juegos y curiosidades
+	a) Ejecute telnet towel.blinkenlights.nl ¿Explique con sus palabras 
+           lo que sucede?
+	b) Ejecute rev y a continuación escriba un nombre de archivo de texto ¿Qué 
+           sucede?
+	c) Instale los siguientes juegos: cowsay y fortune (Ayuda: apt-get 
+           install nombreDelPrograma). Luego ejecútelos por separado y explique 
+           qué hace cada uno. 
+        4) Según el principio del uso de flujo de texto que propone la 
+           filosofía UNIX ¿cómo se le ocurre usar estos 2 programas en 
+           conjunto?  
+
 -----------------------------------------------------------------------------
-OBSERVACIÓN: Filosofía UNIX vs. nuevas tendencias
+SECCIÓN: comandos útiles 
+-----------------------------------------------------------------------------
+Existen cientos de comandos útiles dentro de los sistemas GNU/Linux, que
+nos permitirán editar textos, manipular flujos de texto, realizar operaciones
+aritméticas, generar secuencias, etc. 
+
+1. Ejecute y explique : seq 5
+
+¿Puede generar una secuencia que comience en el número 22 y termine en el 60?
+
+2. Ejecute y explique : 
+Nota: ver "Brace Expansion" (Expansión de llaves) - man bash, sección Expansión. 
+
+   a. echo {01..100}
+   b. echo {15..25..5}
+   c. echo soy_{isaac,asimov}_escritor
+   d. echo {z..a}
+   e. ¿Puede generar una secuencia que comience con 0022 y termine en el 0060?
+   f. ¿Puede generar la secuencia de letras desde la B (mayúscula) hasta
+      la Q?
+   g. ¿Qué programa hace la expansión de las llaves?
+
+
+3. Ejecute y explique : 
+echo "Esta es la salida de mi código a dos lugares distintos" | tee salida.txt
+
+¿Para qué podría ser de utilidad el comando tee dentro de un script?
+
+4. Ejecute y explique :
+	a) echo "linux" | tr a-z A-Z 
+
+	b) Convertir cualquier palabra que contenga vocales en la misma 
+              palabra pero reemplazando las vocales por números: Ejemplo: La 
+              palabra abecedario  --> 4b3c3d4r10
+	      IMPORTANTE: Debe respetar que cada vocal siempre se corresponda 
+              con el mismo número.
+
+        c) echo "2 2 2 1 2 1 3 4 5 6 6" | tr " " "\n" | sort | uniq -u
+
+5. Ejecute y explique : 
+
+echo "a b c" > /tmp/uno
+echo "d e f" > /tmp/dos
+paste /tmp/uno /tmp/dos
+
+6.  Ejecute y explique :
+    a) cat /etc/passwd |cut -f 3 -d:   
+
+    b) ¿Puede listar el ID del usuario y su nombre completo y ordenar la lista
+       de manera inversa?
+
+    c) ¿La versión de cut que utiliza soporta trabajar sobre archivos 
+       directamente? En caso afirmativo muestre un ejemplo, en caso contrario 
+       justifique.
+
+    d) ¿Qué efecto tiene el siguiente comando?: tac /etc/passwd 
+
+7. Ejecute y explique cada parte de la siguiente sentencia: 
+   a) dpkg -L sysstat |grep lib |xargs file
+   NOTA: el paquete sysstat debe estar instalado previamente
+
+-----------------------------------------------------------------------------
+SECCIÓN: 
+-----------------------------------------------------------------------------
+1. ¿Cómo obtiene ayuda para saber cómo interpretar o escribir 
+una sentencia if, for, while, until, case o una función? Escriba 
+a continuación la sintaxis y _sólo la sintaxis_ de cada una de las
+estructuras de control mencionadas.  
+
+Ejemplo: 
+if: if ÓRDENES; then ÓRDENES; [ elif ÓRDENES; then ÓRDENES; ]...[ else ÓRDENES; ] fi
+
+3. ¿De dónde provienen las variables de ambiente que están definidas al 
+   comenzar la ejecución de un script? 
+   Ayuda en man bash:
+          *Sección INVOCATION 
+          *Subsección "Shell Variables" ("Variables del shell").  
+4. 
+   a)  
+   Lea las páginas 29 y 30 del manual de referencia. 
+
+   b) 
+   Observe el script a continuación y complete los incisos: 
+     i) ¿Cuál es la función del script?  
+     ii) ¿Cómo debe invocar al script para cada variable? ¿Es necesario
+         utilizar comillas?¿Cuáles?¿Por qué?
+     ii) Agregue una opción que si el argumento es -h muestre ayuda 
+         acerca de cómo invocar el script. 
+     iv) ¿Qué sucede si se lo invoca de las siguientes maneras? 
+         $ ./script.sh \@ a b c 
+         $ ./script.sh \# a b c 
+         Explique el resultado en cada caso 
+     v) Agregue una opción para poder evaluar el metacaracter * y 
+        PPID. Verifique el funcionamiento para ambos.  
+   
+#Inicio
+#####################
+#!/bin/bash 
+
+eval var='$'$1
+
+case $1 in
+  '#')  echo El número de parámetros posicionales es $var ;;
+  '@')  echo Los parámetros posicionales son: $var ;;
+  '$')  echo El PID del script actual es: $var;;
+  PATH) echo Los directorios de búsqueda de binarios son: $var;;
+  HOME) echo El directorio de inicio es: $var;;
+  PWD)  echo El directorio de trabajo actual es: $var;;
+  *)    echo El valor de la variable $1 es $var;;
+esac
+# Fin del script
+ 
+5. a) Explique los distintos métodos para ejecutar un script. En cada caso
+      indique qué condiciones son necesarias para que la ejecución sea 
+      exitosa (permisos de ejecución, ruta, variables de entorno, etc): 
+      i) ./script.sh 
+      ii) /home/usuario/bin/script.sh
+      iii) script.sh
+      iv) bash script.sh 
+      v) . script.sh 
+   b) Para cada inciso anterior verifique a través de las variables especiales 
+      $$ y $PPID si se crea un nuevo proceso (subshell) o no.  
+
+6. Lea el script a continuación y complete los incisos listados: 
+  a) Documente el uso de variables y parámetros posicionales. Indique 
+  tipo de variables/parámetros, localidad.
+  b) Considere agregar las sentencia declare o local para cada variable. 
+  c) Observe y documente el uso de las variables de ambiente listadas en la 
+  tabla de la página 29, que están en uso dentro del script.  
+  d) ¿Qué condición se evalúa en el if? ¿De qué tipo es? 
+  e) Reescriba la condición de if utilizando el estado de retorno de 
+  algún comando en lugar de test. 
+
+#Inicio
+#####################
+#!/bin/bash
+
+logfile=/tmp/users.log
+echo COMIENZO > $logfile
+
+while true; do
+     for usr in $(cut -f1 -d:  /etc/passwd);do 
+	  procs=$(ps -u ${usr} --no-headers |wc -l)
+	  if [[ $procs -ne 0 ]];then 
+	    echo ${usr}: $procs
+	  fi 
+     done | sort -n -k2  
+     date
+     sleep 30
+done >> $logfile
+
+exit 0
+# Fin del script
+
+
+7. Lea el script a continuación y complete los incisos listados: 
+  a)  Documente el uso de variables y parámetros posicionales. Indique 
+  tipo de variables/parámetros, localidad.
+  b) Observe y documente el uso de las variables de ambiente listadas en la 
+  tabla de la página 29, que están en uso en el script.  
+  c) ¿Se utiliza alguna otra variable de ambiente no documentada en la tabla?
+  d) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
+  ¿Puede escribirla de otra forma? 
+  e) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
+  de las listas observadas en el script. 
+
+#Inicio
+#####################
+#!/bin/bash
+[[ `id -u` -ne 0 ]] || exit
+
+until [[ $# -eq 0 ]]; do
+   if [ -d $1 ];then 
+      cd $1
+      for i in `ls *jpg`;do
+	cp $i ${i%%jpg}JPG
+      done
+      cd $OLDPWD
+      shift 
+   fi 
+done 
+
+8. Lea el script findshell (PEDCO) y complete los incisos listados: 
+  a) Documente el uso de variables y parámetros posicionales. Indique 
+  tipo de variables/parámetros, localidad.
+  b) ¿Cuál es el efecto de la sentencia "declare -u resp" ¿Qué sucede 
+  si no se declara de ese tipo? ¿Agregaría alguna sentencia declare o local?
+  c) ¿La función recibe argumentos? Modifique el script para que muestre los 
+  parámetros posicionales al principio y fin de la ejecución del script y 
+  dentro de la función. Ejecute el script pasando al menos dos paquetes 
+  como argumento. Documente el resultado observado.  
+  d) Observe y documente el uso de las variables de ambiente listadas en la 
+  tabla de la página 29, que están en uso en el script.
+  e) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
+  ¿Puede escribirla de otra forma? 
+  f) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
+  de las listas observadas en el script. 
+  
+9. Lea el script a continuación y complete los incisos listados: 
+  a)  Documente el uso de variables y parámetros posicionales. Indique 
+  tipo de variables/parámetros, localidad.
+  b) ¿Qué sucede con el valor de la variable "nota" si se le asigna algo 
+  distinto de número? 
+  c) ¿Agregaría alguna sentencia declare o local?
+  d) ¿La función recibe argumentos? Modifique el script para que muestre los 
+  parámetros posicionales al principio y fin de la ejecución del script y 
+  dentro de la función. Ejecute el script cargando al menos dos alumnos y 
+  documente el resultado observado. 
+  e) Observe y documente el uso de las variables de ambiente listadas en la 
+  tabla de la página 29, que están en uso en el script.
+  f) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
+  ¿Puede escribirla de otra forma? 
+  g) Lea páginas 43,44 y 45 del manual de referencias. Explique el 
+  funcionamiento de las listas observadas en el script. 
+
+#Inicio
+#####################
+#!/bin/bash
+
+declare -i nota 
+declare -u nombre 
+declare -u apellido 
+declare -u resp
+
+temp=$(tempfile) || temp=/tmp/listado.$$
+
+function calificar (){
+	echo -n "Nombre: $1, Apellido: $2," 
+	if [[ $3 -lt 4 ]];then 
+	   echo " DESAPROBADO"
+	else
+           echo " APROBADO"
+	fi   
+}
+
+while true; do
+	echo -n "Por favor ingrese Nombre: " 
+	read nombre
+	echo -n "Por favor ingrese Apellido: " 
+	read apellido
+	echo -n "Nota correspondiente a $nombre $apellido: " 
+	read nota
+	calificar $nombre $apellido $nota >> $temp
+        
+	resp="N"
+	while [[ "$resp" != "S" ]];do 	
+	  echo -n "¿Otro ingreso? S/N": 
+	  read resp 
+          if [[ "$resp" == "N" ]];then 
+		break 2 
+	  fi 
+          echo
+        done 	
+done
+cat $temp
+
+rm $temp 
+exit 0
+# Fin del script
+
+10. Complete el siguiente script (observar etiqueta TODO) y tenga presente que 
+    debe cumplir los siguientes requerimientos de funcionalidad.
+
+    REQUERIMIENTOS:
+    10.1. La longitud de la clave debe ser igual o mayor a 8 caracteres.
+    10.2. La clave debe contener letras mayúsculas y minúsculas.
+    10.3. Debe imprimir por pantalla el resultado de la evaluación según 
+          corresponda.
+
+OBS: ¡No olvide probar bien su script verificando que cada camino posible 
+     funcione correctamente!
+
+SCRIPT:
+
+#Inicio
+#####################
+// TODO
+echo "Ingrese su clave:"
+read password
+len="${#password}" // Explique con sus palabras qué sucede en esta línea, 
+                      ayuda: sección EXPANSION man bash 
+
+if [[ //TODO ]] ; then
+   if echo "$password" | grep -q [0-9] >/dev/null; then
+      if //TODO ; then
+         if //TODO ; then
+           //TODO
+         else
+           //TODO
+         fi
+      else
+          //TODO
+      fi
+   else
+     //TODO
+   fi
+else
+   //TODO
+fi
+
+
+11. La empresa donde trabajamos necesita enviar una carta de notificación a 
+    todos sus clientes. Por lo que se nos solicita crear un script para 
+    automatizar la personalización de la carta, de manera que esté dirigida a 
+    cada cliente. Para ello, contamos con un archivo que contiene el listado de
+    todos los clientes de la empresa y, por otra parte otro archivo que contiene
+    la carta de notificación (plantilla).
+
+    11.1 Cree un archivo de texto que se llame listadoClientes.txt con la 
+         siguiente información:
+
+    Horacio Perez
+    Juan José López
+    Roberto Lorenzo
+    Mirtha Pasturiza
+
+    11.2 Tenga en cuenta el siguiente texto para armar el template de 
+         notificación:
+
+Estimado xxxxx, 
+
+    Por medio de la presente me permito informarle que nuestras oficinas de 
+atención al cliente se encontraran cerradas desde el 01/01/2020 al 31/01/2020 
+correspondiente al período vacacional. 
+    Por urgencias deberá comunicarse a nuestro centro de ayuda en el horario 
+de 8 a 21 hrs., al teléfono 555-3322. 
+
+    Sin otro particular lo saludo atte. 
+
+Dirección de logística BBQ 
+
+    11.3 Ud deberá crear dos shell script, el primero carta.sh contendrá la 
+        lógica que permita recorrer el archivo de clientes y por cada cliente 
+        invocará, creando un subshell, a cartaCustom.sh que recibirá por 
+        parámetro posicional el cliente y modificará el template de la carta 
+        generando un archivo personalizado. Para finalmente guardar cada 
+        archivo dentro del directorio "cartas". 
+
+Por lo tanto, la salida de la ejecución debería ser como el siguiente ejemplo:
+cartas/Horacio Perez.txt
+cartas/Juan josé López.txt
+.... y así con cada cliente.
+El contenido de cada archivo deberá tener al nombre COMPLETO de cada cliente.
+ 
+AYUDA: Use parámetros posicionales y la repetitiva while para lectura de 
+       archivos.
+
+
+12. Lea los scripts a continuación provistos dentro del paquete sysstat y 
+    observe el uso de: variables, parámetros posicionales, listas, 
+    condiciones y estructuras de control: 
+    /usr/lib/sysstat/sa1
+    /usr/lib/sysstat/sa2
+    
+
+
+-----------------------------------------------------------------------------
+INFORMACIÓN DE SOPORTE PARA EL TRABAJO PRÁCTICO 
+-----------------------------------------------------------------------------
+El uso de la redirección y los pipes es fundamental en la construcción de 
+scripts ya que, siguiendo la filosofía UNIX, nos permite combinar programas
+para construir nuevas funcionalidades. En tal sentido es importante RECORDAR 
+que existen tres descriptores de archivos frecuentemente utilizados y 
+redireccionados dentro de un proceso (programa en ejecución): 
+
+0 Entrada estándar (lo leído por un proceso)  
+1 Salida estándar (lo escrito por un proceso durante un funcionamiento normal) 
+2 Error estándar (lo escrito por un proceso cuando sucedió algún acontecimiento anormal)
+
+Ejemplo: 
+$ read palabra #<- en este caso la entrada estándar se espera desde la terminal.
+ls | wc        #<- en este caso la salida estándar de ls será la entrada 
+	       estándar de wc.  El error estándar de ambos comandos se dirige 
+               a la terminal. 
+
+-----------------------------------------------------------------------------
+FILOSOFÍA UNIX VS. NUEVAS TENDENCIAS
 
 La sentencias como la siguiente son frecuentes: 
 
@@ -132,31 +501,10 @@ muchos UNIX pueden tener versiones de sort (más puristas) que no reciben
 archivos como argumentos, y sólo trabajan sobre flujos de texto; o pueden no
 soportar la opción "-u". Evalúe según el ámbito y sus necesidades puntuales
 el uso de una u otra opción. Generalice esta idea al resto de los programas. 
------------------------------------------------------------------------------
-
-11. Ejecute y explique : seq 5
-
-¿Puede generar una secuencia que comience en el número 22 y termine en el 60?
-
-12. Ejecute y explique : 
-   echo {01..100}
-   echo {15..25..5}
-
-Nota: ver "Brace Expansion" (Expansión de llaves) - man bash, sección Expansión. 
-
-¿Puede generar una secuencia que comience con 0022 y termine en el 0060?
-
-13. Ejecute y explique: echo soy_{isaac,asimov}_escritor
-
-14. Ejecute y explique : echo {z..a}
-
-¿Puede generar la secuencia de letras desde la B (mayúscula) hasta
-la Q?
-
-¿Qué programa hace la expansión de las llaves en los ejercicios 12, 13 y 14?
 
 -----------------------------------------------------------------------------
-OBSERVACIÓN: es muy importante prestar atención a cuál es el 
+METACARACTERES: 
+Es muy importante prestar atención a cuál es el 
 programa que realiza la expansión de metacaracteres*. ¿Lo hace el shell o el 
 programa que recibe la entrada? En este sentido, hay programas que aceptan 
 el uso de metacaracteres para armar expresiones regulares. Por ejemplo, 
@@ -168,60 +516,32 @@ interpretados por grep y no por bash.
 
 *Se considera metacaracter a aquellos caracteres que tienen un significado no 
 literal para el programa que los interpreta. 
+
 -----------------------------------------------------------------------------
+BACKGROUND ACERCA DE CONDICIONES: 
+Las condiciones evaluadas con test o [[ caen en tres categorías 
+principales: 
+	1) comparaciones de cadenas
+	2) comparaciones aritméticas
+	3) condiciones sobre archivos
+        4) condiciones sobre variables (nueva categoría)
 
-15. Ejecute y explique : 
+Cuando en los ejercicios se pregunta de "qué tipo es la condición", se 
+refiere a en cuál de estas categorías se incluye la misma. 
 
-echo "Esta es la salida de mi código a dos lugares distintos" | tee salida.txt
+Ver "CONDITIONAL EXPRESSIONS" en man bash inglés ("EXPRESIONES CONDICIONALES"
+en man bash en español) y páginas 31 a 33 del manual de referencia. 
+-----------------------------------------------------------------------------
+VIM TIPS: 
 
-¿Para qué podría ser de utilidad el comando tee dentro de un script?
-
-16. Ejecute y explique : 
-
-seq 10 | xargs -n 2 
-
-Encuentre al menos otros dos usos del programa xargs.  
-
-17. Ejecute y explique :
-
-	17.1) echo "linux" | tr a-z A-Z 
-
-	17.2) Convertir cualquier palabra que contenga vocales en la misma 
-              palabra pero reemplazando las vocales por números: Ejemplo: La 
-              palabra abecedario  --> 4b3c3d4r10
-	      IMPORTANTE: Debe respetar que cada vocal siempre se corresponda 
-              con el mismo número.
-
-18. Ejecute y explique :
-
-echo "2 2 2 1 2 1 3 4 5 6 6" | tr " " "\n" | sort | uniq -u
-
-19. Ejecute y explique : 
-
-echo "a b c" > /tmp/uno
-echo "d e f" > /tmp/dos
-paste /tmp/uno /tmp/dos
-
-20. a) Ejecute y explique :
-       cat /etc/passwd |cut -f 3 -d:   
-
-    b) ¿Puede listar el ID del usuario y su nombre completo y ordenar la lista
-       de manera inversa?
-    c) ¿La versión de cut que utiliza soporta trabajar sobre archivos 
-       directamente? En caso afirmativo muestre un ejemplo, en caso contrario 
-       justifique.
-
-21. Ejecute y explique :
-
-tac /etc/passwd 
-
-¿Conoce algún programa que haga la operación inversa?
-
-22. Ejecute y explique :
-
-cat /etc/passwd |head -20 | tail -1
-
-a) ¿Cuál es el objetivo de la sentencia anterior? 
-b) ¿Cuántos programas utiliza?¿Puede hacer esto mismo con menos programas? 
-   Generalice la solución para cualquier número de línea. 
-
+En modo normal: 
+:set number  <- muestra los números de línea
+:syntax enable <- colorea el código siguiendo la sintaxis 
+:n1,n2w archivo <- escribe desde la línea n1 hasta n2 en un archivo 
+:r archivo <- copia el contenido de archivo en el documento 
+              actual, a partir de la posición del cursor
+:vsplit archivo <- visualiza dos archivos con división vertical
+	        Ctrl+w para cambiar de archivo
+!!comando <- copia la salida de comando dentro del archivo actual 
+:n1,n2y <- Copiar lineas n1 a n2, luego p para
+           pegar donde crea conveniente.

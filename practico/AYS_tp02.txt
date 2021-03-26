@@ -1,202 +1,84 @@
 ----------------------------------
-TP02 - Automatización y scripting 
-FAI - TUASSL - Variables/parámetros, 
-ambiente, condiciones, listas y repetitivas. 
+TP03 - Automatización y scripting 
+Expansión; expresiones aritméticas; 
+ordenes internas; funciones y 
+estructuras de control
+
+FAI - TUASSL  
 ----------------------------------
 
-Los ejercicios a continuación están relacionados a los temas 
-de variables, parámetros posicionales, variables de ambiente, 
-condiciones y listas. 
-
 MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
-Manual en línea de bash: SECCIÓN "PARAMETERS" (PARÁMETROS)
+---------------------------------------------------
 
+NOTA1: Cada vez que modifique el código VERIFIQUE su correcto 
+funcionamiento.  
 
-VIM TIPS: 
----------------------------------
-En modo normal: 
-:set number  <- muestra los números de línea
-:syntax enable <- colorea el código siguiendo la sintaxis 
-:n1,n2w archivo <- escribe desde la línea n1 hasta n2 en un archivo 
-:r archivo <- copia el contenido de archivo en el documento 
-              actual, a partir de la posición del cursor
-:vsplit archivo <- visualiza dos archivos con división vertical
-	        Ctrl+w para cambiar de archivo
-!!comando <- copia la salida de comando dentro del archivo actual 
-:n1,n2y <- Copiar lineas n1 a n2, luego p para
-           pegar donde crea conveniente.
+NOTA2: Cuando se pida modificar un script, TODAS las modificaciones
+deben hacerse en simultáneo, esto es, en la misma versión. 
 
-BACKGROUND ACERCA DE CONDICIONES: 
----------------------------------
-Las condiciones evaluadas con test o [[ caen en tres categorías 
-principales: 
-	1) comparaciones de cadenas
-	2) comparaciones aritméticas
-	3) condiciones sobre archivos
-        4) condiciones sobre variables (nueva categoría)
-
-Cuando en los ejercicios se pregunta de "qué tipo es la condición", se 
-refiere a en cuál de estas categorías se incluye la misma. 
-
-Ver "CONDITIONAL EXPRESSIONS" en man bash inglés ("EXPRESIONES CONDICIONALES"
-en man bash en español) y páginas 31 a 33 del manual de referencia. 
-
-ACLARACIONES GENERALES
----------------------------------
-* Cuando los ejercicios pidan modificar código, repita
-el bloque a continuación del original y haga las modificaciones.  
-
-* Este práctico contiene scripts que pueden no ser comprendidos en 
-su totalidad en un principio, no se preocupe, haga su mejor intento y 
-enfóquese en la consigna, todo será revelado a su tiempo. 
-
+NOTA3: Cuando se pida modificar un script del sistema, haga una copia
+y trabaje con él en su directorio de ejercitaciones. NO MODIFIQUE LOS SCRIPTS 
+DEL SISTEMA 
 
 EJERCITACIÓN:
 ---------------------------------
-1. ¿Cómo obtiene ayuda para saber cómo interpretar o escribir 
-una sentencia if, for, while, until, case o una función? Escriba 
-a continuación la sintaxis y _sólo la sintaxis_ de cada una de las
-estructuras de control mencionadas.  
+1. ¿Qué es una orden simple y una orden compuesta para bash? 
 
-Ejemplo: 
-if: if ÓRDENES; then ÓRDENES; [ elif ÓRDENES; then ÓRDENES; ]...[ else ÓRDENES; ] fi
+2. Escriba en líneas sucesivas las distintas expansiones que suceden
+   en la ejecución de los comandos a continuación. 
 
-
-2. LEA PÁGINAS 31 A 36 DEL MANUAL DE REFERENCIA, LUEGO
-Ejecute y explique estos casos :
-
-Caso a)
-
-    [[ -d /var ]]
-    echo $?
-
-    test -d /var
-    echo $?
-
-    /usr/bin/test -d /var
-    echo $?
-
-
-Caso b)
-
-    [[ -d /directorio ]]
-    echo $?
-
-    test -d /directorio
-    echo $?
-
-    /usr/bin/test -d /directorio
-    echo $?
-    
-Caso c)
-
-    if [[ -d /var ]] ; then
-	    echo "El dir existe"
-    else
-	    echo "NO existe"
-    fi
-
-
-Caso d)
-
-    if test -d /var  ; then
-	    echo "El dir existe"
-    else
-	    echo "NO existe"
-    fi
-
-
-Caso e)
-
-    if test -d /var && [[ -d /etc ]] ; then
-	    echo "Los dos directorios existen "
-    else
-	    echo "Alguno NO existe"
-    fi
-
-
-Caso f)
-
-    if test -d /var && test -d /directorio ; then
-	    echo "Los dos directorios existen "
-    else
-	    echo "Alguno NO existe"
-    fi
-
-3. ¿De dónde provienen las variables de ambiente que están definidas al 
-   comenzar la ejecución de un script? 
-   Ayuda en man bash:
-          *Sección INVOCATION 
-          *Subsección "Shell Variables" ("Variables del shell").  
-
-4. 
-   a)  
-   Lea las páginas 29 y 30 del manual de referencia y, desarrolle
-   un script que muestre el contenido de cada una de las variables
-   listadas en la tabla; en caso de ser posible, modifique su contenido, 
-   y vuelva a mostrar para observar el efecto. 
-
-   b) 
-   Observe el script a continuación y complete los incisos: 
-     i) ¿Cuál es la función del script?  
-     ii) ¿Cómo debe invocar al script para cada variable? ¿Es necesario
-         utilizar comillas?¿Cuáles?¿Por qué?
-     ii) Agregue una opción que si el argumento es -h muestre ayuda 
-         acerca de cómo invocar el script. 
-     iv) ¿Qué sucede si se lo invoca de las siguientes maneras? 
-         $ ./script.sh \@ a b c 
-         $ ./script.sh \# a b c 
-         Explique el resultado en cada caso 
-     v) Agregue una opción para poder evaluar el metacaracter * y 
-        PPID. Verifique el funcionamiento para ambos.  
+Ejemplo:
+cat archivo{a,b,c}.txt ; date=$(date +%Y%m%d)
+cat archivoa.txt archivob.txt archivoc.txt ; date=$(date +%Y%m%d) -> Expansión 
+de llave
+cat archivoa.txt archivob.txt archivoc.txt ; date=20200408 -> Sustitución de 
+comando 
    
-#!/bin/bash 
+    a) arch=Nuevo_archivo.txt ; mv ${arch} ${arch##Nuevo_}
+    b) for i in $(date);do val=$val$i;done ; touch=/tmp/{uno,dos}.$val
+    c) err=$(zcat /var/log/{messages.?.gz,syslog*gz} |grep error) 
+    d) for usr in $(cut -f1 -d: /etc/passwd);do 
+           home=$(grep ^${usr}: /etc/passwd |cut -f6 -d:)
+           if [[ -d $home ]];then 
+            eval echo cp /tmp/LEGAL.txt  ~$usr/ 
+           fi 
+       done
+    e) echo Los ejecutables de root son en total: $(echo $(ls /sbin/ |wc -l ; ls /usr/sbin |wc -l)|sed 's/ /+/'| bc) 
 
-eval var='$'$1
 
-case $1 in
-  '#')  echo El número de parámetros posicionales es $var ;;
-  '@')  echo Los parámetros posicionales son: $var ;;
-  '$')  echo El PID del script actual es: $var;;
-  PATH) echo Los directorios de búsqueda de binarios son: $var;;
-  HOME) echo El directorio de inicio es: $var;;
-  PWD)  echo El directorio de trabajo actual es: $var;;
-  *)    echo El valor de la variable $1 es $var;;
-esac
- 
-5. a) Explique los distintos métodos para ejecutar un script. En cada caso
-      indique qué condiciones son necesarias para que la ejecución sea 
-      exitosa (permisos de ejecución, ruta, variables de entorno, etc): 
-      i) ./script.sh 
-      ii) /home/usuario/bin/script.sh
-      iii) script.sh
-      iv) bash script.sh 
-      v) . script.sh 
-   b) Para cada inciso anterior verifique a través de las variables especiales 
-      $$ y $PPID si se crea un nuevo proceso o no.  
-
-6. Lea el script a continuación y complete los incisos listados: 
-  a) Documente el uso de variables y parámetros posicionales. Indique 
-  tipo de variables/parámetros, localidad.
-  b) Agregue las sentencia declare o local para cada variable. 
-  c) Observe y documente el uso de las variables de ambiente listadas en la 
-  tabla de la página 29, que están en uso dentro del script.  
-  d) ¿Qué condición se evalúa en el if? ¿De qué tipo es? 
-  e) Reescriba la condición de if utilizando el estado de retorno de 
-  algún comando en lugar de test. 
+4. Lea el script a continuación y complete los incisos listados: 
+ a) Indique qué hace el script línea a línea y de manera general.  
+    Agregue como comentario al inicio la FUNCIONALIDAD GENERAL. 
+ b) Reemplace el ciclo for con un while; y el ciclo while con for. 
+ c) Investigue el uso de la orden interna ':'. ¿En qué lugar podría utilizarla? 
+    ¿Se obtiene algún beneficio con el cambio? 
+ d) Modifique el script tal que exista una función que retorne la cantidad de 
+    procesos para un usuario recibido como argumento. Indique al menos dos 
+    métodos para retornar este valor. 
+ e) ¿Se evalúan todos los usuarios en el MISMO INSTANTE de tiempo? Modifique el
+    script para que así sea. 
+ f) Modifique el script tal que se muestre el total de procesos para cada 
+    instante, evaluado como suma de lo calculado para cada usuario (utilice 
+    expresiones aritméticas). 
+    Explique cómo resuelve la obtención del valor de procs modificado dentro 
+    del subshell. ¿Existe más de una manera?  
+ g) Reemplace el uso de `` por su equivalente. 
+ h) Modifique el script para que la salida se vea _TAMBIEN_ por pantalla
+    (Ayuda: tee) 
 
 #Inicio
 #####################
 #!/bin/bash
 
-logfile=/tmp/users.log
+declare -i procs 
+declare -r logfile=/tmp/users.log
 echo COMIENZO > $logfile
 
 while true; do
-     for usr in $(cut -f1 -d:  /etc/passwd);do 
-	  procs=$(ps -u ${usr} --no-headers |wc -l)
+     for i in `cut -f1 -d:  /etc/passwd`;do 
+	  procs=`ps -u ${i} --no-headers |wc -l`
 	  if [[ $procs -ne 0 ]];then 
-	    echo ${usr}: $procs
+	    echo ${i}: $procs
 	  fi 
      done | sort -n -k2  
      date
@@ -207,16 +89,29 @@ exit 0
 # Fin del script
 
 
-7. Lea el script a continuación y complete los incisos listados: 
-  a)  Documente el uso de variables y parámetros posicionales. Indique 
-  tipo de variables/parámetros, localidad.
-  b) Observe y documente el uso de las variables de ambiente listadas en la 
-  tabla de la página 29, que están en uso en el script.  
-  c) ¿Se utiliza alguna otra variable de ambiente no documentada en la tabla?
-  d) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
-  ¿Puede escribirla de otra forma? 
-  e) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
-  de las listas observadas en el script. 
+5. Lea el script a continuación y complete los incisos listados: 
+ a) Indique qué hace el script línea a línea y de manera general. Ver
+    Agregue como comentario al inicio la FUNCIONALIDAD GENERAL. 
+ b) Ver página 71 del manual de referencia para explicar la sentencia que 
+    contiene al comando 'cp'. 
+    ¿En qué sección del capítulo 2 se encuentra la tabla? Indique además
+    en qué sección del manual de bash se encuentra la información referente
+    a esta línea. 
+ c) Reemplace el ciclo until con un while y en otra versión con for.
+    En el caso de for, ¿es necesario utilizar shift?. En caso de que no lo sea,
+    ¿es exactamente el mismo comportamiento? ¿Qué sucede con los parámetros 
+    posicionales?.
+ d) Modifique el script para que guarde las nuevas versiones de los 
+    archivos en un subdirectorio llamado JPG dentro del directorio de 
+    trabajo actual. ¿Qué política asume si el directorio JPG ya se
+    encuentra creado? Verifique el comportamiento del script en esta 
+    situación. 
+ e) Modifique el script tal que exista una función que verifique si el 
+    usuario es root y, en ese caso, pregunte al usuario si desea continuar
+    con la ejecución del script. Caso contrario, deberá TERMINAR la 
+    ejecución. 
+ f) Reemplace el uso de `` por su equivalente. ¿Se crea un subshell al usar
+    la sustitución de comandos? 
 
 #Inicio
 #####################
@@ -224,7 +119,7 @@ exit 0
 [[ `id -u` -ne 0 ]] || exit
 
 until [[ $# -eq 0 ]]; do
-   if [ -d $1 ];then 
+   if [[ -d $1 ]];then 
       cd $1
       for i in `ls *jpg`;do
 	cp $i ${i%%jpg}JPG
@@ -233,40 +128,110 @@ until [[ $# -eq 0 ]]; do
       shift 
    fi 
 done 
+# Fin del script
 
-8. Lea el script findshell (PEDCO) y complete los incisos listados: 
-  a) Documente el uso de variables y parámetros posicionales. Indique 
-  tipo de variables/parámetros, localidad.
-  b) ¿Cuál es el efecto de la sentencia "declare -u resp" ¿Qué sucede 
-  si no se declara de ese tipo? ¿Agregaría alguna sentencia declare o local?
-  c) ¿La función recibe argumentos? Modifique el script para que muestre los 
-  parámetros posicionales al principio y fin de la ejecución del script y 
-  dentro de la función. Ejecute el script pasando al menos dos paquetes 
-  como argumento. Documente el resultado observado.  
-  d) Observe y documente el uso de las variables de ambiente listadas en la 
-  tabla de la página 29, que están en uso en el script.
-  e) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
-  ¿Puede escribirla de otra forma? 
-  f) Lea páginas 43,44 y 45 del manual de referencia. Explique el funcionamiento
-  de las listas observadas en el script. 
+6. Lea el script a continuación y complete los incisos listados: 
+ a) Indique qué hace el script línea a línea y de manera general.  
+    Agregue como comentario al inicio la funcionalidad general. 
+ b) Modifique la función buscarscript tal que: 
+	* Reemplace el while con for. Lea la sección "Tuberías/Pipes"  
+        de man bash. Explique el impacto de la localidad de la 
+        variable 'a' dentro del while. ¿Puede observar su valor
+        fuera del while?¿Qué sucede al reemplazarla por un for?
+	* Además del listado de scripts encontrados, retorne un 
+        valor entero con el total scripts encontrados. 
+  c) Modifique el script para que se emita al final del listado,
+     el total de scripts encontrados. 
+  d) En el caso de no proveer argumentos, critique y mejore la 
+     sección de código entre los comentarios ###Mejorar. 
+  e) Reescriba el while en el elif sin usar redirección (<). 
+    ¿Cambia la localidad de la variable pkg en la versión 
+    modificada? 
+  f) En la sentencia else de la estructura de control principal, 
+    reescriba el while utilizando for y until. ¿Qué sucede con la 
+    localidad de la variable pkg en cada caso? ¿Qué sucede con 
+    los parámetros posicionales en cada caso?
+  g) Reemplace el uso de `` por su equivalente. 
+  h) Reemplace el último while del código con un for. 
+  i) Agregue una función tal que si el usuario no es root, consulte
+     al usuario si quiere continuar ejecutando el script. ¿Por qué
+     puede ser necesaria esta verificación? 
+
+#Inicio
+#####################
+#!/bin/bash 
+
+declare -u resp
+
+function buscarscript(){
+local a
+   
+   if ! dpkg -l $1 &> /dev/null; then
+     echo "$1 no instalado"
+     return 
+   fi
+   echo $1 
+   dpkg -L $1 | while read archivo; do
+      a=`file "$archivo"|grep "Bourne-Again"|cut -f1 -d:`
+      if [[ -n "$a" ]];then  echo "    $a";fi 
+   done   
+}
+
+if [[ $# -eq 0 ]];then 
+   ###Mejorar
+   echo -n "Se creará un listado para todos los paquetes instalados en el sistema, ¿esta de acuerdo? S/N "
+   read resp 
+   if [[ "$resp" == "N" ]];then 
+	echo "Saliendo..." 
+	exit 1 
+   elif [[ "$resp" != "S" ]];then 
+	echo "Respuesta inválida, saliendo..."
+        exit 2
+   fi 
+   ###Mejorar
+   #Crear listado para todos los paquetes del sistema 
+   dpkg -l |awk '$1=="ii" {print $2}'|while read pkg; do
+      buscarscript $pkg 
+   done 
+elif [[ -f "$1" ]];then
+   # Si el primer argumento es un archivo regular, se asume que contiene una
+   #lista de nombres de paquetes separada por nueva linea, sin lineas vacías. 
+   while read pkg;do
+      buscarscript $pkg 
+   done < $1 
+else
+   #Asume que los argumentos son un listado de nombres de paquetes
+   while [[ $# -gt 0 ]];do
+	buscarscript $1
+	shift
+   done 
+fi 
+# Fin del script
   
-9. Lea el script a continuación y complete los incisos listados: 
-  a)  Documente el uso de variables y parámetros posicionales. Indique 
-  tipo de variables/parámetros, localidad.
-  b) ¿Qué sucede con el valor de la variable "nota" si se le asigna algo 
-  distinto de número? 
-  c) ¿Agregaría alguna sentencia declare o local?
-  d) ¿La función recibe argumentos? Modifique el script para que muestre los 
-  parámetros posicionales al principio y fin de la ejecución del script y 
-  dentro de la función. Ejecute el script cargando al menos dos alumnos y 
-  documente el resultado observado. 
-  e) Observe y documente el uso de las variables de ambiente listadas en la 
-  tabla de la página 29, que están en uso en el script.
-  f) ¿Qué condiciones se evalúan en el script? ¿De qué tipo son? 
-  ¿Puede escribirla de otra forma? 
-  g) Lea páginas 43,44 y 45 del manual de referencias. Explique el 
-  funcionamiento de las listas observadas en el script. 
-
+7. Lea el script a continuación y complete los incisos listados: 
+ a)Indique qué hace el script línea a línea y de manera general.  
+   Agregue como comentario al inicio la funcionalidad general. 
+ b)Utilizando la estructura de control más apropiada, modifique la función 
+   calificar tal que: 
+	* Si la nota es 0 se devuelva REPROBADO
+  	* Si la nota está entre 1 y 3 se devuelva INSUFICIENTE
+	* Si la nota es 4 se devuelva APROBADO
+	* Si la nota está entre 5 y 7 se devuelva BUENO 
+	* Si la nota está entre 8 y 9 se devuelva MUY BUENO 
+	* Si la nota es 10 se devuelva EXCELENTE 
+ 	* EN cualquier otro caso se devuelve "NOTA INVALIDA"
+ c)Crear una nueva función que realice la función de ingreso de 
+   datos. La misma deberá verificar que la nota se encuentre en 
+   el rango 0-10. ¿Qué puede decir acerca de las verificaciones 
+   en el inciso anterior, en relación a esta verificación?
+ d)¿Qué otra función podría agregar?
+ e)Explique claramente el funcionamiento de la sentencia "break 2". 
+   Reemplace el if que lo contiene por una lista (&& o ||). 
+ f)Modifique el script para que se muestre el promedio de notas 
+   ingresadas, al finalizar la carga de alumnos. 
+ g) Reemplace el uso de `` por su equivalente. 
+  
+  
 #Inicio
 #####################
 #!/bin/bash
@@ -312,89 +277,44 @@ rm $temp
 exit 0
 # Fin del script
 
-10. Complete el siguiente script (observar etiqueta TODO) y tenga presente que 
-    debe cumplir los siguientes requerimientos de funcionalidad.
+8. Sobre el script /usr/sbin/iptables-apply :
+   a) ¿A qué paquete de software pertenece el script?
+   b) Liste el nombre de todas las funciones del script. Para cada una
+   de ellas, y sin entrar en detalles del total del script, intente 
+   dar una breve descripción de su funcionalidad (Ayuda: lea la 
+   página 73 del manual de referencia. El guión - que marca 
+   el string delimitante de un here-document <<-StringDelimitante 
+   suprime los tabs (pero no los espacios) en la salida). ¿Devuelve
+   algún valor la función? ¿Tiene variables locales la función? 
+   ¿Consideraría agregar alguna sentencia local?
+   c) Explique qué hace la sentencia case en las líneas 153 a 160. 
+   Reescriba ese case utilizando if
 
-    REQUERIMIENTOS:
-    10.1. La longitud de la clave debe ser igual o mayor a 8 caracteres.
-    10.2. La clave debe contener letras mayúsculas y minúsculas.
-    10.3. Debe imprimir por pantalla el resultado de la evaluación según 
-          corresponda.
+9. Sobre el script /usr/bin/ldd
+   a) ¿A qué paquete de software pertenece el script?
+   b) Liste el nombre de todas las funciones del script. ¿Devuelve 
+   algún valor la función? ¿Tiene variables locales la función? 
+   ¿Consideraría agregar alguna sentencia local?
+   c) Explique el comportamiento de manera general, del while y 
+   case en las líneas 34 a 94. Sin entrar en detalle línea a línea. 
+   Explique sobre qué se itera y cuál parece ser la idea de esa 
+   sección de código.
 
-OBS: ¡No olvide probar bien su script verificando que cada camino posible 
-     funcione correctamente!
+10. Encuentre un script en el sistema que haga uso de la sentencia 
+   local dentro de funciones. Copie una de esas funciones aquí (junto
+   al nombre del script al que pertenece). 
+   Ayuda: 
+      Puede utilizar findshell.sh y  |xargs grep 'local '
 
-SCRIPT:
+11. Encuentre un script en el sistema que utilice let, otro expr.
+    Copie algunas de esas sentencias aquí (junto al nombre del 
+    script al que pertenece). ¿Qué otra forma conoce
+    para realizar operaciones aritméticas? Reescriba las sentencias
+    extraídas de los scripts utilizando las diferentes variantes.
+    Ayuda: 
+    Puede utilizar findshell.sh y  |xargs grep 'let '
 
-#Inicio
-#####################
-// TODO
-echo "Ingrese su clave:"
-read password
-len="${#password}" // Explique con sus palabras qué sucede en esta línea, 
-                      ayuda: sección EXPANSION man bash 
-
-if [[ //TODO ]] ; then
-   if echo "$password" | grep -q [0-9] >/dev/null; then
-      if //TODO ; then
-         if //TODO ; then
-           //TODO
-         else
-           //TODO
-         fi
-      else
-          //TODO
-      fi
-   else
-     //TODO
-   fi
-else
-   //TODO
-fi
-
-
-11. La empresa donde trabajamos necesita enviar una carta de notificación a 
-    todos sus clientes. Por lo que se nos solicita crear un script para 
-    automatizar la personalización de la carta, de manera que esté dirigida a 
-    cada cliente. Para ello, contamos con un archivo que contiene el listado de
-    todos los clientes de la empresa y, por otra parte otro archivo que contiene
-    la carta de notificación (plantilla).
-
-    11.1 Cree un archivo de texto que se llame listadoClientes.txt con la 
-         siguiente información:
-
-    Horacio Perez
-    Juan José López
-    Roberto Lorenzo
-    Mirtha Pasturiza
-
-    11.2 Tenga en cuenta el siguiente texto para armar el template de 
-         notificación:
-
-Estimado xxxxx, 
-
-    Por medio de la presente me permito informarle que nuestras oficinas de 
-atención al cliente se encontraran cerradas desde el 01/01/2020 al 31/01/2020 
-correspondiente al período vacacional. 
-    Por urgencias deberá comunicarse a nuestro centro de ayuda en el horario 
-de 8 a 21 hrs., al teléfono 555-3322. 
-
-    Sin otro particular lo saludo atte. 
-
-Dirección de logística BBQ 
-
-    11.3 Ud deberá crear dos shell script, el primero carta.sh contendrá la 
-        lógica que permita recorrer el archivo de clientes y por cada cliente 
-        invocará, creando un subshell, a cartaCustom.sh que recibirá por 
-        parámetro posicional el cliente y modificará el template de la carta 
-        generando un archivo personalizado. Para finalmente guardar cada 
-        archivo dentro del directorio "cartas". 
-
-Por lo tanto, la salida de la ejecución debería ser como el siguiente ejemplo:
-cartas/Horacio Perez.txt
-cartas/Juan josé López.txt
-.... y así con cada cliente.
-El contenido de cada archivo deberá tener al nombre COMPLETO de cada cliente.
- 
-AYUDA: Use parámetros posicionales y la repetitiva while para lectura de 
-       archivos.
+12. En los ejercicios que incluyen sentencias condicionales que utilizan 
+    [[ ]], test o [ ], evalúe de manera general qué sucedería en caso de 
+    reemplazar por alguna de las otras implementaciones. Es decir, si usamos
+    [[ ]] por ejemplo, qué sucede si reemplazo por [] o por /usr/bin/test

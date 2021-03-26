@@ -1,139 +1,129 @@
 ----------------------------------
-TP04 - Automatización y scripting 
-Depuración / DEBUG
+TP05 - Automatización y scripting 
+Herramientas: find, sed, grep, awk,
+cron/at
 FAI - TUASSL  
 ----------------------------------
 
 MANUAL DE REFERENCIA: "BEGINNING LINUX PROGRAMMING"
 ---------------------------------------------------
-NOTA1: Los temas cubiertos en este práctico incluyen los
-desarrollados en las páginas 74 y 75 del manual de referencia. 
-
-NOTA2: Cuando los ejercicios pidan modificar código, repita
-el bloque a continuación del original y haga las modificaciones.  
-
-NOTA3: Cada vez que modifique el código VERIFIQUE su correcto 
-funcionamiento.  
-
-NOTA4: Cuando se pida modificar un script, todas las modificaciones
-deben hacerse en simultáneo en la misma versión. Si lo hace en versiones 
-separadas, recuerde armar una unificando todas las modificaciones. 
-
-NOTA5: EL uso de algún editor que coloree según la sintaxis suele 
-ser de ayuda. En el caso de el editor vi, la opción syntax enable 
-realiza esta función. 
 
 EJERCITACIÓN:
 ---------------------------------
-0. Indique al menos dos formas de invocar las opciones para trazado de
-   scripts. 
-
-1. Dado el siguiente script, utilizando la/s opción/es apropiada/s del 
-shell (-x o -xv), observe la ejecución del script a continuación  y responda:
-  a) ¿Se ejecutan las líneas anteriores al error de sintaxis? 
-  b) ¿Se ejecutan las líneas posteriores al error de sintaxis? 
-  c) ¿Es importante verificar la sintaxis de un script antes de efectivamente 
-     ejecutarlo? ¿Cómo puede hacerlo?
-  d) Elimine los errores de sintaxis y verifique. 
-
-#!/bin/bash
-echo Haciendo algo terrible, como editar /etc/passwd
-echo Haciendo algo terrible, como borrar archivos
-if [[ -f /etc/passwd ];then echo Algo aún más terrible ;fi
-echo Haciendo algo terrible, como editar /etc/shadow
-# Fin del script 
-
-2. Dado el siguiente script, utilizando la/s opción/es apropiada del 
-shell (-x o -xv), observe la ejecución del script a continuación  y responda:
-  a) ¿Existen errores de sintaxis en el script?¿Cómo lo puede verificar sin 
-     ejecutar efectivamente el script?
-  b) ¿Existen errores en ejecución?¿Qué error es?
-  c) ¿Se ejecutan las líneas anteriores al error en ejecución?
-  d) ¿Se ejecutan las lineas posteriores al error en ejecución?
-  e) ¿Puede ser útil en esta situación la opción nounset (-u) de bash?
-     Verifique lo qué sucede. ¿Alguna diferencia con no utilizar la opción?
-
-#!/bin/bash
-echo Haciendo algo terrible, como editar /etc/passwd
-echo Haciendo algo terrible, como borrar archivos
-if [ $nodef -ne 0  ];then echo Algo aún más terrible ;fi
-echo Haciendo algo terrible, como editar /etc/shadow
-# Fin del script 
-
-2. Lea el script a continuación y complete los incisos listados: 
-  a) Busque errores de sintaxis y elimine los mismos, sin ejecutar 
-     efectivamente hasta en tanto no haya eliminado los errores. 
-     Para cada error, copie aquí la línea y el error indicado por
-     bash. Además indique la resolución. ¿La corrección fue aplicada 
-     en la línea indicada por bash? 
-     Utilice la opción apropiada de bash para lograrlo. 
-  b) Para cada variable del script analice qué sucedería si dicha 
-     variable quedase sin definir (es decir, no se le asigna valor 
-     en ningún momento). Además indique si, dada la lógica del script,
-     es posible que quede sin definir. En caso de ser posible, 
-     indique cuál sería el impacto y qué haría para mejorar el script. 
-      
-
-#Inicio
-#####################
-#!/bin/bash
-
-# El siguiente script emite cada 30 segundos un resumen de la 
-# cantidad de procesos por usuario, ordenado de menor a mayor. 
-# Dicho resumen se emite por pantalla y se guarda en un archivo
-# temporal. 
-
-declare -i procs total 
-declare -r logfile=$(tempfile)
-declare -r instante=$(tempfile)
-declare -r temp=$(tempfile)
+0. Comando find. En cada caso indique cuál es el directorio de búsqueda. 
+Cuáles son las opciones que afectan toda la operación; las pruebas que 
+afectan archivos individuales, y las acciones a realizar. ¿Es necesario 
+ser root para ejecutar estos comandos? ¿Siempre será necesario?
 
 
-function total_proc (){ 
-  echo $(grep "^$1 " $instante |wc -l)
+  ####        #   ####
+ #    #       #  #    #     EVALUAR LA SENTENCIA ANTES DE EJECUTAR
+ #    #       #  #    #     PUEDE CAUSAR ESTRAGOS EN SU MAQUINA PERSONAL
+ #    #       #  #    #
+ #    #  #    #  #    #
+  ####    ####    ####
 
-echo COMIENZO | tee $logfile 
+ a) Indique el comando find que cumpla con lo pedido en cada búsqueda. 
+     i) Busque archivos en todo el árbol de directorios tal que que 
+        pertenezcan a root y tengan permisos 777. 
+    ii) Busque archivos de dispositivos (bloques o carácter). 
+   iii) Busque archivos regulares finalizados en jpg o JPG, ubicados dentro 
+	del directorio home y, liste sus propiedades. 
+    iv) Busque archivos que hayan sido modificados hace 1 día.
+     v) Busque archivos en todo el árbol de directorios tal que:  
+        pertenezcan a root y tengan permisos 777 y, sean scripts. 
+    vi) Busque archivos en todo el árbol de directorios tal que:  
+        pertenezcan a root; tengan setuid o setgid y, permisos 
+        de escritura y lectura para todos, y no sean binarios (ELF). ¿Por qué 
+        pueden ser interesantes estos archivos desde el punto de 
+        vista de la seguridad?
 
-while :; do
-     ps -ef --no-headers > $instante 
-     total=0 
-     date
-     for usr in $(cut -f1 -d:  /etc/passwd);do 
-	  procs=$(total_proc $usr)
-	  if [ $procs -ne 0 ];then 
-	    echo ${usr}: $procs
-	    let total=total+procs
-	  fi 
-     done > $temp 
-     sort -n -k2 $temp 
-     echo "Total de procesos: $total
-     sleep 30
-done | tee $logfile 
+ b) Describa el alcance de las siguientes búsquedas:
+	 i) find . -mmin -5  -ls
+	ii) find / -mount \( -nogroup -or -nouser \) -ok rm {} \;
+       iii) find /home -size +2G -type f -delete 	
+	iv) find /tmp -printf "%p %k %\n"
+	 v) find / -type f -exec grep -l -m 1 '^#!/bin/bash' {} \;
+            Más allá del formato, ¿qué diferencias encuentra entre el resultado 
+            del comando anterior y findshell.sh?¿Qué sucede si la expresión 
+            regular se encuentra en una línea distinta de la primera? 
+        
+Expresiones regulares:  
+----------------------
+Una  expresión  regular  es  un  patrón que describe un conjunto de cadenas 
+de caracteres. Las expresiones regulares se construyen de forma análoga a 
+las expresiones aritméticas, combinando expresiones más pequeñas mediante 
+ciertos operadores para formar expresiones complejas. -man grep- 
 
-#Limpieza
-[[ -f $instante ] && rm $instante 
-[[ -f $temp ]] && rm $temp 
-echo $logfile debe ser borrado manualmente. 
+Las herramientas find, sed, grep, awk y perl utilizan expresiones regulares. 
+Sin embargo, cada herramienta puede dar soporte a un cierto tipo de expresiones
+regulares y no otros. En cada caso corresponderá analizar cuál es el tipo de
+expresiones regulares soportadas y, utilizarlas en consecuencia. Por ejemplo 
+en el caso de find, las expresiones regulares utilizadas de manera 
+predeterminada son las mismas que provee el software emacs. Sin embargo 
+find provee la opción regextype, que nos permite cambiar ese comportamiento, 
+y utilizar por ejemplo las mismas expresiones regulares que egrep (grep -E).
 
-exit 0
-# Fin del script
+El shell en sí mismo soporta expresiones regulares, ver man bash
+(sección EXPANSIÓN, subsección Expansión de caminos, subsubsección
+Patrones). 
+
+Más información: 
+http://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap09.html
+
+1. Expresiones regulares:  
+ a) Indique el alcance de las expresiones regulares en cada comando; y el 
+    efecto logrado por el comando en general. Indique además cuál es el 
+    programa que interpreta la expresión regular.  
+
+     i) find / -xdev -regextype posix-egrep -iregex '(/usr)?/[s]?bin/.*'
+    ii) find / -xdev | egrep '(/usr)?/[s]?bin/.*'
+   iii) egrep -n  '\b(\w+)[ ]+\1\b' mitexto.txt
+    iv) /sbin/ifconfig  | egrep '\b([[:xdigit:]]{2}:){5}[[:xdigit:]]{2}\b'
+     v) ls -d  *[[:digit:]]*
+
+ b) Utilizando grep indique sentencias que cumplan con lo siguiente: 
+     i) Encontrar números aislados de al menos 4 dígitos, es decir que no
+        se encuentren concatenados a caracteres alfabéticos.
+    ii) Encontrar una patrón que conforme una palabra completa, esto es
+        que no sea sub-cadena.
+   iii) Encontrar líneas vacías. 
+    iv) Encontrar en la base de datos de usuarios, aquellos que no tengan 
+        un shell asignado.  
+    v) Encontrar en la base de datos de usuarios, aquellos que comiencen 
+        con la letra m o M. 
+   vi) Encontrar palabras de 5 caracteres que comiencen con m y terminen 
+        con a (Usar /usr/share/dict/words para probar). 
+
+2. Uso de awk.  
+Awk es un lenguaje de programación orientado al procesamiento de patrones y 
+textos. Permite soluciones más generales de las que podemos lograr con sed. 
+Sin embargo, existen pocos scripts en el sistema totalmente escritos en este 
+lenguaje. Su uso más frecuente es en pequeñas sentencias dentro de scripts
+escritos en bash, sh, etc. 
+
+ a) A continuación se indican varias sentencias awk extraídas de scripts del
+    sistema (findshell |xargs grep awk ). Indique la función que realiza awk 
+    en cada caso; y el efecto del comando en general. 
+     i) swpf=$(free |tail|awk '{print $NF}'
+    ii) SYSFS=$(mount |grep sysfs|awk {'print $3'})
+   iii) ALSA_DRIVER_VERSION=`cat /proc/asound/version |head -n1|awk {'print $7'} |sed 's/\.$//'`
+    iv) max_mem=`free | awk 'NR == 2 {fmem=int($2 / 1024); if (fmem < 4000) {print fmem} else {print 4000}}'`
+     v) bridge=$(brctl show | awk 'NR==2 {print $1}')
+    vi) RPMS=$(LANG=C cp -va ${temp_dir_name}/SRPMS/* $kmp_basedir | awk '{print $NF}')
+     v) max_mem=`vmstat | awk 'NR == 3 {fmem=int($5 / 1024); if (fmem < 4000) {print fmem} else {print 4000}}'`
+    vi) line=$(awk '{ print $1 " " $3 " " $2 }' /proc/self/uid_map)
+
+ b) Compare la sentencia a continuación con el efecto del ejercicio 0.b)v)
+    find / -type f -exec awk 'NR==1 && $1=="#!/bin/bash" {print FILENAME}' {} \;
 
 
 3. Lea el script a continuación y complete los incisos listados: 
-  a) Busque errores de sintaxis y elimine los mismos, sin ejecutar 
-     efectivamente hasta en tanto no haya eliminado los errores. 
-     Para cada error, copie aquí la línea y el error indicado por
-     bash. Además indique la resolución. ¿La corrección fue aplicada 
-     en la línea indicada por bash? 
-     Utilice la opción apropiada de bash para lograrlo. 
-  b) Para cada variable del script analice qué sucedería si dicha 
-     variable quedase sin definir (es decir, no se le asigna valor 
-     en ningún momento). Además indique si, dada la lógica del script,
-     es posible que quede sin definir. En caso de ser posible, 
-     indique cuál sería el impacto y qué haría para mejorar el script. 
-  c) ¿Qué sucede si no existen archivos jpg en el/los directorios 
-     pasados como argumento?¿Cómo podría mejorar esta sección del script?
-
+ a) Indique todos los usos de expresiones regulares en el script. En
+    cada caso indique cuál es el programa que interpreta la expresión 
+    regular y, el alcance de la misma.  
+ b) ¿Podría reemplazar 'ls *jpg' con find? 
+      
 #Inicio
 #####################
 
@@ -146,14 +136,15 @@ exit 0
 #!/bin/bash
 
 function es_root() {
-local -u resp
+local resp
+declare -u resp 
 
 if [[ $(id -u) -eq 0 ]] ;then
     while : ;do 
-       echo "ADVERTENCIA: ud. es root, realmente desea continuar S/N"
+       echo "ADVERTENCIA: ud. es root, realmente desea continuar? S/N"
        read resp
-       case $resp in:
-         S*) return ;
+       case $resp in
+         S*) return ;;
          N*) echo saliendo.. ; exit ;;
        esac 
     done 
@@ -163,31 +154,23 @@ if [[ $(id -u) -eq 0 ]] ;then
 es_root
  
 for dir; do
-   if [[ -d $dir ]] then 
+   if [[ -d $dir ]];then 
       cd $dir
       [[ ! -d JPG ]] && mkdir JPG 
       for i in $(ls *jpg);do
-	cp -i $i JPG/${i%%jpg}JPG #Expansión de parámetro: remueve jpg del final de $i, agregando JPG.  
+	cp -i $i JPG/${i%%jpg}JPG #Expansión de parámetro: remueve jpg del final  #de $i agregando.  
+      done
       cd $OLDPWD
    fi 
 done 
+
 # Fin del script
 
 4. Lea el script a continuación y complete los incisos listados: 
-  a) Busque errores de sintaxis y elimine los mismos, sin ejecutar 
-     efectivamente hasta en tanto no haya eliminado los errores. 
-     Para cada error, copie aquí la línea y el error indicado por
-     bash. Además indique la resolución. ¿La corrección fue aplicada 
-     en la línea indicada por bash? 
-     Utilice la opción apropiada de bash para lograrlo. 
-  b) Para cada variable del script analice qué sucedería si dicha 
-     variable quedase sin definir (es decir, no se le asigna valor 
-     en ningún momento). Además indique si, dada la lógica del script,
-     es posible que quede sin definir. En caso de ser posible, 
-     indique cuál sería el impacto y qué haría para mejorar el script. 
-  c) ¿Está funcionando correctamente el script? Observe lo que sucede para un 
-     sólo paquete (ejemplo a2ps). ¿Puede detectar cuál es el problema y corregirlo?
-     ¿Se trata de un error de sintaxis?
+ a) Indique todos los usos de expresiones regulares en el script. En
+    cada caso indique cuál es el programa que interpreta la expresión 
+    regular y, el alcance de la misma.  
+ b) Observe y documente cada uso de find, sed, awk y grep en el script. 
 
 #Inicio
 #####################
@@ -198,8 +181,10 @@ done
 # distribución debian o derivado. Se puede indicar un listado de 
 # nombres de paquete, un archivo con una lista de nombres de paquete, 
 # o bien si no se proveen argumentos se genera el listado para todos
-# los paquetes instalados en el sistema. El listado será emitido por 
-# la salida estándar. 
+# los paquetes instalados en el sistema. 
+
+declare -u resp
+declare -i total=0 
 
 function buscarscript(){
 local a
@@ -212,9 +197,10 @@ local -i total=0
    echo $1 
    for archivo in $(dpkg -L $1); do
       a=$(file "$archivo"|grep "Bourne-Again"|cut -f1 -d:)
-      if [ -n $a ];then  
+      if [[ -n $a ]];then  
 	echo "    $a"
         let total++
+      fi 
    done   
    return $total 
 }
@@ -222,10 +208,10 @@ local -i total=0
 function todo_sistema(){
 local -u resp 
    while :;do
-     echo "Se creará un listado para todos los paquetes instalados en el sistema, ¿esta de acuerdo? S/N" 
+     echo "Se creará un listado para todos los paquetes instalados en el sistema, ¿esta de acuerdo? S/N"
      read resp 
      case $resp in
-        S) return  
+        S) return ;; 
         N) echo saliendo...; exit ;; 
      esac
    done  
@@ -235,17 +221,15 @@ function no_es_root(){
 local -u resp 
 if [[ $(id -u) -ne 0 ]] ;then
     while : ;do 
-       echo "ADVERTENCIA: ud. NO es root, realmente desea continuar? S/N'
+       echo "DVERTENCIA: ud. NO es root, realmente desea continuar? S/N"
        read resp
        case $resp in
          S*) return ;;
          N*) echo saliendo.. ; exit ;;
        esac 
     done 
- fi 
+fi 
 }
-
-declare -i total=0 
 
 no_es_root 
 
@@ -256,7 +240,7 @@ if [[ $# -eq 0 ]];then
       buscarscript $pkg
       let total=total+$?
    done 
-elif [[ -f "$1"]];then
+elif [[ -f "$1" ]];then
    # Si el primer argumento es un archivo regular, se asume que contiene una
    #lista de nombres de paquetes separada por nueva linea, sin lineas vacías. 
    for pkg in $(cat $1);do
@@ -268,150 +252,73 @@ else
    for pkg ;do
 	buscarscript $pkg
         let total=total+$?
+   done 
 fi 
 echo Total de scripts de bash encontrados: $total  
 exit 0
-# Fin del script
-  
-5. Lea el script a continuación y complete los incisos listados: 
-  a) Busque errores de sintaxis y elimine los mismos, sin ejecutar 
-     efectivamente hasta en tanto no haya eliminado los errores. 
-     Para cada error, copie aquí la línea y el error indicado por
-     bash. Además indique la resolución. ¿La corrección fue aplicada 
-     en la línea indicada por bash? 
-     Utilice la opción apropiada de bash para lograrlo. 
-  b) Para cada variable del script analice qué sucedería si dicha 
-     variable quedase sin definir (es decir, no se le asigna valor 
-     en ningún momento). Además indique si, dada la lógica del script,
-     es posible que quede sin definir. En caso de ser posible, 
-     indique cuál sería el impacto y qué haría para mejorar el script. 
-  c) ¿Qué sucede con el contenido del nombre, apellido y nota en caso 
-     de que el usuario no ingrese valor? ¿Podría mejorar esta situación?
-     
-  
-#Inicio
-#####################
-#!/bin/bash
-# El siguiente script es utilizado por un usuario para ingresar 
-# tuplas constituidas de: Nombre, Apellido y nota, correspondientes 
-# a un alumno. Basado en cada tupla se emitirá, por la salida 
-# estándar, el mismo listado pero con una nota alfabética basada 
-# en la nota numérica ingresada. 
 
+5. Dado el siguiente comando: 
+   find /usr/bin /bin /sbin /usr/sbin  -type f -exec egrep -l -w '^#!/bin/bash|^#!/bin/sh' {} \; |xargs egrep -l -w 'awk|grep|find|sed'
+   a) ¿Qué obtenemos a partir del siguiente comando? 
+   b) ¿Encuentra algún programa que haya utilizado en el listado obtenido?
+   c) Usando el listado obtenido, analice e indique 2 ejemplos de uso de sed, awk, grep y find.  
+   d) ¿Puede modificar el comando tal que se encuentren scripts en bash o sh que contengan llamadas al intérprete perl? 
 
-function carga_nota(){
-  echo -n "Por favor ingrese Nombre: " 
-  read nombre
-  echo -n "Por favor ingrese Apellido: " 
-  read apellido
-  while : ;do 
-     echo -n "Nota correspondiente a $nombre $apellido: " 
-     read nota
-     case $nota in 
-     [0-9]|10) return ;;
-     esac 
-  done 
-}
-
-function otro_ingreso () {
-  local -u resp 
-  resp="N"
-  while [[ "$resp" != "S" ]];do 	
-    echo -n "¿Otro ingreso? S/N": 
-    read resp 
-    if [[ "$resp" == "N" ]];then 
-       return 1
-    fi 
-  done 	
-}
-
-function calificar (){
-  echo -n "Nombre: $1, Apellido: $2," 
-  case $3 in
-    0) echo REPROBADO ;;
-    [1-3]) echo INSUFICIENTE ;; 
-    4) echo APROBADO ;;
-    [5-7]) echo BUENO;;
-    [8-9) echo MUY BUENO;;
-    10) echo EXCELENTE ;;  
-    *) echo NOTA INVALIDA ;;
-  esac 
-}
-
-declare -u nombre apellido 
-declare -i otro=0 cont=0 prom=0
-declare nota
-declare -r temp=`tempfile || temp=/tmp/listado.$$
-
-while [[ $otro -eq 0 ]]; do
-  carga_nota   
-  let prom=prom+nota
-  let cont++
-  calificar $nombre $apellido $nota >> $temp
-  otro_ingreso 
-  otro=$?
-done
-
-let prom=prom/cont
-echo PROMEDIO DE NOTAS: $prom  >> $temp 
-
-cat $temp
-[[ -f $temp ]] && rm $temp 
-
-exit 0
-# Fin del script
-
-6. Dado el siguiente script: 
-   1) Verifique su sintaxis 
-   2) Indique la funcionalidad general 
-   3) Modifique el script tal que: 
-      1) El listado de videos se pasa como argumento. 
-      2) Que se intenten bajar sólo aquellos que no hayan sido ya bajados. 
-      3) Que al finalizar se muestre el listado de archivos bajados 
-      4) Se agregue una OPCIÓN de número máximo de intentos (-m <valor>), 
-         tal que superado dicho valor se desista de la ejecución.   
-      5) Agregar verificaciones, al menos sobre el archivo argumento. 
-      6) Agregar una función de ayuda que sea invocada con -h o ante un error 
-         de invocación
-      8) Verifique que el software youtube-dl esté instalado y disponible 
-      9) ¿Se le ocurre algo más que podría modificar/mejorar? 
+Cron/at: 
+--------
+6. Lea el script a continuación y complete los incisos:  
+   a) Indique la funcionalidad del mismo. 
+   b) ¿Podría reemplazar la órden compuesta creada con llaves, por 
+      la misma orden creada con paréntesis? ¿Por qué?
+   c) Realice el/los cambios necesarios para que el umbral MIN sea 
+      ingresado como parámetro posicional del script. 
 
 #Inicio del script
-#!/bin/bash 
+#!/bin/bash
 
-todook=0 
+temp=$(tempfile)
+MIN=3
 
-while : ;do   
-   for url in "$(cat videos.txt)";do     
-       youtube-dl -f mp4  "$url"; 
-       todook=$(( $todook || $? ))
-   done 
-[[ $todook -eq 0 ]] && break
-done
-
+while : ;do 
+   who > $temp 
+   users=$(cat $temp |cut -f1 -d\ |uniq | wc -l)
+   if [[ $users -ge $MIN ]];then 
+     { echo '!! ALERTA: MAS DE DOS USUARIOS PRESENTES !!'; cat $temp ; } | wall 
+   fi 
+   sleep 10 
+done 
+exit 
 #Fin del script
 
 
-7. Sobre el script /usr/sbin/iptables-apply : 
-   a) Invocando el script en modo debug (bash -x o -xv), pase como argumento 
-   la opción -h y observe la ejecución. 
-   b) Invocando el script en modo debug (bash -x o -xv), pase como argumento 
-   la opción --version y observe la ejecución. 
-   c) ¿Qué opciones se ha/n configurado en el script, que permita/n 
-   ayudar al correcto funcionamiento y capturar errores comunes?
+7. Agregue una línea en el crontab de root tal que ejecute todos los días 
+cada 10 minutos el script del ejercicio anterior, pero cuya 
+salida sea guardada en el archivo /var/log/usuarios_presentes. Dicho archivo 
+debe ser acumulativo, esto es, no debe ser sobrescrito con 
+cada ejecución. Observe que en este caso ya no será necesario el ciclo 
+infinito, pues cron se encarga de la ejecución periódica. ¿Por qué utilizamos
+el cron de root y no el de cualquier usuario como en el ejercicio anterior? 
 
 
-8. Sobre el script internas.sh y módulos.sh 
-   a) ¿Es visible la variable DEBUG en las funciones del archivo módulos.sh?
-      ¿Cuál es el efecto de esta variable?
-   b) Genere tres errores de sintaxis simultáneamente, y verifique cuál es 
-      el/los error/s reportado/s por bash. Indique las líneas de error aquí. 
-   c) ¿Al utilizar la opción -x ¿Se observa la ejecución interna de las 
-      funciones o sólo se ve el llamado? 
-   d) Observe la línea "source modulos.sh" ¿Qué sucede al ejecutar con -x y con 
-      -v?
-   e) Genere código que fuerce la acción de las opciones set -eu en el script.  
+8. Ud es un administrador precavido y sabe que hoy a las 18hs alguien mas va 
+a implementar cambios en la configuración del sistema. Por ende decide que un
+rato antes de que suceda, quisiera realizar un backup del directorio de 
+configuración de sistema en el home de root, sin embargo, le ha surgido una 
+cita importante que le impide realizarlo. Utilice el comando at para planificar la tarea
+para que se ejecute a las 17:20 hrs 
 
 
-8. 
+9. Indique cómo sería la planificación por crontab para los siguientes casos:
+	a) Todos los viernes del mes de diciembre
+	b) Cada 3 días
+	c) El primer día de cada mes. 
+	d) De las 18h a las 22hs.
+	e) En los minutos 0 a 14 y 24 a 35, de las 0hs,7hs y23hs, los días 
+	     miércoles.
+	f) Una vez por año
 
+10. Indique expresiones válidas para indicar a at que comience:
+	a) dentro de 5 minutos
+	b) dentro de 3 días 
+	c) A las 18:23hs 
+	d) A las 4 de la tarde. 
