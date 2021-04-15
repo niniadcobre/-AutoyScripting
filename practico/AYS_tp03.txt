@@ -413,5 +413,3 @@ done
    e) Genere código que fuerce la acción de las opciones set -eu en el script.  
 
 
-8. 
-

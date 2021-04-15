@@ -1,5 +1,5 @@
 ----------------------------------
-TP03 - Automatización y scripting 
+TP02 - Automatización y scripting 
 Expansión; expresiones aritméticas; 
 ordenes internas; funciones y 
 estructuras de control
@@ -314,7 +314,3 @@ exit 0
     Ayuda: 
     Puede utilizar findshell.sh y  |xargs grep 'let '
 
-12. En los ejercicios que incluyen sentencias condicionales que utilizan 
-    [[ ]], test o [ ], evalúe de manera general qué sucedería en caso de 
-    reemplazar por alguna de las otras implementaciones. Es decir, si usamos
-    [[ ]] por ejemplo, qué sucede si reemplazo por [] o por /usr/bin/test

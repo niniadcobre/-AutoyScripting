@@ -46,12 +46,12 @@ Semana 2 - 22/3
 Semana 3  - 29/3
         FERIADO 2 de abril - Día del Veterano y de los caídos en la 
         guerra de Malvinas, y viernes santo. 
-        Estructura de control y funciones
 
 Semana 4  - 5/4
-        Listas / Expansión 
+        Estructura de control y funciones
 
 Semana 5  - 12/4
+        Listas / Expansión 
 	Expresiones aritméticas / Ejecución de comando 
 
 Semana 6  - 19/4
