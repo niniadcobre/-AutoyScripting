@@ -51,15 +51,15 @@ Semana 4  - 5/4
         Estructura de control y funciones
 
 Semana 5  - 12/4
-        Listas / Expansión 
-	Expresiones aritméticas / Ejecución de comando 
+        Listas / Bloques de sentencias   
+        Debug   
 
 Semana 6  - 19/4
         HITO Entrega y revisión TP0 33% 
 
 Semana 7  - 26/4
-        Debug   
-
+	Expansión 
+	Expresiones aritméticas / Ejecución de comando 
 Semana 8  - 3/5
 	find, sed, grep, awk, perl
 
