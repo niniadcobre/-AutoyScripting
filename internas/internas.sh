@@ -6,7 +6,7 @@ set -eu
 
 DEBUG=1
 
-source modulos.sh 
+. modulos.sh 
 
 #Se requiere siempre al menos un argumento. ¿Cómo haría para cambiar este
 #comportamiento para ejecutar todas las funciones disponibles?

@@ -5,6 +5,8 @@
 # Pregunta: ¿Cuando una función es definida, las sentencias que la componen 
 # son efectivamente ejecutadas?
 
+cowsay HOLA 
+
 ayuda () {
    [[ -v DEBUG ]] && echo DEBUG es $DEBUG
    printf "Ayuda: 
