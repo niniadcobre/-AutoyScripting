@@ -59,20 +59,20 @@ Semana 6  - 19/4
 
 Semana 7  - 26/4
 	Expansión 
-	Expresiones aritméticas / Ejecución de comando 
 Semana 8  - 3/5
-	find, sed, grep, awk, perl
+	Expresiones aritméticas / Ejecución de comando 
 
 Semana 9  - 10/5
- 	Expresiones regulares / cron/at
+	find, grep, expresiones regulares 
       
 Semana 10 - 17/5
         HITO Entrega y revisión TP0 66% 
         
 Semana 11 - 24/5
- 	Expresiones regulares / cron/at
+	sed, awk, perl, python 
 
 Semana 12 - 31/5
+ 	Expresiones regulares / cron/at
 
 Semana 13 - 7/6
 
